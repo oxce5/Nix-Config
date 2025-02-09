@@ -44,11 +44,15 @@
   };
 
   # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
+  programs.neovim.enable = true;
+  programs.yazi.enable = true;
+
+
   home.packages = with pkgs; [
     inputs.zen-browser.packages."${system}".default
     steam
     discord
+    krita
 
     # Hyprland packages
     waybar
