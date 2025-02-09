@@ -54,6 +54,7 @@
     discord
     krita
     betterdiscordctl
+    fastfetch
 
     # Hyprland packages
     waybar

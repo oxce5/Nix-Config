@@ -19,7 +19,7 @@
     ./programs.nix
     ./sys-packages.nix
     ./system.nix
-    ./fonts.nix
+    #./fonts.nix
     ./nvidia-config.nix
     ./services.nix
     ./audio.nix
