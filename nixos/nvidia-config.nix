@@ -1,10 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
-# Enable OpenGL
-  hardware.graphics = {
-    enable = true;
-  };
+  # Enable OpenGL
+  hardware.graphics.enable = true;
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
