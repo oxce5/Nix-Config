@@ -14,5 +14,6 @@
      git
      gh
      curl
+     home-manager
   ];
 }
