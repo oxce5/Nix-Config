@@ -13,7 +13,7 @@
   services.getty.autologinUser = "oxce5";
   
   security.sudo.extraRules= [
-  {  users = [ "privileged_user" ];
+  {  users = [ "oxce5" ];
     commands = [
        { command = "ALL" ;
          options= [ "NOPASSWD" ]; # "SETENV" # Adding the following could be a good idea
