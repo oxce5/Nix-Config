@@ -5,10 +5,7 @@
   #hardware.graphics.enable = true;
 
   # Load nvidia driver for Xorg and Wayland
-  services.xserver = {
-    enable = true;
-    videoDrivers = ["nvidia"];
-  };
+  services.xserver.videoDrivers = ["nvidia"];
 
   hardware.nvidia = {
     modesetting.enable = true;
