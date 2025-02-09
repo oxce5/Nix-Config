@@ -9,12 +9,14 @@
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = {
     self,
     nixpkgs,
     home-manager,
+    catppuccin,
     zen-browser,
     ...
   } @ inputs: let
