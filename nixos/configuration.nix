@@ -20,7 +20,7 @@
     ./sys-packages.nix
     ./system.nix
     ./fonts.nix
-    ./nvidia.nix
+    ./nvidia-config.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
