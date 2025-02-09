@@ -46,7 +46,7 @@
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
-    inputs.zen-browser.packages."${system}".specific
+    inputs.zen-browser.packages."${system}".default
   ];
 
   # Enable home-manager and git
@@ -63,5 +63,5 @@
   #};
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "24.11";
+  home.stateVersion = "23.11";
 }
