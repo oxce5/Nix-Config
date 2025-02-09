@@ -21,6 +21,7 @@
     ./system.nix
     ./fonts.nix
     ./nvidia-config.nix
+    ./services.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
