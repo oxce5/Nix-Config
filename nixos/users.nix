@@ -11,6 +11,15 @@
 
   # Enable automatic login for the user.
   services.getty.autologinUser = "oxce5";
-
+  
+  security.sudo.extraRules= [
+  {  users = [ "privileged_user" ];
+    commands = [
+       { command = "ALL" ;
+         options= [ "NOPASSWD" ]; # "SETENV" # Adding the following could be a good idea
+        }
+      ];
+    }
+  ];
 
 }

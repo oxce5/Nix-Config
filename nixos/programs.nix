@@ -2,4 +2,7 @@
 
 {
    programs.hyprland.enable = true;
+   programs.steam = {
+      enable = true;
+    };
 }

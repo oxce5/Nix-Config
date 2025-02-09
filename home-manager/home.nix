@@ -50,11 +50,13 @@
 
   home.packages = with pkgs; [
     inputs.zen-browser.packages."${system}".default
-    steam
     discord
     krita
     betterdiscordctl
     fastfetch
+    grimblast
+    mpv
+    ani-cli
 
     # Hyprland packages
     waybar
@@ -82,5 +84,5 @@
   #};
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.11";
 }
