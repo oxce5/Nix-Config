@@ -8,12 +8,14 @@
     # Home manager
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
   outputs = {
     self,
     nixpkgs,
     home-manager,
+    zen-browser,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -28,6 +30,7 @@
         modules = [./nixos/configuration.nix];
       };
     };
+    zen-browser.packages."${system}".default
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'

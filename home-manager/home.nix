@@ -40,8 +40,8 @@
 
   # TODO: Set your username
   home = {
-    username = "your-username";
-    homeDirectory = "/home/your-username";
+    username = "oxce5";
+    homeDirectory = "/home/oxce5";
   };
 
   # Add stuff for your user as you see fit:
@@ -54,7 +54,13 @@
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
-
+  
+  catppuccin = {
+    enable = true;
+    flavor = "mocha";
+    accent = "blue";
+  };
+  
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.05";
+  home.stateVersion = "24.11";
 }
