@@ -55,12 +55,12 @@
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
-  
-  catppuccin = {
-    enable = true;
-    flavor = "mocha";
-    accent = "blue";
-  };
+
+  #catppuccin = {
+  #  enable = true;
+  #  flavor = "mocha";
+  #  accent = "blue";
+  #};
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "24.11";
