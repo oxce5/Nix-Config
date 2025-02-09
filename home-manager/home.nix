@@ -51,6 +51,8 @@
     discord
 
     # Hyprland packages
+    waybar
+    swww
     rofi
     dunst 
     swaybg
