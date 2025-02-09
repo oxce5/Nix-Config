@@ -47,6 +47,18 @@
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
     inputs.zen-browser.packages."${system}".default
+    steam
+    discord
+
+    # Hyprland packages
+    rofi
+    dunst 
+    swaybg
+    swaylock
+    swayidle
+    pamixer
+    light
+    brillo
   ];
 
   # Enable home-manager and git
