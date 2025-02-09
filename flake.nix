@@ -30,7 +30,6 @@
         modules = [./nixos/configuration.nix];
       };
     };
-    zen-browser.packages."${system}".default
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'

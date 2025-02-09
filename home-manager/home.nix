@@ -10,9 +10,9 @@
   # You can import other home-manager modules here
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModule
+   inputs.zen-browser.packages."${system}".default
 
-    # You can also split up your configuration and import pieces of it here:
+   # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
   ];
 
