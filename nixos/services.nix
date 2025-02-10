@@ -20,5 +20,7 @@
   users.users."oxce5".extraGroups = ["adbusers"];
   services.udev.packages = [
     pkgs.android-udev-rules
+    pkgs.platformio-core
+    pkgs.openocd 
   ];
 }

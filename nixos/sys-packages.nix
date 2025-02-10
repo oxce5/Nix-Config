@@ -29,6 +29,9 @@
      cloudflare-warp
      nginx
      android-tools
+     nodejs
+     platformio
+     playit-cli
      # nur.repos.ataraxiasjel.waydroid-script
   ];
 }

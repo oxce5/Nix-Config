@@ -57,6 +57,9 @@
     grimblast
     mpv
     ani-cli
+    libreoffice
+    blender
+    tealdeer
 
     # Hyprland packages
     waybar
