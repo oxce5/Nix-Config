@@ -21,5 +21,8 @@
       ];
     }
   ];
+  users.users.http = {
+     isNormalUser = true;
+  };
 
 }

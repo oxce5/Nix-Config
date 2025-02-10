@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Enable OpenGL
-  #hardware.graphics.enable = true;
+  #Enable OpenGL
+  hardware.graphics.enable = true;
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
@@ -13,7 +13,7 @@
     powerManagement.finegrained = true;
     open = true;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
   hardware.nvidia.prime = {
