@@ -31,7 +31,8 @@
      android-tools
      nodejs
      platformio
-     playit-cli
+     wine
+
      # nur.repos.ataraxiasjel.waydroid-script
   ];
 }

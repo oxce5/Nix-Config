@@ -23,7 +23,7 @@
     ./nvidia-config.nix
     ./services.nix
     ./audio.nix
-    ./waydroid.nix
+    ./virtualization.nix
     ./nginx.nix
 
     # Import your generated (nixos-generate-config) hardware configuration

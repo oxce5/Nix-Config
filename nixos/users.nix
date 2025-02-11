@@ -5,7 +5,7 @@
   users.users.oxce5 = {
     isNormalUser = true;
     description = "oxce5_root";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [];
   };
 

@@ -60,6 +60,7 @@
     libreoffice
     blender
     tealdeer
+    lunar-client
 
     # Hyprland packages
     waybar
