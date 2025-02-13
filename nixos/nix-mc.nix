@@ -1,46 +1,36 @@
-{ config, inputs, pkgs, lib, ... }: 
+{ config, pkgs, lib, inputs, ... }: 
 {
-  services.playit = {
-    enable = true;
-    user = "playit";
-    group = "playit";
-    secretPath = config.age.secrets.playit-secret.path;
-  };
+  imports = [ inputs.nix-minecraft.nixosModules.minecraft-servers ];
+  nixpkgs.overlays = [ inputs.nix-minecraft.overlay ];
+
   # Minecraft server settings
   services.minecraft-servers = {
-    enable = true;
+    enable = false;
     eula = true;
+    dataDir = "/var/lib/mc-server";
+
     openFirewall = false;
     servers.fabric = {
       enable = true;
-
       # Specify the custom minecraft server package
-      package = pkgs.fabricServers.fabric-1_21_4 {
-        loaderVersion = "0.16.10";
-      }; # Specific fabric loader version
+      package = pkgs.fabricServers.fabric-1_21_4; 
 
-      symlinks = {
-        mods = pkgs.linkFarmFromDrvs "mods" (builtins.attrValues {
-          Fabric-API = pkgs.fetchurl {
-            url =
-              "https://cdn.modrinth.com/data/P7dR8mSH/versions/3WOjLgFJ/fabric-api-0.116.1%2B1.21.4.jar";
-            sha512 =
-              "d5e9f87679b5edc9786e651fc481f8861a9cf53ed381890a1cb5e129222d6c5fa99f06045007f8e1fba02da686cdb6db2d99b334a1d23881cb56dfa199932eea";
-          };
-          Geyser = pkgs.fetchurl {
-            url =
-              "https://cdn.modrinth.com/data/wKkoqHrH/versions/3wFQ2Lyh/geyser-fabric-Geyser-Fabric-2.6.0-b756.jar";
-            sha512 =
-              "c42d28ff66eb0f918408605538b67148407f958c54f969e907aabb64102d06af1e8ed0315a0bed56114dd79fc5788406472c8884132c932e64cd82e8b906613d";
-          };
-          Floodgate = pkgs.fetchurl {
-            url =
-              "https://cdn.modrinth.com/data/bWrNNfkb/versions/nyg969vQ/Floodgate-Fabric-2.2.4-b43.jar";
-            sha512 =
-              "0d73f7f88429f15989b0e7a33f05c2812d13822fd50e4c1a1793c9e2e65abbbe19cb2ad6bb9a6328e076cadf531261e893a88666be7efbc1b6d7f9534e52b336";
-          };
-        });
-      };
+      # symlinks = {
+      #   mods = pkgs.linkFarmFromDrvs "mods" (builtins.attrValues {
+      #     Geyser = pkgs.fetchurl {
+      #       url =
+      #         "https://cdn.modrinth.com/data/wKkoqHrH/versions/3wFQ2Lyh/geyser-fabric-Geyser-Fabric-2.6.0-b756.jar";
+      #       # sha512 =
+      #         # "3pafydfzh76l3pr81jlfvhvj4gl3392k9zz8xmi0iwydscsfcphcjhf7qwily3mnarlncxnkkzy7fj5rjkf2rcifwc2rchxlq4c6iyc";
+      #     };
+      #     Floodgate = pkgs.fetchurl {
+      #       url =
+      #         "https://cdn.modrinth.com/data/bWrNNfkb/versions/nyg969vQ/Floodgate-Fabric-2.2.4-b43.jar";
+      #       # sha512 =
+      #         # "0s1ylqq2g2l7dn429x93nv41xdjkfz8dcrhg4mx5xz0qljik7h0bgdswi5c09kdsr393lp2llh9y55ps56gxrllzh2aj3kk6cqy4k9k";
+      #     };
+      #   });
+      # };
     };
   };
 }

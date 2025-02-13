@@ -44,11 +44,6 @@
         modules = [ 
         ./nixos/configuration.nix 
         playit-nixos-module.nixosModules.default
-        ./minecraft.nix
-        nix-minecraft.nixosModules.minecraft-servers
-        {
-          nixpkgs.overlays = [ inputs.nix-minecraft.overlay ];
-          }
         ];
       };
     };

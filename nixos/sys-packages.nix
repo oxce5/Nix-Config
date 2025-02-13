@@ -32,6 +32,7 @@
      nodejs
      platformio
      wine
+     brightnessctl
 
      # nur.repos.ataraxiasjel.waydroid-script
   ];
