@@ -5,13 +5,14 @@
   inputs = {
     # Nixpkgs and utilities
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    flake-utils.url = "github:numtide/flake-utils";
     playit-nixos-module.url = "github:pedorich-n/playit-nixos-module"; 
     nix-minecraft.url = "github:Infinidoge/nix-minecraft"; 
     # Community repositories
-    # nur = {
-    #   url = "github:nix-community/NUR";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     
     # Home Manager
     home-manager.url = "github:nix-community/home-manager/release-24.11";
@@ -44,6 +45,10 @@
         modules = [ 
         ./nixos/configuration.nix 
         playit-nixos-module.nixosModules.default
+        nur.modules.nixos.default
+        ({ pkgs, ... }: {
+           environment.systemPackages = [ pkgs.nur.repos.ataraxiasjel.waydroid-script ];
+        })
         ];
       };
     };
