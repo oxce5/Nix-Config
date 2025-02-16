@@ -1,11 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
+  fonts.packages = with pkgs; [
     font-awesome
-    nerdfonts
+    # nerdfonts
     jetbrains-mono
     iosevka
-    noto-fonts-color-emoji
+    noto-fonts-emoji
+    noto-fonts-cjk-sans
   ];
 }

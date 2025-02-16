@@ -30,4 +30,15 @@
     layout = "us";
     variant = "";
   };
+  environment.variables = {
+    OCL_ICD_VENDORS="/run/opengl-driver/etc/OpenCL/vendors";
+  };
+
+  nix.settings = {
+    substituters = [ "https://ezkea.cachix.org" ];
+    trusted-public-keys = [ "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI=" ];
+  };
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 }
+
