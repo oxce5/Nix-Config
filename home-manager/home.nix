@@ -10,7 +10,7 @@
   # You can import other home-manager modules here
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
-
+    inputs.spicetify-nix.homeManagerModules.default
    # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
   ];
@@ -52,8 +52,24 @@
   # Add stuff for your user as you see fit:
   programs.neovim.enable = true;
   programs.yazi.enable = true;
+  programs.obs-studio.enable = true;
+  programs.spicetify =
+  let
+    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+  in
+  {
+    enable = true;
 
-
+    enabledExtensions = with spicePkgs.extensions; [
+      adblock
+      hidePodcasts
+      shuffle # shuffle+ (special characters are sanitized out of extension names)
+    ];
+    enabledCustomApps = with spicePkgs.apps; [
+      newReleases
+      marketplace
+    ];
+  };
   home.packages = with pkgs; [
     inputs.zen-browser.packages."${system}".default
     discord
@@ -67,6 +83,8 @@
     blender
     tealdeer
     heroic
+    davinci-resolve
+    clinfo
 
     # Hyprland packages
     waybar
