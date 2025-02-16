@@ -21,6 +21,11 @@
     # Other flakes
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     catppuccin.url = "github:catppuccin/nix";
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+
+    # Anime Games Launcher
+    aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-24.11";
+    aagl.inputs.nixpkgs.follows = "nixpkgs"; # Name of nixpkgs input you want to use
   };
 
   outputs = { 
@@ -30,7 +35,8 @@
     nur,
     zen-browser,
     playit-nixos-module,
-    nix-minecraft,
+    spicetify-nix,
+    aagl,
     ... 
   } @ inputs: let
     inherit (self) outputs;
@@ -45,10 +51,22 @@
         modules = [ 
         ./nixos/configuration.nix 
         playit-nixos-module.nixosModules.default
+
         nur.modules.nixos.default
         ({ pkgs, ... }: {
            environment.systemPackages = [ pkgs.nur.repos.ataraxiasjel.waydroid-script ];
         })
+
+        {
+          imports = [ aagl.nixosModules.default ];
+          nix.settings = aagl.nixConfig; # Set up Cachix
+          programs.anime-game-launcher.enable = false; # Adds launcher and /etc/hosts rules
+          programs.anime-games-launcher.enable = false;
+          programs.honkers-railway-launcher.enable = true;
+          programs.honkers-launcher.enable = false;
+          programs.wavey-launcher.enable = false;
+          programs.sleepy-launcher.enable = true;
+        }
         ];
       };
     };
