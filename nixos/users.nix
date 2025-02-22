@@ -1,12 +1,14 @@
 { configs, pkgs, ... }:
 
 {
+  programs.zsh.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.oxce5 = {
     isNormalUser = true;
     description = "oxce5_root";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [];
+    shell = pkgs.zsh;
   };
 
   # Enable automatic login for the user.

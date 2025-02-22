@@ -70,6 +70,86 @@
       marketplace
     ];
   };
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    initExtra = ''
+      # Launch Hyprland on tty1 if not already in Wayland
+      if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
+        Hyprland
+      fi
+    '';    
+
+    shellAliases = {
+      ls = "lsd";
+      ll = "ls -l";
+      la = "ls -a";
+      lla = "ls -la";
+      lt = "ls --tree";
+      update = "sudo nixos-rebuild switch";
+      home-update = "home-manager switch";
+    };
+    history.size = 10000;
+
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ 
+        "zsh-lsd"
+        "git"
+        "sudo"
+        "z"
+      ];
+    };
+  };
+
+  programs.oh-my-posh = {
+    enable = true;
+    enableZshIntegration = true;
+    useTheme = "craver";  
+  };
+  
+  programs.cava = {
+      enable = true;
+      settings = {
+        input.method = "pipewire";
+    };
+  };
+  
+  programs.hyprlock = {
+    enable = true;
+    extraConfig = "source=~/.config/hypr/hyprlock/hyprlock.conf";
+  };
+
+  services.hypridle = {
+    enable = true;
+    settings = {
+        general = {
+          before_sleep_cmd = "loginctl lock-session";
+          after_sleep_cmd = "hyprctl dispatch dpms on";
+          lock_cmd = "pidof hyprlock || hyprlock";
+          ignore_dbus_inhibit = false;
+      };
+
+      listener = [
+        {
+          timeout = 180;
+          on-timeout = "hyprlock";
+          on-resume = "notify-send 'Welcome back!'";
+        }
+        {
+          timeout = 240;
+          on-timeout = "hyprctl dispatch dpms off";
+          on-resume = "hyprctl dispatch dpms on";
+        }
+      ];
+    };
+  };
+
+  services.playerctld.enable = true;
+
   home.packages = with pkgs; [
     inputs.zen-browser.packages."${system}".default
     discord
@@ -85,6 +165,10 @@
     heroic
     davinci-resolve
     clinfo
+    telegram-desktop
+    obsidian
+    playerctl
+    libnotify
 
     # Hyprland packages
     waybar
