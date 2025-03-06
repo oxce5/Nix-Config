@@ -53,6 +53,8 @@
      ffmpeg-full
      superfile
      lenovo-legion
+     cloudflared
+     ventoy-full
 
      ];
 }

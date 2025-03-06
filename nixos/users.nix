@@ -27,4 +27,14 @@
      isNormalUser = true;
   };
 
+  
+  users.users.cloudflared = {
+    isSystemUser = true;
+    group = "cloudflared";
+    home = "/var/lib/cloudflared";
+    createHome = true;
+    shell = "/run/current-system/sw/bin/nologin"; # Prevents login access
+  };
+
+  users.groups.cloudflared = {};
 }

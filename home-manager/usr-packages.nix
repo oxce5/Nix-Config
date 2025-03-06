@@ -26,6 +26,9 @@
     unzip
     cargo
     arduino-ide
+    udiskie
+    fritzing
+    thunderbird
 
     # Hyprland packages
     waybar

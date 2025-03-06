@@ -14,12 +14,12 @@
     # outputs.homeManagerModules.example
 
     # Or modules exported from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModules.default
+    # inputs.nix-colors.homeManagerModules.default 
+    inputs.spicetify-nix.homeManagerModules.default
 
     # You can also split up your configuration and import pieces of it here:
     #./nvim.nix
     ./usr-packages.nix
-    ./spicetify.nix
     ./zsh.nix
     ./cava.nix
     ./hypr.nix
@@ -74,6 +74,30 @@
   # Enable home-manager and git
   programs.home-manager.enable = true;
   programs.git.enable = true;
+  
+  programs.spicetify =
+  let
+    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+  in
+  {
+    enable = true;
+
+    enabledExtensions = with spicePkgs.extensions; [
+      adblock
+      hidePodcasts
+      shuffle # shuffle+ (special characters are sanitized out of extension names)
+    ];
+    enabledCustomApps = with spicePkgs.apps; [
+      newReleases
+      marketplace
+    ];
+  };
+
+  services.udiskie = {
+      enable = true;
+      notify = true;
+      automount = true;
+  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

@@ -24,4 +24,19 @@
     pkgs.platformio-core.udev
     pkgs.openocd 
   ];
+  services.cloudflared = {
+    enable = true;
+    user = "cloudflared";
+    tunnels = {
+      "capstone-mad-fak" = {
+        default = "http://localhost:80";  # Make sure this is the correct entry point
+        credentialsFile = "/var/lib/cloudflared/capstone-mad-fak.json";
+        ingress = {
+          "mad-fak.space" = "http://localhost:80";  # Main site
+          default = "http_status:404";  # Default rule for unmatched requests
+        };
+      };
+    };
+  };
+  services.udisks2.enable = true;
 }

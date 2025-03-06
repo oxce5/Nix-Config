@@ -20,9 +20,10 @@
     # You can also split up your configuration and import pieces of it here:
     ./users.nix
     ./networking.nix
-    ./programs.nix
+    # ./programs.nix
     ./sys-packages.nix
     ./system.nix
+    ./steam.nix
     ./fonts.nix
     ./nvidia-config.nix
     ./services.nix
