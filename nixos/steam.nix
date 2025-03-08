@@ -1,11 +1,13 @@
 
 {
-  programs.steam = {
+  programs = {
+    steam = {
       enable = true;
       gamescopeSession.enable = true;
     };
-  gamescope = {
+    gamescope = {
       enable = true;
       capSysNice = true;
     };
+  };
 }

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ...}:
 
 {
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
@@ -39,4 +39,6 @@
     };
   };
   services.udisks2.enable = true;
+
+  services.thermald.enable = true;
 }

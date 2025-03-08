@@ -29,9 +29,11 @@
     udiskie
     fritzing
     thunderbird
+    yt-dlp
 
     # Hyprland packages
     waybar
+    ags
     swww
     rofi
     dunst 

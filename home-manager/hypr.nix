@@ -16,12 +16,12 @@
 
       listener = [
         {
-          timeout = 180;
+          timeout = 300;
           on-timeout = "hyprlock";
           on-resume = "notify-send 'Welcome back!'";
         }
         {
-          timeout = 240;
+          timeout = 540;
           on-timeout = "hyprctl dispatch dpms off";
           on-resume = "hyprctl dispatch dpms on";
         }

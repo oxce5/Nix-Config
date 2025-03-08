@@ -44,5 +44,13 @@
   };
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+
+  zramSwap = {
+    enable = true;              # Enables zRAM as swap
+    memoryPercent = 50;         # Percentage of RAM to use for zRAM (default is 50)
+    algorithm = "zstd";         # Compression algorithm (options: lzo, lz4, zstd, etc.)
+    swapDevices = 1;            # Number of zRAM swap devices (recommended to keep at 1)
+    priority = 100;             # Priority of zRAM swap (higher means preferred over disk swap)
+  };
 }
 

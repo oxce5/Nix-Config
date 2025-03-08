@@ -23,6 +23,11 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    jerry = {
+      url = "github:justchokingaround/jerry";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    ags.url = "github:aylur/ags"; 
   };
 
   outputs = {

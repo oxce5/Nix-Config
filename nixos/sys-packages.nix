@@ -24,9 +24,12 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+     inputs.jerry.packages.${pkgs.system}.default
      glibcLocales
      neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      wl-clipboard
+     xclip
+     xsel
      kitty
      wget
      git

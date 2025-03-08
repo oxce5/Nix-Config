@@ -25,6 +25,7 @@
     ./hypr.nix
     ./audio.nix
     ./posh.nix
+    ./ags.nix
   ];
 
   nixpkgs = {
