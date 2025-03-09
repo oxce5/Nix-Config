@@ -25,12 +25,14 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
      inputs.jerry.packages.${pkgs.system}.default
+     inputs.matugen.packages.${system}.default
      glibcLocales
      neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      wl-clipboard
      xclip
      xsel
      kitty
+     ghostty
      wget
      git
      gh

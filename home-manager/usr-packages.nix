@@ -31,12 +31,11 @@
     thunderbird
     yt-dlp
 
+
     # Hyprland packages
     waybar
-    ags
     swww
     rofi
-    dunst 
     swaybg
     swaylock
     swayidle

@@ -27,7 +27,12 @@
       url = "github:justchokingaround/jerry";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    ags.url = "github:aylur/ags"; 
+    ags.url = "github:aylur/ags/v1"; 
+    matugen.url = "github:/InioX/Matugen";
+    hyprpanel = {
+      url = "github:jas-singhfsu/hyprpanel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -38,6 +43,7 @@
     zen-browser,
     playit-nixos-module,
     spicetify-nix,
+    ags,
     aagl,
     ...
   } @ inputs: let

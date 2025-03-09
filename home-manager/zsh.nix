@@ -30,9 +30,8 @@
       la = "ls -a";
       lla = "ls -la";
       lt = "ls --tree";
-      update = "sudo nixos-rebuild switch";
-      home-update = "home-manager switch";
-      spf = "superfile";
+      update = "sudo nixos-rebuild switch --flake /home/oxce5/nix-config/";
+      home-update = "home-manager switch --flake /home/oxce5/nix-config/";
     };
     history.size = 10000;
 
