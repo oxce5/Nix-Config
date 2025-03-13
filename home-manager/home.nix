@@ -27,6 +27,8 @@
     ./posh.nix
     ./hyprpanel.nix
     ./ghostty.nix
+    ./yazi.nix
+    ./tmux.nix
   ];
 
   nixpkgs = {
@@ -64,7 +66,6 @@
 
   # Add stuff for your user as you see fit:
   programs.neovim.enable = true;
-  programs.yazi.enable = true;
   programs.obs-studio.enable = true;
   # home.packages = with pkgs; [ steam ];
 

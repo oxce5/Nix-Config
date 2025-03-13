@@ -24,6 +24,18 @@
     pkgs.platformio-core.udev
     pkgs.openocd 
   ];
+  services.udev.extraRules = ''
+    ACTION=="change", SUBSYSTEM=="power_supply", KERNEL=="ACAD", ENV{POWER_SUPPLY_ONLINE}=="1", RUN+="${pkgs.systemd}/bin/systemctl start --no-block dynamic-rr@144.service"
+    ACTION=="change", SUBSYSTEM=="power_supply", KERNEL=="ACAD", ENV{POWER_SUPPLY_ONLINE}=="0", RUN+="${pkgs.systemd}/bin/systemctl start --no-block dynamic-rr@60.service"
+  '';
+
+  systemd.services."dynamic-rr@" = {
+    description = "Change refresh rate dynamically";
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "/home/oxce5/nix-config/assets/dynamic_rr.sh %i";
+    };
+  };
   services.cloudflared = {
     enable = true;
     user = "cloudflared";

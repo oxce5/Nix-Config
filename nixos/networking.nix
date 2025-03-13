@@ -7,6 +7,7 @@
     82   # Custom Port (adjust as necessary)
     443  # HTTPS
     3301 # Custom Port (adjust as necessary)
+    8080
   ];
   networking.firewall.allowedUDPPorts = [
     80

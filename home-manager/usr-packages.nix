@@ -11,7 +11,6 @@
     mpv
     ani-cli
     libreoffice
-    blender
     tealdeer
     heroic
     davinci-resolve
@@ -30,11 +29,10 @@
     fritzing
     thunderbird
     yt-dlp
+    tmux
 
 
     # Hyprland packages
-    waybar
-    swww
     rofi
     swaybg
     swaylock

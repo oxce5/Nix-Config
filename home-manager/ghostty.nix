@@ -6,7 +6,7 @@
     settings = {
       background-opacity = 0.6;  
       theme = "tokyonight-storm";
-      custom-shader = "~/.config/ghostty/glow-rgbsplit-twitchy.glsl";
+      custom-shader = "~/.config/ghostty/bloom.glsl";
     };
   };
 }

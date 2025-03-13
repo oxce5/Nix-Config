@@ -1,10 +1,14 @@
-{ config, pkgs, ...}:
+{ config, pkgs, lib, ...}:
 
 {
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.extraModulePackages = [ pkgs.linuxKernel.packages.linux_zen.lenovo-legion-module ];
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+  };
 
   # Set your time zone.
   time.timeZone = "Asia/Manila";

@@ -9,12 +9,6 @@
     # Default: false
     enable = true;
 
-    # Automatically restart HyprPanel with systemd.
-    # Useful when updating your config so that you
-    # don't need to manually restart it.
-    # Default: false
-    systemd.enable = true;
-
     # Add '/nix/store/.../hyprpanel' to your
     # Hyprland config 'exec-once'.
     # Default: false
@@ -44,7 +38,7 @@
         "0" = {
           left = [ "dashboard" "workspaces" "clock" ];
           middle = [ "media" ];
-          right = [ "cava" "volume" "battery" "systray" "notifications" ];
+          right = [ "cava" "volume" "network" "battery" "systray" "notifications" ];
         };
       };
     };
@@ -72,6 +66,7 @@
 
       menus.dashboard.directories.enabled = false;
       menus.dashboard.stats.enable_gpu = true;
+      menus.volume.raiseMaximumVolume = true;
 
       theme.bar.transparent = true;
 
@@ -83,6 +78,13 @@
         orientation = "horizontal";
         location = "top";
       };
+      theme.matugen = true;
+
+      wallpaper = {
+        enable = true;
+        image = "/home/oxce5/nix-config/assets/wall.jpg";
+      };
+
     };
   };
 }

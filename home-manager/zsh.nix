@@ -12,15 +12,13 @@
         Hyprland
       fi
 
-      spf() {
-        export SPF_LAST_DIR="/home/oxce5/.local/state/superfile/lastdir"
-        
-        command spf "$@"
-
-        [ ! -f "$SPF_LAST_DIR" ] || {
-            bash "$SPF_LAST_DIR"
-            rm -f -- "$SPF_LAST_DIR" > /dev/null
-        }
+      function y() {
+        local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+        yazi "$@" --cwd-file="$tmp"
+        if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+          builtin cd -- "$cwd"
+        fi
+        rm -f -- "$tmp"
       }
     '';    
 

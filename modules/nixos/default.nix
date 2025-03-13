@@ -10,6 +10,7 @@
     # ./playit-agent.nix
     inputs.nur.modules.nixos.default
     inputs.playit-nixos-module.nixosModules.default
+    inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
 }

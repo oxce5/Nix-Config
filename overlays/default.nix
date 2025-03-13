@@ -7,10 +7,11 @@
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
-    # example = prev.example.overrideAttrs (oldAttrs: rec {
-    # ...
-    # });
-  };
+  #     blender = import (fetchGit {
+  #       url = "https://github.com/NixOS/nixpkgs";
+  #       rev = "81b970640e56a5c07a336d2c05018b0c9bf57a51";  # Pinned commit
+  #     }) { inherit (prev) system; }.blender;
+    };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.unstable'
