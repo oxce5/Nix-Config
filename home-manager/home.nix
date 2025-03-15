@@ -96,6 +96,12 @@
       notify = true;
       automount = true;
   };
+  gtk = {
+    enable = true;
+    cursorTheme = {
+      name = "Neuro-sama";
+    };
+  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
