@@ -20,6 +20,8 @@
         fi
         rm -f -- "$tmp"
       }
+
+      eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.omp.json)"
     '';    
 
     shellAliases = {
@@ -30,6 +32,7 @@
       lt = "ls --tree";
       update = "sudo nixos-rebuild switch --flake /home/oxce5/nix-config/";
       home-update = "home-manager switch --flake /home/oxce5/nix-config/";
+      mux_def = "~/nix-config/assets/load_layout.sh";
     };
     history.size = 10000;
 
