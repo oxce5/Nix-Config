@@ -2,6 +2,7 @@
 {
   programs.tmux = {
     enable = true; # Enable tmux in Home Manager
+    tmuxinator.enable = true;
 
     plugins = with pkgs.tmuxPlugins; [
       sensible         # Better default behavior
@@ -31,6 +32,9 @@
       set -g @theme_left_separator ''
       set -g @theme_right_separator ''
       set -g @theme_plugins 'datetime'
+
+      bind g run-shell "echo 'Working' > ~/debug.log"
+
       run '~/tmux/plugins/tpm/tpm'
     '';
     mouse = true;
