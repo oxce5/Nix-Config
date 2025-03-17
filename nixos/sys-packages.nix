@@ -62,6 +62,7 @@
      cloudflared
      ventoy-full
      nix-prefetch-git
+     cudaPackages.cudatoolkit
 
      ];
 }
