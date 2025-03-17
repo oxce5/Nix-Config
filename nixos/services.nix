@@ -28,6 +28,7 @@
     ACTION=="change", SUBSYSTEM=="power_supply", KERNEL=="ACAD", ENV{POWER_SUPPLY_ONLINE}=="1", RUN+="${pkgs.systemd}/bin/systemctl start --no-block dynamic-rr@144.service"
     ACTION=="change", SUBSYSTEM=="power_supply", KERNEL=="ACAD", ENV{POWER_SUPPLY_ONLINE}=="0", RUN+="${pkgs.systemd}/bin/systemctl start --no-block dynamic-rr@60.service"
   '';
+  services.gvfs.enable = true;
 
   systemd.services."dynamic-rr@" = {
     description = "Change refresh rate dynamically";
