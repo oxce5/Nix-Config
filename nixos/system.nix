@@ -56,5 +56,6 @@
     swapDevices = 1;            # Number of zRAM swap devices (recommended to keep at 1)
     priority = 100;             # Priority of zRAM swap (higher means preferred over disk swap)
   };
+
 }
 
