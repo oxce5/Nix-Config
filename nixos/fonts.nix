@@ -8,5 +8,7 @@
     iosevka
     noto-fonts-emoji
     noto-fonts-cjk-sans
+    breeze-icons
+    gnome.adwaita-icon-theme
   ];
 }

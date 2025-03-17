@@ -25,7 +25,7 @@
     ./hypr.nix
     ./audio.nix
     ./posh.nix
-    ./hyprpanel.nix
+    # ./hyprpanel.nix
     ./ghostty.nix
     ./yazi.nix
     ./tmux.nix
@@ -100,6 +100,14 @@
     enable = true;
     cursorTheme = {
       name = "Neuro-sama";
+    };
+    theme = {
+      name = "Tokyonight-Dark";
+      package = pkgs.tokyonight-gtk-theme;
+    };
+    iconTheme = {
+      name = "Papirus-Dark";  # or "Tela-dark"
+      package = pkgs.papirus-icon-theme;
     };
   };
 
