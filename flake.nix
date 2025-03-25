@@ -27,7 +27,6 @@
       url = "github:justchokingaround/jerry";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    ags.url = "github:aylur/ags/v1"; 
     matugen.url = "github:/InioX/Matugen";
     hyprpanel = {
       url = "github:jas-singhfsu/hyprpanel";
@@ -35,6 +34,10 @@
     };
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.2";
+    };
+    ags = {
+      url = "github:aylur/ags"; 
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 
