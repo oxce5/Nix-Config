@@ -4,7 +4,6 @@
   home.packages = with pkgs; [
     inputs.zen-browser.packages."${system}".default
     discord
-    blender
     krita
     betterdiscordctl
     fastfetch
@@ -33,9 +32,10 @@
     tmux
     tmuxinator
     lazygit
-
+    qtscrcpy
 
     # Hyprland packages
+    swww
     rofi
     swaybg
     swaylock

@@ -25,7 +25,6 @@
     ./hypr.nix
     ./audio.nix
     ./posh.nix
-    # ./hyprpanel.nix
     ./ghostty.nix
     ./yazi.nix
     ./tmux.nix
