@@ -36,7 +36,7 @@
       url = "github:nix-community/lanzaboote/v0.4.2";
     };
     ags = {
-      url = "github:aylur/ags"; 
+      url = "path:/home/oxce5/nix-config/assets/ags"; 
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
@@ -65,10 +65,13 @@
     # This is a function that generates an attribute by calling a function you
     # pass to it, with each system as an argument
     forAllSystems = nixpkgs.lib.genAttrs systems;
-  in {
-    # Your custom packages
-    # Accessible through 'nix build', 'nix shell', etc
-    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+in {
+    packages = forAllSystems (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      # Use the ags flake's package directly
+      ags = inputs.ags.packages.${system}.default;
+    });
     # Formatter for your nix files, available through 'nix fmt'
     # Other options beside 'alejandra' include 'nixpkgs-fmt'
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
