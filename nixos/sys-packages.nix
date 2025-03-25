@@ -24,45 +24,47 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     inputs.jerry.packages.${pkgs.system}.default
-     inputs.matugen.packages.${system}.default
-     glibcLocales
-     unstable.sbctl
-     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     socat
-     wl-clipboard
-     xclip
-     xsel
-     kitty
-     ghostty
-     wget
-     git
-     gh
-     curl
-     python3
-     cloudflare-warp
-     nginx
-     android-tools
-     nodejs
-     platformio
-     wine
-     brightnessctl
-     ocl-icd
-     # nvidia-vaapi-driver
-     pavucontrol 
-     distrobox
-     distrobox-tui
-     lsd
-     fzf
-     clang
-     lua-language-server
-     ffmpeg-full
-     superfile
-     lenovo-legion
-     cloudflared
-     ventoy-full
-     nix-prefetch-git
-     cudaPackages.cudatoolkit
+      inputs.jerry.packages.${pkgs.system}.default
+      inputs.matugen.packages.${system}.default
+      inputs.ags.packages.x86_64-linux.default  # Installs 'my-shell'
+      glibcLocales
+      busybox
+      unstable.sbctl
+      neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      socat
+      wl-clipboard
+      xclip
+      xsel
+      kitty
+      ghostty
+      wget
+      git
+      gh
+      curl
+      python3
+      cloudflare-warp
+      nginx
+      android-tools
+      nodejs
+      platformio
+      wine
+      brightnessctl
+      ocl-icd
+      # nvidia-vaapi-driver
+      pavucontrol 
+      distrobox
+      distrobox-tui
+      lsd
+      fzf
+      clang
+      lua-language-server
+      ffmpeg-full
+      superfile
+      lenovo-legion
+      cloudflared
+      ventoy-full
+      nix-prefetch-git
+      # cudaPackages.cudatoolkit
 
-     ];
+    ];
 }
