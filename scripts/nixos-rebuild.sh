@@ -48,7 +48,7 @@ current=$(nixos-rebuild list-generations | grep current)
 git commit -am "$current"
 
 # Review logs
-bat n:xos-switch.log
+bat nixos-switch.log
 
 # Back to where you were
 popd
