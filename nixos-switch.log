@@ -1,0 +1,34 @@
+warning: Git tree '/home/oxce5/hydenix' is dirty
+building the system configuration...
+warning: Git tree '/home/oxce5/hydenix' is dirty
+evaluation warning:
+                    The aagl-gtk-on-nix release branch is 24.11, but the current
+                    Nixpkgs release is 25.05. This mismatch may cause errors and
+                    unexpected behavior. It is recommended to use a release of
+                    aagl-gtk-on-nix that matches your Nixpkgs release.
+
+                    If you insist on using this version, you can disable this warning by
+                    setting
+
+                    aagl.enableNixpkgsReleaseBranchCheck = false;
+
+                    in your configuration.
+these 6 derivations will be built:
+  /nix/store/sh6hbynr6ib4jgalpgppjlmz7p8d7fpm-activation-script.drv
+  /nix/store/d5rjyldflf459hzvnb3qgs1l76i2ij9v-home-manager-generation.drv
+  /nix/store/rrdnb8p7rzml01ghfcd0vppdpbiq9gqd-unit-home-manager-oxce5.service.drv
+  /nix/store/bkkmv7xs2vc2p7gncvz768gj59n4rjx8-system-units.drv
+  /nix/store/gxcqyy3a06g6kb3q3vy5jx2x9addxhz8-etc.drv
+  /nix/store/bbxg539mngmjx8w5bnvdwj98ynzlysf2-nixos-system-hydenix-25.05.20250318.b6eaf97.drv
+building '/nix/store/sh6hbynr6ib4jgalpgppjlmz7p8d7fpm-activation-script.drv'...
+building '/nix/store/d5rjyldflf459hzvnb3qgs1l76i2ij9v-home-manager-generation.drv'...
+building '/nix/store/rrdnb8p7rzml01ghfcd0vppdpbiq9gqd-unit-home-manager-oxce5.service.drv'...
+building '/nix/store/bkkmv7xs2vc2p7gncvz768gj59n4rjx8-system-units.drv'...
+building '/nix/store/gxcqyy3a06g6kb3q3vy5jx2x9addxhz8-etc.drv'...
+building '/nix/store/bbxg539mngmjx8w5bnvdwj98ynzlysf2-nixos-system-hydenix-25.05.20250318.b6eaf97.drv'...
+activating the configuration...
+setting up /etc...
+reloading user units for oxce5...
+restarting sysinit-reactivation.target
+the following new units were started: systemd-hostnamed.service
+Done. The new configuration is /nix/store/201yl342x7rh45rihbl685grcvpg4g1i-nixos-system-hydenix-25.05.20250318.b6eaf97
