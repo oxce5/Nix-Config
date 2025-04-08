@@ -42,8 +42,16 @@
       gamescopeSession.enable = true;
     };
   };
-  services.thermald.enable = true;
-  services.flatpak.enable = true;
+  services = {
+    thermald.enable = true;
+    deluge = {
+      enable = true;
+      web.enable = true;
+      user = "oxce5";
+    };
+
+    flatpak.enable = true;
+  };
   systemd.services.flatpak-repo = {
     wantedBy = ["multi-user.target"];
     path = [pkgs.flatpak];
