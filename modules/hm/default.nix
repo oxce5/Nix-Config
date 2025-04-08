@@ -53,6 +53,7 @@
     "${config.xdg.configHome}/mimeapps.list".force = lib.mkForce true;
   };
   services.podman.enable = true;
+
   # hydenix home-manager options go here
   hydenix.hm = {
     #! Important options
