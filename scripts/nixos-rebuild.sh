@@ -24,7 +24,6 @@ pushd ~/hydenix
 # Early return if no changes were detected (thanks @singiamtel!)
 if git diff --quiet '*.nix'; then
   echo "No changes detected."
-  exit 0
 fi
 
 # Autoformat your nix files
