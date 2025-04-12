@@ -78,18 +78,49 @@
         statusline.lualine.enable = true;
         telescope.enable = true;
         autocomplete.nvim-cmp.enable = true;
-        useSystemClipboard = true;
 
         lazy.enable = true;
         utility = {
           surround.enable = true;
-          snacks-nvim.enable = true;
+          snacks-nvim = {
+            enable = true;
+            setupOpts = {
+              explorer = {
+                replace_netrw = true;
+              };
+              picker = {
+                sources = {
+                  explorer = {};
+                };
+              };
+            };
+          };
           yanky-nvim.enable = true;
         };
 
         binds = {
           whichKey.enable = true;
         };
+        tabline = {
+          nvimBufferline.enable = true;
+        };
+
+        notify = {
+          nvim-notify.enable = true;
+        };
+
+        ui = {
+          noice.enable = true;
+        };
+        options = {
+          tabstop = 2;
+          shiftwidth = 2;
+          autoindent = true;
+        };
+        luaConfigRC.tab = ''
+          vim.opt.expandtab = true
+          vim.opt.smartindent = true
+        '';
       };
     };
   };
