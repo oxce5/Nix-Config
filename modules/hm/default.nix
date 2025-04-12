@@ -9,6 +9,7 @@
     # ./example.nix - add your modules here
     inputs.spicetify-nix.homeManagerModules.default
     inputs.nix-index-database.hmModules.nix-index
+    inputs.nvf.homeManagerModules.default
   ];
 
   programs.spicetify = let
@@ -53,6 +54,19 @@
     "${config.xdg.configHome}/mimeapps.list".force = lib.mkForce true;
   };
   services.podman.enable = true;
+
+  programs.nvf = {
+    enable = true;
+    # your settings need to go into the settings attribute set
+    # most settings are documented in the appendix
+    settings = {
+      vim.viAlias = false;
+      vim.vimAlias = true;
+      vim.lsp = {
+        enable = true;
+      };
+    };
+  };
 
   # hydenix home-manager options go here
   hydenix.hm = {
