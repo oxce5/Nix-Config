@@ -60,10 +60,35 @@
     # your settings need to go into the settings attribute set
     # most settings are documented in the appendix
     settings = {
-      vim.viAlias = false;
-      vim.vimAlias = true;
-      vim.lsp = {
-        enable = true;
+      vim = {
+        theme = {
+          enable = true;
+          name = "tokyonight";
+          style = "night";
+        };
+
+        languages = {
+          enableLSP = true;
+          enableTreesitter = true;
+
+          nix.enable = true;
+          python.enable = true;
+        };
+
+        statusline.lualine.enable = true;
+        telescope.enable = true;
+        autocomplete.nvim-cmp.enable = true;
+
+        lazy.enable = true;
+        utility = {
+          surround.enable = true;
+          snacks-nvim.enable = true;
+          yanky-nvim.enable = true;
+        };
+
+        binds = {
+          whichKey.enable = true;
+        };
       };
     };
   };
