@@ -62,7 +62,7 @@
 
         keymaps = [
           {
-            key = "<leader>m";
+            key = "<leader>e";
             mode = "n";
             silent = true;
             action = "<cmd>lua require('snacks.explorer').open()<CR>";
