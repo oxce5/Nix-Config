@@ -57,6 +57,7 @@
 
   programs.nvf = {
     enable = true;
+    enableManpages = true;
     # your settings need to go into the settings attribute set
     # most settings are documented in the appendix
     settings = {
@@ -97,11 +98,15 @@
             };
           };
           yanky-nvim.enable = true;
+          yazi-nvim = {
+            enable = true;
+          };
         };
 
         binds = {
           whichKey.enable = true;
         };
+
         tabline = {
           nvimBufferline.enable = true;
         };
@@ -113,11 +118,13 @@
         ui = {
           noice.enable = true;
         };
+
         options = {
           tabstop = 2;
           shiftwidth = 2;
           autoindent = true;
         };
+
         luaConfigRC.tab = ''
           vim.opt.expandtab = true
           vim.opt.smartindent = true
