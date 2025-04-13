@@ -50,7 +50,7 @@
               };
             };
           };
-          yanky-nvim.enable = true;
+          yanky-nvim.enable = false;
           yazi-nvim = {
             enable = true;
           };
