@@ -26,8 +26,13 @@
         statusline.lualine.enable = true;
         telescope.enable = true;
         autocomplete.nvim-cmp.enable = true;
-
+        binds.whichKey.enable = true;
+        tabline.nvimBufferline.enable = true;
+        notify.nvim-notify.enable = true;
+        ui.noice.enable = true;
+        autopairs.nvim-autopairs.enable = true;
         lazy.enable = true;
+
         utility = {
           surround.enable = true;
           snacks-nvim = {
@@ -49,27 +54,20 @@
           };
         };
 
-        binds = {
-          whichKey.enable = true;
-        };
-
-        tabline = {
-          nvimBufferline.enable = true;
-        };
-
-        notify = {
-          nvim-notify.enable = true;
-        };
-
-        ui = {
-          noice.enable = true;
-        };
-
         options = {
           tabstop = 2;
           shiftwidth = 2;
           autoindent = true;
         };
+
+        keymaps = [
+          {
+            key = "<leader>m";
+            mode = "n";
+            silent = true;
+            action = "<cmd>lua require('snacks.explorer').open()<CR>";
+          }
+        ];
 
         luaConfigRC.tab = ''
           vim.opt.expandtab = true
