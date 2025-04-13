@@ -30,6 +30,7 @@
   };
   programs.yazi.enable = true;
   programs.lazygit.enable = true;
+  programs.gh.enable = true;
 
   # home-manager options go here/
   home.packages = with pkgs; [
