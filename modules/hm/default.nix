@@ -29,8 +29,9 @@
     ];
   };
   programs.yazi.enable = true;
+  programs.lazygit.enable = true;
 
-  # home-manager options go here
+  # home-manager options go here/
   home.packages = with pkgs; [
     inputs.zen-browser.packages."${system}".default
     krita
