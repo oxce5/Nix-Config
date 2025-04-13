@@ -2,3 +2,4 @@
 *.qcow2
 result
 .git-hooks
+nixos-switch.log

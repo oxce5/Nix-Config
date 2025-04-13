@@ -33,6 +33,7 @@
         autopairs.nvim-autopairs.enable = true;
         lazy.enable = true;
         mini.ai = {enable = true;};
+        useSystemClipboard = true;
 
         utility = {
           surround.enable = true;
