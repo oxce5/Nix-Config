@@ -32,6 +32,7 @@
         ui.noice.enable = true;
         autopairs.nvim-autopairs.enable = true;
         lazy.enable = true;
+        mini.ai = {enable = true;};
 
         utility = {
           surround.enable = true;
