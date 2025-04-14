@@ -22,7 +22,7 @@
     };
   };
 
-  outputs = {...} @ inputs: let
+  outputs = {nixpkgs, ...} @ inputs: let
     HOSTNAME = "hydenix";
 
     hydenixConfig = inputs.hydenix.inputs.hydenix-nixpkgs.lib.nixosSystem {
@@ -37,5 +37,9 @@
   in {
     nixosConfigurations.nixos = hydenixConfig;
     nixosConfigurations.${HOSTNAME} = hydenixConfig;
+
+    hydenixConfig.packages = with nixpkgs; [
+      (import ./pkgs/crafty.nix {inherit lib stdenv python3 fetchgit;})
+    ];
   };
 }
