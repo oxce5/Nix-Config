@@ -10,7 +10,6 @@
 
   environment.systemPackages = with pkgs; [
     inputs.jerry.packages.${pkgs.system}.default
-    (callPackage ../../pkgs/crafty.nix {inherit (pkgs) lib stdenv python3 fetchgit;})
     waydroid-helper
     cloudflare-warp
     alejandra

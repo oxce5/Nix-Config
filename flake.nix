@@ -34,10 +34,6 @@
         ./configuration.nix
       ];
     };
-
-    craftyPackage = import ./pkgs/crafty.nix {
-      inherit (nixpkgs) lib stdenv python3 fetchgit;
-    };
   in {
     nixosConfigurations.nixos = hydenixConfig;
     nixosConfigurations.${HOSTNAME} = hydenixConfig;

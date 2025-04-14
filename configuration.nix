@@ -22,6 +22,7 @@ in {
     ./hardware-configuration.nix
     inputs.hydenix.lib.nixOsModules
     ./modules/system
+    ./crafty
 
     # === GPU-specific configurations ===
 
