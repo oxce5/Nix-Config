@@ -60,6 +60,17 @@
     '';
   };
 
+  virtualisation = {
+    docker = {
+      enable = true;
+      rootless = {
+        enable = true;
+        setSocketVariable = true;
+      };
+    };
+    waydroid.enable = true;
+  };
+
   systemd.packages = [pkgs.cloudflare-warp]; # for warp-cli
   systemd.targets.multi-user.wants = ["warp-svc.service"]; # causes warp-svc to be started automatically
   zramSwap = {
@@ -71,5 +82,4 @@
     substituters = ["https://ezkea.cachix.org"];
     trusted-public-keys = ["ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="];
   };
-  virtualisation.waydroid.enable = true;
 }
