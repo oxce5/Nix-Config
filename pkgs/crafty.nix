@@ -12,37 +12,69 @@ stdenv.mkDerivation rec {
   src = fetchgit {
     url = "https://gitlab.com/crafty-controller/crafty-4.git";
     rev = "master"; # You can lock to a specific commit hash if you want
-    sha256 = "ea59f0d5eceb86f790e54a826d1e947e970d3f9d"; # Replace with the actual sha256
+    sha256 = "1lq51b8hppn6n6jnd3fvz1p451piflvphlm42n6nfz2awkgx6c6g"; # Replace with the actual sha256
   };
 
-  buildinputs = [python3];
+  nativeBuildInputs = [python3];
 
-  # build steps
-  unpackphase = ''
-    echo "unpacking the repository"
-    cp -r ${src} $out
-  '';
+  buildInputs = with python3.pkgs; [
+    apscheduler
+    argon2-cffi
+    # cached_property (not in Nixpkgs; see below)
+    colorama
+    croniter
+    cryptography
+    # libgravatar (not in Nixpkgs; see below)
+    nh3
+    packaging
+    peewee
+    psutil
+    pyopenssl
+    pyjwt
+    pyyaml
+    requests
+    # termcolor (not in Nixpkgs; see below)
+    tornado
+    tzlocal
+    jsonschema
+    orjson
+    prometheus-client
+    pillow
+  ];
 
-  installphase = ''
-    echo "installing crafty..."
-    cd $out
+  installPhase = ''
+    runHook preInstall
 
-    python3 -m venv .venv
-    source .venv/bin/activate
-    pip install --no-cache-dir -r crafty-4/requirements.txt
+    mkdir -p $out/share/crafty
+    cp -r . $out/share/crafty
 
+    # Set up Python virtual environment
+    python3 -m venv $out/share/crafty/.venv
+    source $out/share/crafty/.venv/bin/activate
+
+    # Link Nix-provided Python packages
+    for pkg in ${lib.concatStringsSep " " buildInputs}; do
+      find $pkg -type d -name "*.egg-info" -exec cp -r {} $out/share/crafty/.venv/lib/python*/site-packages/ \;
+      find $pkg -type d -name "*.dist-info" -exec cp -r {} $out/share/crafty/.venv/lib/python*/site-packages/ \;
+      find $pkg -type f -name "*.py" -exec cp {} $out/share/crafty/.venv/lib/python*/site-packages/ \;
+      find $pkg -type d -name "*.so" -exec cp -r {} $out/share/crafty/.venv/lib/python*/site-packages/ \;
+    done
+
+    # Create executable script
     mkdir -p $out/bin
-    cat > $out/bin/crafty <<eof
-    #!${stdenv.bash}/bin/bash
-    cd $out/crafty-4
+    cat > $out/bin/crafty <<EOF
+    #!${stdenv.shell}
+    cd $out/share/crafty
     source .venv/bin/activate
     exec python3 main.py "\$@"
-    eof
+    EOF
     chmod +x $out/bin/crafty
+
+    runHook postInstall
   '';
 
   meta = with lib; {
-    description = "crafty minecraft controller";
+    description = "Crafty Minecraft Controller";
     license = licenses.mit;
     platforms = platforms.linux;
   };

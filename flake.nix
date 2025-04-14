@@ -41,10 +41,5 @@
   in {
     nixosConfigurations.nixos = hydenixConfig;
     nixosConfigurations.${HOSTNAME} = hydenixConfig;
-
-    # Adding Crafty to the system packages
-    hydenixConfig.packages = with nixpkgs; [
-      craftyPackage
-    ];
   };
 }
