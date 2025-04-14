@@ -34,12 +34,17 @@
         ./configuration.nix
       ];
     };
+
+    craftyPackage = import ./pkgs/crafty.nix {
+      inherit (nixpkgs) lib stdenv python3 fetchgit;
+    };
   in {
     nixosConfigurations.nixos = hydenixConfig;
     nixosConfigurations.${HOSTNAME} = hydenixConfig;
 
+    # Adding Crafty to the system packages
     hydenixConfig.packages = with nixpkgs; [
-      (import ./pkgs/crafty.nix {inherit lib stdenv python3 fetchgit;})
+      craftyPackage
     ];
   };
 }
