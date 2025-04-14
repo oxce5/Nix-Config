@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
   src = fetchgit {
     url = "https://gitlab.com/crafty-controller/crafty-4.git";
     rev = "master"; # You can lock to a specific commit hash if you want
-    sha256 = lib.fakeSha256; # Replace with the actual sha256
+    sha256 = "ea59f0d5eceb86f790e54a826d1e947e970d3f9d"; # Replace with the actual sha256
   };
 
   buildInputs = [python3];
