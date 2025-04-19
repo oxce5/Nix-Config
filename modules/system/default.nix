@@ -12,7 +12,6 @@
 
   environment.systemPackages = with pkgs; [
     inputs.jerry.packages.${pkgs.system}.default
-    cudaPackages.cudatoolkit
     waydroid-helper
     cloudflare-warp
     unrar

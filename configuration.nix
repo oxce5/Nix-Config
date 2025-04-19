@@ -9,8 +9,6 @@
       (final: prev: {
         userPkgs = inputs.nixpkgs {
           config.allowUnfree = true;
-          config.cudaSupport = true;
-          config.cudaCapabilities = ["sm_86"];
         };
       })
     ];
