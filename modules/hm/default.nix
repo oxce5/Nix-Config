@@ -68,6 +68,11 @@
       force = true;
       mutable = true;
     };
+    ".config/hyde/themes/Tokyo Night/wallpapers/carlotta.jpg" = lib.mkForce {
+      source = ./assets/carlotta.jpg;
+      force = true;
+      mutable = true;
+    };
   };
   services.podman.enable = true;
 
@@ -146,7 +151,7 @@
     };
     theme = {
       enable = true; # enable theme module
-      active = "Material Sakura"; # active theme name
+      active = "Tokyo Night"; # active theme name
       themes = [
         "Tokyo Night"
         "Material Sakura"
