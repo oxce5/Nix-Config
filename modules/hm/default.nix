@@ -22,6 +22,7 @@ in {
       hidePodcasts
       shuffle # shuffle+ (special characters are sanitized out of extension names)
     ];
+    theme = spicePkgs.themes.hazy;
   };
   programs.yazi.enable = true;
   programs.lazygit.enable = true;
