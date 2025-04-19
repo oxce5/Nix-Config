@@ -4,7 +4,9 @@
   lib,
   config,
   ...
-}: {
+}: let
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
+in {
   imports = [
     # ./example.nix - add your modules here
     inputs.spicetify-nix.homeManagerModules.default
@@ -13,19 +15,12 @@
     ./nvf_config.nix
   ];
 
-  programs.spicetify = let
-    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
-  in {
+  programs.spicetify = {
     enable = true;
-
     enabledExtensions = with spicePkgs.extensions; [
-      adblock
+      adblockify
       hidePodcasts
       shuffle # shuffle+ (special characters are sanitized out of extension names)
-    ];
-    enabledCustomApps = with spicePkgs.apps; [
-      newReleases
-      marketplace
     ];
   };
   programs.yazi.enable = true;
