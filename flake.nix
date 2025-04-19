@@ -15,6 +15,7 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nvf.url = "github:notashelf/nvf";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
     # Hydenix and its nixpkgs - kept separate to avoid conflicts
     hydenix = {

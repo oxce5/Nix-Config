@@ -5,6 +5,8 @@
 }: {
   imports = [
     # ./example.nix - add your modules here
+    inputs.nix-flatpak.nixosModules.nix-flatpak
+
     ./aagl.nix
   ];
 
@@ -55,7 +57,14 @@
       user = "oxce5";
     };
 
-    flatpak.enable = true;
+    flatpak = {
+      enable = true;
+      packages = [
+        "com.github.tchx84.Flatseal"
+        "com.usebottles.bottles"
+        "io.mrarm.mcpelauncher"
+      ];
+    };
     cron = {
       enable = true;
       systemCronJobs = [

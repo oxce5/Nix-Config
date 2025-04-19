@@ -146,9 +146,11 @@
     };
     theme = {
       enable = true; # enable theme module
-      active = "Tokyo Night"; # active theme name
+      active = "Material Sakura"; # active theme name
       themes = [
         "Tokyo Night"
+        "Material Sakura"
+        "Catppuccin Mocha"
       ]; # default enabled themes, full list in https://github.com/richen604/hydenix/tree/main/hydenix/sources/themes
     };
     waybar.enable = true; # enable waybar module
