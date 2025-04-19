@@ -12,6 +12,10 @@
     inputs.jerry.packages.${pkgs.system}.default
     waydroid-helper
     cloudflare-warp
+    unrar
+    p7zip
+    python3Full
+    wine
     alejandra
     bat
     # pkgs.vscode - hydenix's vscode version
@@ -23,6 +27,7 @@
   };
   hardware.nvidia = {
     open = false;
+    powerManagement.finegrained = true;
     prime = {
       offload = {
         enable = true;

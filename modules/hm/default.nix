@@ -38,9 +38,11 @@
     krita
     clang
     mpv
+    obs-studio
     tealdeer
     blender
     motrix
+    koboldcpp
     # pkgs.vscode - hydenix's vscode version
     # pkgs.userPkgs.vscode - your personal nixpkgs version
   ];
@@ -56,6 +58,16 @@
       mutable = true;
     };
     "${config.xdg.configHome}/mimeapps.list".force = lib.mkForce true;
+    ".config/kitty/theme.conf" = lib.mkForce {
+      source = ./config/theme.conf;
+      force = true;
+      mutable = true;
+    };
+    ".config/kitty/kitty.conf" = lib.mkForce {
+      source = ./config/kitty.conf;
+      force = true;
+      mutable = true;
+    };
   };
   services.podman.enable = true;
 
@@ -113,6 +125,7 @@
       zsh.enable = true; # enable zsh shell
       zsh.configText = ''
         alias rebuild="/home/oxce5/hydenix/scripts/nixos-rebuild.sh"
+        alias nvim="/home/oxce5/hydenix/scripts/nvim.sh"
       ''; # zsh config text
       bash.enable = false; # enable bash shell
       fish.enable = false; # enable fish shell
