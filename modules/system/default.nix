@@ -51,6 +51,18 @@
   };
   services = {
     thermald.enable = true;
+    auto-cpufreq.enable = true;
+    auto-cpufreq.settings = {
+      battery = {
+        governor = "powersave";
+        turbo = "never";
+      };
+      charger = {
+        governor = "performance";
+        turbo = "auto";
+      };
+    };
+
     deluge = {
       enable = true;
       web.enable = true;
@@ -66,7 +78,7 @@
       ];
     };
     cron = {
-      enable = true;
+      enable = false;
       systemCronJobs = [
         "*/5 * * * * ~/duckdns/duck.sh >/dev/null 2>&1"
       ];
