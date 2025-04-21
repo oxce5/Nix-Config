@@ -84,7 +84,7 @@ in {
     audio.enable = true; # enable audio module
     boot = {
       enable = true; # enable boot module
-      useSystemdBoot = true; # disable for GRUB
+      useSystemdBoot = true; # disable for GRUBcpufreq
       grubTheme = pkgs.hydenix.grub-retroboot; # or pkgs.hydenix.grub-pochita
       grubExtraConfig = ""; # additional GRUB configuration
       kernelPackages = pkgs.linuxPackages_zen; # default zen kernel

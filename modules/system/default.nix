@@ -12,6 +12,7 @@
 
   environment.systemPackages = with pkgs; [
     inputs.jerry.packages.${pkgs.system}.default
+    sbctl
     waydroid-helper
     cloudflare-warp
     unrar
