@@ -131,9 +131,9 @@ in {
   ];
 
   boot = {
-    #loader.systemd-boot.enable = lib.mkForce false;
+    loader.systemd-boot.enable = lib.mkForce false;
     lanzaboote = {
-      enable = false;
+      enable = true;
       pkiBundle = "/var/lib/sbctl";
     };
   };
