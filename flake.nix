@@ -16,6 +16,12 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nvf.url = "github:notashelf/nvf";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.2";
+
+      # Optional but recommended to limit the size of your system closure.
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
 
     # Hydenix and its nixpkgs - kept separate to avoid conflicts
     hydenix = {

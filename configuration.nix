@@ -1,4 +1,8 @@
-{inputs, ...}: let
+{
+  inputs,
+  lib,
+  ...
+}: let
   # Package declaration
   # ---------------------
   pkgs = import inputs.hydenix.inputs.hydenix-nixpkgs {
@@ -49,6 +53,8 @@ in {
     # === Other common modules ===
     inputs.hydenix.inputs.nixos-hardware.nixosModules.common-pc
     inputs.hydenix.inputs.nixos-hardware.nixosModules.common-pc-ssd
+
+    inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
   home-manager = {
@@ -123,4 +129,12 @@ in {
       ];
     }
   ];
+
+  boot = {
+    #loader.systemd-boot.enable = lib.mkForce false;
+    lanzaboote = {
+      enable = false;
+      pkiBundle = "/var/lib/sbctl";
+    };
+  };
 }
