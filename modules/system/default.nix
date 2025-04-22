@@ -63,6 +63,10 @@
         turbo = "auto";
       };
     };
+    undervolt = {
+      enable = false;
+      coreOffset = -1;
+    };
 
     deluge = {
       enable = true;
