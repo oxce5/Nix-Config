@@ -63,9 +63,13 @@
         turbo = "auto";
       };
     };
+    tlp = {
+      enable = true;
+      settings.CPU_MAX_PERF_ON_BAT = 30;
+    };
     undervolt = {
-      enable = false;
-      coreOffset = -1;
+      enable = true;
+      coreOffset = -125;
     };
 
     deluge = {
