@@ -53,7 +53,7 @@
       enable = true;
       clean.enable = true;
       clean.extraArgs = "--keep-since 4d --keep 5";
-      flake = "/home/oxce5/hydenix";
+      flake = "/home/oxce5/hydenix/";
     };
   };
   services = {

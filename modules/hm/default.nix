@@ -130,6 +130,9 @@ in {
       zsh.configText = ''
         alias rebuild="/home/oxce5/hydenix/scripts/nixos-rebuild.sh"
         alias nvim="/home/oxce5/hydenix/scripts/nvim.sh"
+
+        f=~/hydenix/scripts/nh-comp.sh
+        [[ -f "$f" ]] && source "$f"
       ''; # zsh config text
       bash.enable = false; # enable bash shell
       fish.enable = false; # enable fish shell
