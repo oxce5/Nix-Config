@@ -4,76 +4,75 @@
   lib,
   config,
   ...
-}: let
-  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
-in {
+}:
+with pkgs; let
+  patchDesktop = pkg: appName: from: to: lib.hiPrio (
+    pkgs.runCommand "$patched-desktop-entry-for-${appName}" {} ''
+      ${coreutils}/bin/mkdir -p $out/share/applications
+      ${gnused}/bin/sed 's#${from}#${to}#g' < ${pkg}/share/applications/${appName}.desktop > $out/share/applications/${appName}.desktop
+      '');
+  GPUOffloadApp = pkg: desktopName: patchDesktop pkg desktopName "^Exec=" "Exec=nvidia-offload ";
+in
+  {
+  # Add the overlay to Nixpkgs
   imports = [
     # ./example.nix - add your modules here
-    inputs.spicetify-nix.homeManagerModules.default
     inputs.nix-index-database.hmModules.nix-index
+    inputs.zen-browser.homeModules.twilight
+    inputs.impermanence.homeManagerModules.impermanence
 
     ./nvf_config.nix
+    ./shell.nix
+    ./symlink.nix
+    ./spicetify.nix
+    ./tmux.nix
+    ./yazi.nix
   ];
 
-  programs.spicetify = {
-    enable = true;
-    enabledExtensions = with spicePkgs.extensions; [
-      adblockify
-      hidePodcasts
-      shuffle # shuffle+ (special characters are sanitized out of extension names)
-    ];
-    enabledCustomApps = with spicePkgs.apps; [
-      lyricsPlus
-      reddit
-    ];
-    theme = spicePkgs.themes.hazy;
-  };
-  programs.yazi.enable = true;
-  programs.lazygit.enable = true;
-  programs.gh.enable = true;
-
   # home-manager options go here/
+  programs = { 
+    lazygit.enable = true;
+    gh.enable = true;
+    zen-browser = {
+      enable = true;
+    };
+    zellij = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+  };
+
+  services = {
+    podman.enable = true;
+  };
+
   home.packages = with pkgs; [
-    inputs.zen-browser.packages."${system}".default
+    trackma-curses
+    heroic
+    blender
+    (GPUOffloadApp blender "blender")
+    zoxide
     krita
     clang
     mpv
-    obs-studio
     tealdeer
-    blender
     motrix
+    thunderbird
+    proton-caller
     # pkgs.vscode - hydenix's vscode version
     # pkgs.userPkgs.vscode - your personal nixpkgs version
   ];
-  home.file = {
-    ".config/hypr/userprefs.conf" = lib.mkForce {
-      source = ./config/userprefs.conf;
-      force = true;
-      mutable = true;
-    };
-    ".config/hypr/keybindings.conf" = lib.mkForce {
-      source = ./config/keybindings.conf;
-      force = true;
-      mutable = true;
-    };
-    "${config.xdg.configHome}/mimeapps.list".force = lib.mkForce true;
-    ".config/kitty/theme.conf" = lib.mkForce {
-      source = ./config/theme.conf;
-      force = true;
-      mutable = true;
-    };
-    ".config/kitty/kitty.conf" = lib.mkForce {
-      source = ./config/kitty.conf;
-      force = true;
-      mutable = true;
-    };
-    ".config/hyde/themes/Tokyo Night/wallpapers/carlotta.jpg" = lib.mkForce {
-      source = ./assets/carlotta.jpg;
-      force = true;
-      mutable = true;
+  home.persistence."/persistent" = {
+    directories = [
+      ".zen"
+    ];
+  };
+  
+  xdg = {
+    mimeApps.associations.removed = {
+      "application/zip" = [ "org.kde.ark.desktop" ];
     };
   };
-  services.podman.enable = true;
 
   # hydenix home-manager options go here
   hydenix.hm = {
@@ -81,10 +80,10 @@ in {
     enable = true;
 
     /*
-    ! Below are defaults
+   ! Below are defaults
     */
     comma.enable = true; # useful nix tool to run software without installing it first
-    dolphin.enable = true; # file manager
+    dolphin.enable = false; # file manager
     editors = {
       enable = true; # enable editors module
       vscode = {
@@ -130,9 +129,6 @@ in {
       zsh.configText = ''
         alias rebuild="/home/oxce5/hydenix/scripts/nixos-rebuild.sh"
         alias nvim="/home/oxce5/hydenix/scripts/nvim.sh"
-
-        f=~/hydenix/scripts/nh-comp.sh
-        [[ -f "$f" ]] && source "$f"
       ''; # zsh config text
       bash.enable = false; # enable bash shell
       fish.enable = false; # enable fish shell
@@ -140,9 +136,9 @@ in {
     };
     social = {
       enable = true; # enable social module
-      discord.enable = true; # enable discord module
+      discord.enable = false; # enable discord module
       webcord.enable = false; # enable webcord module
-      vesktop.enable = false; # enable vesktop module
+      vesktop.enable = true; # enable vesktop module
     };
     spotify.enable = false; # enable spotify module
     swww.enable = true; # enable swww wallpaper daemon
@@ -153,11 +149,10 @@ in {
     };
     theme = {
       enable = true; # enable theme module
-      active = "Tokyo Night"; # active theme name
+      active = "BlueSky"; # active theme name
       themes = [
         "Tokyo Night"
-        "Material Sakura"
-        "Catppuccin Mocha"
+        "BlueSky"
       ]; # default enabled themes, full list in https://github.com/richen604/hydenix/tree/main/hydenix/sources/themes
     };
     waybar.enable = true; # enable waybar module

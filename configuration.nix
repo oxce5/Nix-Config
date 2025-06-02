@@ -1,5 +1,6 @@
 {
   inputs,
+  config,
   lib,
   ...
 }: let
@@ -8,6 +9,9 @@
   pkgs = import inputs.hydenix.inputs.hydenix-nixpkgs {
     inherit (inputs.hydenix.lib) system;
     config.allowUnfree = true;
+    config.packageOverrides = pkgs: {
+      obs-studio = pkgs.obs-studio.override { ffmpeg = pkgs.ffmpeg-full; };
+    };
     overlays = [
       inputs.hydenix.lib.overlays
       (final: prev: {
@@ -93,7 +97,7 @@ in {
       useSystemdBoot = true; # disable for GRUBcpufreq
       grubTheme = pkgs.hydenix.grub-retroboot; # or pkgs.hydenix.grub-pochita
       grubExtraConfig = ""; # additional GRUB configuration
-      kernelPackages = pkgs.linuxPackages_zen; # default zen kernel
+      kernelPackages =  pkgs.linuxPackages_xanmod_latest; # default zen kernel
     };
     hardware.enable = true; # enable hardware module
     network.enable = true; # enable network module
@@ -114,6 +118,9 @@ in {
       "networkmanager" # For network management
       "video" # For display/graphics access
       "docker"
+      "scanner"      
+      "lp" 
+      "gamemode"
       # Add other groups as needed
     ];
     shell = pkgs.zsh; # Change if you prefer a different shell
@@ -131,11 +138,30 @@ in {
   ];
 
   boot = {
-    loader.systemd-boot.enable = lib.mkForce false;
+    #loader.systemd-boot.enable = lib.mkForce false;
+    loader.timeout = 0;
     lanzaboote = {
-      enable = true;
+      enable = false;
       pkiBundle = "/var/lib/sbctl";
     };
     kernelModules = ["msr"];
+    kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=auto"
+    ];
+    plymouth = {
+      enable = true;
+    };
+    binfmt.registrations.appimage = {
+      wrapInterpreterInShell = false;
+      interpreter = "${pkgs.appimage-run}/bin/appimage-run";
+      recognitionType = "magic";
+      offset = 0;
+      mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
+      magicOrExtension = ''\x7fELF....AI\x02'';
+    };
   };
 }
