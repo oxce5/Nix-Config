@@ -54,14 +54,14 @@ Rectangle {
         }
       }
 
-      Wid.NotifDots {
-        color: Dat.Colors.surface_container
-        anchors.bottomMargin: 10
-        anchors.bottom: parent.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        height: 35
-        radius: 20
-      }
+      // Wid.NotifDots {
+      //   color: Dat.Colors.surface_container
+      //   anchors.bottomMargin: 10
+      //   anchors.bottom: parent.bottom
+      //   anchors.horizontalCenter: parent.horizontalCenter
+      //   height: 35
+      //   radius: 20
+      // }
     }
 
     ColumnLayout {

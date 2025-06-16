@@ -104,7 +104,7 @@ in {
     nix.enable = true; # enable nix module
     sddm = {
       enable = true; # enable sddm module
-      theme = pkgs.hydenix.sddm-candy; # or pkgs.hydenix.sddm-corners
+      theme = "Candy"; # or pkgs.hydenix.sddm-corners
     };
     system.enable = true; # enable system module
   };
@@ -138,13 +138,16 @@ in {
   ];
 
   boot = {
-    #loader.systemd-boot.enable = lib.mkForce false;
-    loader.timeout = 0;
+    loader = {
+      timeout = 5;
+      systemd-boot.configurationLimit = 3;
+    };
     lanzaboote = {
       enable = false;
       pkiBundle = "/var/lib/sbctl";
     };
     kernelModules = ["msr"];
+    extraModulePackages = [ config.boot.kernelPackages.lenovo-legion-module ];
     kernelParams = [
       "quiet"
       "splash"

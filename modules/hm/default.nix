@@ -20,7 +20,9 @@ in
     inputs.nix-index-database.hmModules.nix-index
     inputs.zen-browser.homeModules.twilight
     inputs.impermanence.homeManagerModules.impermanence
+    inputs.zen-nebula.homeModules.default
 
+    ./hyprlock.nix
     ./nvf_config.nix
     ./shell.nix
     ./symlink.nix
@@ -40,15 +42,33 @@ in
       enable = true;
       enableZshIntegration = true;
     };
+    nh = {
+      enable = true;
+      clean.enable = if config.programs.nh.enable then true else false;
+      clean.extraArgs = "--keep-since 4d --keep 5";
+      flake = "/home/oxce5/hydenix/";
+    };
+  };
+  zen-nebula = {
+    enable = true;
+    profile = "wgi9he2k.Default Profile";
   };
 
   services = {
     podman.enable = true;
   };
 
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "x-scheme-handler/roblox-player" = [ "org.vinegarhq.Sober.desktop" ];
+    };
+  };
+
   home.packages = with pkgs; [
     trackma-curses
     heroic
+    bottles
     blender
     (GPUOffloadApp blender "blender")
     zoxide
@@ -68,12 +88,6 @@ in
     ];
   };
   
-  xdg = {
-    mimeApps.associations.removed = {
-      "application/zip" = [ "org.kde.ark.desktop" ];
-    };
-  };
-
   # hydenix home-manager options go here
   hydenix.hm = {
     #! Important options
@@ -96,10 +110,6 @@ in
     fastfetch.enable = true; # fastfetch configuration
     firefox = {
       enable = false; # enable firefox module
-      useHydeConfig = false; # use hyde firefo configuration and extensions
-      useUserChrome = true; # if useHydeConfig is true, apply hyde userChrome CSS customizations
-      useUserJs = true; # if useHydeConfig is true, apply hyde user.js preferences
-      useExtensions = true; # if useHydeConfig is true, install hyde firefox extensions
     };
     git = {
       enable = true; # enable git module
@@ -109,8 +119,8 @@ in
     hyde.enable = true; # enable hyde module
     hyprland.enable = true; # enable hyprland module
     lockscreen = {
-      enable = true; # enable lockscreen module
-      hyprlock = true; # enable hyprlock lockscreen
+      enable = false; # enable lockscreen module
+      hyprlock = false; # enable hyprlock lockscreen
       swaylock = false; # enable swaylock lockscreen
     };
     notifications.enable = true; # enable notifications module
@@ -120,8 +130,8 @@ in
       enable = true; # enable screenshots module
       grim.enable = true; # enable grim screenshot tool
       slurp.enable = true; # enable slurp region selection tool
-      satty.enable = true; # enable satty screenshot annotation tool
-      swappy.enable = false; # enable swappy screenshot editor
+      satty.enable = false; # enable satty screenshot annotation tool
+      swappy.enable = true; # enable swappy screenshot editor
     };
     shell = {
       enable = true; # enable shell module
@@ -130,32 +140,38 @@ in
         alias rebuild="/home/oxce5/hydenix/scripts/nixos-rebuild.sh"
         alias nvim="/home/oxce5/hydenix/scripts/nvim.sh"
       ''; # zsh config text
+      zsh.plugins = [ "sudo" ];
       bash.enable = false; # enable bash shell
       fish.enable = false; # enable fish shell
       pokego.enable = true; # enable Pokemon ASCII art scripts
+      p10k.enable = false; # enable p10k prompt
+      starship.enable = true; # enable starship prompt
     };
     social = {
       enable = true; # enable social module
-      discord.enable = false; # enable discord module
+      discord.enable = true; # enable discord module
       webcord.enable = false; # enable webcord module
-      vesktop.enable = true; # enable vesktop module
+      vesktop.enable = false; # enable vesktop module
     };
     spotify.enable = false; # enable spotify module
     swww.enable = true; # enable swww wallpaper daemon
     terminals = {
       enable = true; # enable terminals module
       kitty.enable = true; # enable kitty terminal
-      kitty.configText = ""; # kitty config text
+      kitty.configText = "
+        background_opacity 0.4
+      "; # kitty config text
     };
     theme = {
       enable = true; # enable theme module
-      active = "BlueSky"; # active theme name
+      active = "Oxo Carbon"; # active theme name
       themes = [
+        "Oxo Carbon"
         "Tokyo Night"
         "BlueSky"
       ]; # default enabled themes, full list in https://github.com/richen604/hydenix/tree/main/hydenix/sources/themes
     };
-    waybar.enable = true; # enable waybar module
+    waybar.enable = false; # enable waybar module
     wlogout.enable = true; # enable wlogout module
     xdg.enable = true; # enable xdg module
   };

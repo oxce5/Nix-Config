@@ -34,5 +34,21 @@
       force = true;
       mutable = true;
     };
+
+    ".local/lib/hyde/gamemode.sh" = lib.mkForce {
+      source = ./config/gamemode.sh;
+      force = true;
+      mutable = true;
+    };
+    ".local/lib/hyde/screenshot.sh" = lib.mkForce {
+      source = ./config/screenshot.sh;
+      force = true;
+      mutable = true;
+    };
+    ".local/lib/hyde/battery.sh" = lib.mkForce {
+      source = ./config/battery.sh;
+      force = true;
+      mutable = true;
+    };
   };
 }

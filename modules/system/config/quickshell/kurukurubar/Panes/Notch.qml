@@ -623,14 +623,6 @@ Scope {
             radius: notificationRect.radius
           }
 
-          InboxPane {
-            id: inboxRect
-
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            color: "transparent"
-            radius: notificationRect.radius
-          }
         }
       }
     }

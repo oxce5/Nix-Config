@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   config,
+  lib,
   ...
 }: 
 let
@@ -12,6 +13,7 @@ in
     # ./example.nix - add your modules here
     inputs.nix-flatpak.nixosModules.nix-flatpak
     inputs.sops-nix.nixosModules.sops
+    inputs.hydenix.inputs.nixos-hardware.nixosModules.common-gpu-nvidia
 
     ./aagl.nix
   ];
@@ -38,6 +40,7 @@ in
     alejandra
     bat
     nix-ld
+    nextdns
 
     python313Packages.aria2p
     # pkgs.vscode - hydenix's vscode version
@@ -49,6 +52,19 @@ in
     defaultSopsFormat = "yaml";
     age.keyFile = "/home/oxce5/.config/sops/age/keys.txt";
     secrets."aria2_rpc" = { };
+  };
+
+  specialisation = {
+    battery-saver.configuration = {
+      system.nixos.tags = ["battery-saver"];
+      hardware = {
+        nvidia = {
+          prime.offload.enable = lib.mkForce false;
+          prime.offload.enableOffloadCmd = lib.mkForce false;
+          powerManagement.finegrained = lib.mkForce false;
+        };
+      };
+    };
   };
 
   hardware.sane.enable = true; # enables support for SANE scanners
@@ -74,6 +90,7 @@ in
     };
   };
   services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.cpu.intel.updateMicrocode = true; # update Intel CPU microcode
 
   programs = {
     gamescope = {
@@ -99,12 +116,6 @@ in
           ];
       };
     };
-    nh = {
-      enable = true;
-      clean.enable = true;
-      clean.extraArgs = "--keep-since 4d --keep 5";
-      flake = "/home/oxce5/hydenix/";
-    };
     nix-ld = {
       enable = true;
       libraries = pkgs.steam-run.args.multiPkgs pkgs;
@@ -114,23 +125,22 @@ in
 
   services = {
     thermald.enable = true;
-    power-profiles-daemon.enable = true;
-    # auto-cpufreq.enable = true;
-    # auto-cpufreq.settings = {
-    #   battery = {
-    #     governor = "powersave";
-    #     turbo = "never";
-    #   };
-    #   charger = {
-    #     governor = "performance";
-    #     turbo = "auto";
-    #   };
-    # };
-    # tlp = {
-    #   enable = true;
-    #   settings.CPU_MAX_PERF_ON_BAT = 30;
-    #   settings.CPU_MAX_PERF_ON_AC = 100;
-    # };
+    auto-cpufreq.enable = true;
+    auto-cpufreq.settings = {
+      battery = {
+        governor = "powersave";
+        turbo = "never";
+      };
+      charger = {
+        governor = "performance";
+        turbo = "auto";
+      };
+    };
+    tlp = {
+      enable = true;
+      settings.CPU_MAX_PERF_ON_BAT = 30;
+      settings.CPU_MAX_PERF_ON_AC = 100;
+    };
     undervolt = {
       enable = true;
       coreOffset = -125;
@@ -167,9 +177,16 @@ in
       ];
     };
     cron = {
-      enable = false;
+      enable = true;
       systemCronJobs = [
-        "*/5 * * * * ~/duckdns/duck.sh >/dev/null 2>&1"
+        "*/20 * * * * /home/0xce5/hydenix/scripts/weather.sh /tmp/hyprlock-weather.txt >/dev/null 2>&1"
+      ];
+    };
+    nextdns = {
+      enable = true;
+      arguments = [
+        "-config" "9a438c"
+        "-cache-size" "10MB"
       ];
     };
   };
@@ -179,6 +196,13 @@ in
     script = ''
       flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     '';
+  };
+  systemd.services.nextdns-activate = {
+    script = ''
+      /run/current-system/sw/bin/nextdns activate
+    '';
+    after = [ "nextdns.service" ];
+    wantedBy = [ "multi-user.target" ];
   };
 
   virtualisation = {
