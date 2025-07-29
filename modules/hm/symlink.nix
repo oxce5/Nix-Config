@@ -1,18 +1,14 @@
-{ lib, config, ... }:
-
 {
+  lib,
+  config,
+  ...
+}: {
   home.file = {
     "${config.xdg.configHome}/mimeapps.list".force = lib.mkForce true;
     ".config/kitty/theme.conf" = lib.mkForce {
       source = ./config/theme.conf;
       force = true;
       mutable = true;
-    };
-    ".config/hyde/themes/Tokyo Night/wallpapers" = lib.mkForce {
-      source = ./assets;
-      force = true;
-      mutable = true;
-      recursive = true;
     };
     ".local/lib/hyde/gamemode.sh" = lib.mkForce {
       source = ./config/gamemode.sh;
