@@ -8,12 +8,6 @@
     (obs-studio.override {
       cudaSupport = true;
     })
-    (import ./kurukurubar.nix {
-      inherit symlinkJoin makeWrapper quickshell kdePackages lib;
-      makeFontsConf = pkgs.makeFontsConf;
-      nerd-fonts = pkgs.nerd-fonts.caskaydia-mono;
-      material-symbols = pkgs.material-symbols;
-    })
     atuin
     nvidia-vaapi-driver
     sbctl

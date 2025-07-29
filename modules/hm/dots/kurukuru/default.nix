@@ -31,21 +31,20 @@
       # librebarcode
     ];
   };
-in
-  symlinkJoin {
-    pname = "kurukurubar";
-    version = quickshell.version;
+in symlinkJoin {
+  pname = "kurukurubar";
+  version = quickshell.version;
 
-    paths = [quickshell];
-    nativeBuildInputs = [makeWrapper];
+  paths = [quickshell];
+  nativeBuildInputs = [makeWrapper];
 
-    postBuild = ''
-      makeWrapper $out/bin/quickshell $out/bin/kurukurubar \
-        --set FONTCONFIG_FILE "${fontconfig}" \
-        --set QML2_IMPORT_PATH "${qmlPath}" \
-        --add-flags '-p ${configPath}' \
-        --prefix PATH : "$out/bin"
+  postBuild = ''
+    makeWrapper $out/bin/quickshell $out/bin/kurukurubar \
+    --set FONTCONFIG_FILE "${fontconfig}" \
+    --set QML2_IMPORT_PATH "${qmlPath}" \
+    --add-flags '-p ${configPath}' \
+    --prefix PATH : "$out/bin"
     '';
 
-    meta.mainProgram = "kurukurubar";
-  }
+  meta.mainProgram = "kurukurubar";
+}
