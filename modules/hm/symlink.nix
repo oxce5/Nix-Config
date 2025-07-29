@@ -2,24 +2,9 @@
 
 {
   home.file = {
-    ".config/hypr/userprefs.conf" = lib.mkForce {
-      source = ./config/userprefs.conf;
-      force = true;
-      mutable = true;
-    };
-    ".config/hypr/keybindings.conf" = lib.mkForce {
-      source = ./config/keybindings.conf;
-      force = true;
-      mutable = true;
-    };
     "${config.xdg.configHome}/mimeapps.list".force = lib.mkForce true;
     ".config/kitty/theme.conf" = lib.mkForce {
       source = ./config/theme.conf;
-      force = true;
-      mutable = true;
-    };
-    ".config/kitty/kitty.conf" = lib.mkForce {
-      source = ./config/kitty.conf;
       force = true;
       mutable = true;
     };
@@ -29,12 +14,6 @@
       mutable = true;
       recursive = true;
     };
-    ".local/share/hyde/hyprland.conf" = lib.mkForce {
-      source = ./config/hyprland_hyde.conf;
-      force = true;
-      mutable = true;
-    };
-
     ".local/lib/hyde/gamemode.sh" = lib.mkForce {
       source = ./config/gamemode.sh;
       force = true;
@@ -47,6 +26,11 @@
     };
     ".local/lib/hyde/battery.sh" = lib.mkForce {
       source = ./config/battery.sh;
+      force = true;
+      mutable = true;
+    };
+    ".local/share/hyde/config.toml" = lib.mkForce {
+      source = ./config/config.toml;
       force = true;
       mutable = true;
     };

@@ -15,9 +15,8 @@
     overlays = [
       inputs.hydenix.lib.overlays
       (final: prev: {
-        userPkgs = inputs.nixpkgs {
-          config.allowUnfree = true;
-        };
+        nh = inputs.nixpkgs.legacyPackages.${prev.system}.nh;
+        blender = inputs.nixpkgs.legacyPackages.${prev.system}.blender;
       })
     ];
   };
@@ -32,33 +31,14 @@ in {
     ./modules/system
 
     # === GPU-specific configurations ===
+    inputs.nixos-hardware.nixosModules.common-gpu-nvidia
 
-    /*
-    For drivers, we are leveraging nixos-hardware
-    Most common drivers are below, but you can see more options here: https://github.com/NixOS/nixos-hardware
-    */
-
-    #! EDIT THIS SECTION
-    # For NVIDIA setups
-    inputs.hydenix.inputs.nixos-hardware.nixosModules.common-gpu-nvidia
-    # inputs.hydenix.inputs.nixos-hardware.nixosModules.common-gpu-nvidia-nonmodeset
-
-    # For AMD setups
-    # inputs.hydenix.inputs.nixos-hardware.nixosModules.common-gpu-amd
-
-    # === CPU-specific configurations ===
-    # For AMD CPUs
-    # inputs.hydenix.inputs.nixos-hardware.nixosModules.common-cpu-amd
-    # inputs.hydenix.inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
-
-    # For Intel CPUs
-    inputs.hydenix.inputs.nixos-hardware.nixosModules.common-cpu-intel
+    inputs.nixos-hardware.nixosModules.common-cpu-intel
 
     # === Other common modules ===
-    inputs.hydenix.inputs.nixos-hardware.nixosModules.common-pc
-    inputs.hydenix.inputs.nixos-hardware.nixosModules.common-pc-ssd
+    inputs.nixos-hardware.nixosModules.common-pc
+    inputs.nixos-hardware.nixosModules.common-pc-ssd
 
-    inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
   home-manager = {
@@ -94,11 +74,12 @@ in {
     audio.enable = true; # enable audio module
     boot = {
       enable = true; # enable boot module
-      useSystemdBoot = true; # disable for GRUBcpufreq
-      grubTheme = pkgs.hydenix.grub-retroboot; # or pkgs.hydenix.grub-pochita
+      useSystemdBoot = false; # disable for GRUBcpufreq
+      grubTheme = "Retroboot"; # or pkgs.hydenix.grub-pochita
       grubExtraConfig = ""; # additional GRUB configuration
       kernelPackages =  pkgs.linuxPackages_xanmod_latest; # default zen kernel
     };
+    gaming.enable = false;
     hardware.enable = true; # enable hardware module
     network.enable = true; # enable network module
     nix.enable = true; # enable nix module
@@ -121,6 +102,8 @@ in {
       "scanner"      
       "lp" 
       "gamemode"
+      "adbusers"
+      "aria"
       # Add other groups as needed
     ];
     shell = pkgs.zsh; # Change if you prefer a different shell
@@ -136,18 +119,21 @@ in {
       ];
     }
   ];
+  security.polkit.enable = true;
 
   boot = {
     loader = {
       timeout = 5;
       systemd-boot.configurationLimit = 3;
+      grub.configurationLimit = 3;
     };
-    lanzaboote = {
-      enable = false;
-      pkiBundle = "/var/lib/sbctl";
-    };
-    kernelModules = ["msr"];
-    extraModulePackages = [ config.boot.kernelPackages.lenovo-legion-module ];
+    kernelModules = [
+      "msr"
+      "ntsync"
+    ];
+    extraModulePackages = with config.boot.kernelPackages; [ 
+      lenovo-legion-module 
+    ];
     kernelParams = [
       "quiet"
       "splash"
@@ -167,4 +153,21 @@ in {
       magicOrExtension = ''\x7fELF....AI\x02'';
     };
   };
+
+  nix.settings = {
+    substituters = [
+      "https://cache.nixos.org/"
+      "https://ezkea.cachix.org"
+      "https://nix-gaming.cachix.org"
+      "https://prismlauncher.cachix.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:vliehR4ZkL9QFXy3yF3XYxkq8vA2BNB8+HF9zGml8Xg="
+      "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
+      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+      "prismlauncher.cachix.org-1:9/n/FGyABA2jLUVfY+DEp4hKds/rwO+SCOtbOkDzd+c="
+    ];
+  };
 }
+
+
