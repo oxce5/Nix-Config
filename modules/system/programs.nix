@@ -1,8 +1,9 @@
 {
+  inputs,
   pkgs,
-  lib,
   ...
-}: {
+}:
+{
   environment.systemPackages = with pkgs; [
     inputs.jerry.packages.${pkgs.system}.default
     (obs-studio.override {
@@ -31,7 +32,5 @@
     lenovo-legion
 
     unstable.python313Packages.aria2p
-    # pkgs.vscode - hydenix's vscode version
-    # pkgs.userPkgs.vscode - your personal nixpkgs version
   ];
 }
