@@ -10,7 +10,7 @@
     inherit (inputs.hydenix.lib) system;
     config.allowUnfree = true;
     config.packageOverrides = pkgs: {
-      obs-studio = pkgs.obs-studio.override { ffmpeg = pkgs.ffmpeg-full; };
+      obs-studio = pkgs.obs-studio.override {ffmpeg = pkgs.ffmpeg-full;};
     };
     overlays = [
       inputs.hydenix.lib.overlays
@@ -38,7 +38,6 @@ in {
     # === Other common modules ===
     inputs.nixos-hardware.nixosModules.common-pc
     inputs.nixos-hardware.nixosModules.common-pc-ssd
-
   ];
 
   home-manager = {
@@ -77,7 +76,7 @@ in {
       useSystemdBoot = false; # disable for GRUBcpufreq
       grubTheme = "Retroboot"; # or pkgs.hydenix.grub-pochita
       grubExtraConfig = ""; # additional GRUB configuration
-      kernelPackages =  pkgs.linuxPackages_xanmod_latest; # default zen kernel
+      kernelPackages = pkgs.linuxPackages_xanmod_latest; # default zen kernel
     };
     gaming.enable = false;
     hardware.enable = true; # enable hardware module
@@ -99,8 +98,8 @@ in {
       "networkmanager" # For network management
       "video" # For display/graphics access
       "docker"
-      "scanner"      
-      "lp" 
+      "scanner"
+      "lp"
       "gamemode"
       "adbusers"
       "aria"
@@ -131,8 +130,8 @@ in {
       "msr"
       "ntsync"
     ];
-    extraModulePackages = with config.boot.kernelPackages; [ 
-      lenovo-legion-module 
+    extraModulePackages = with config.boot.kernelPackages; [
+      lenovo-legion-module
     ];
     kernelParams = [
       "quiet"
@@ -169,5 +168,3 @@ in {
     ];
   };
 }
-
-
