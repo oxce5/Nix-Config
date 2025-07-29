@@ -1,7 +1,5 @@
 {
 pkgs, 
-symlinkJoin, 
-makeWrapper, 
 lib, 
 ...
 }:
