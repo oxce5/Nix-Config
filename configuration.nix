@@ -15,6 +15,10 @@
     overlays = [
       inputs.hydenix.lib.overlays
       (final: prev: {
+        unstable = import inputs.nixpkgs {
+          system = prev.system;
+          config.allowUnfree = true;
+        };
         nh = inputs.nixpkgs.legacyPackages.${prev.system}.nh;
         blender = inputs.nixpkgs.legacyPackages.${prev.system}.blender;
       })
