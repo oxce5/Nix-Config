@@ -8,8 +8,8 @@
     inputs.impermanence.homeManagerModules.impermanence
 
     ./dots
-    ./packages
-    ./programs
+    ./packages.nix
+    ./programs.nix
     ./symlink.nix
   ];
 
