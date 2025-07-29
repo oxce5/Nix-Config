@@ -1,8 +1,7 @@
 {
-  description = "template for hydenix";
+  description = "0xCE5's Nix Config";
 
   inputs = {
-    # User's nixpkgs - for user packages
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -18,14 +17,15 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     nix-autobahn.url = "github:Lassulus/nix-autobahn";
     impermanence.url = "github:nix-community/impermanence";
+
     # Hydenix and its nixpkgs - kept separate to avoid conflicts
     hydenix = {
       url = "github:richen604/hydenix";
     };
-    quickshell = { 
-      url = "github:quickshell-mirror/quickshell/"; 
+    quickshell = {
+      url = "github:quickshell-mirror/quickshell/";
     };
-    sops-nix = { 
+    sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
