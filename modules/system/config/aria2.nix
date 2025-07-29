@@ -1,5 +1,5 @@
 {
-  user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0";
+  user-agent = "Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0";
   check-integrity = true;
   continue = true;
   max-concurrent-downloads = 5;
