@@ -7,6 +7,7 @@
     ./aagl.nix
     ./hardware.nix
     ./services.nix
+    ./secrets.nix
     ./network.nix
     ./steam.nix
     ./programs.nix
