@@ -22,9 +22,7 @@
     hydenix = {
       url = "github:richen604/hydenix";
     };
-    quickshell = {
-      url = "github:quickshell-mirror/quickshell/";
-    };
+    zaphkiel.url = "github:Rexcrazy804/Zaphkiel";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
