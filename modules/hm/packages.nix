@@ -9,7 +9,6 @@
       withOpenASAR = true;
       withVencord = true;
     })
-    riceCursor
     youtube-music
     trackma-curses
     heroic
