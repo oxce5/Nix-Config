@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       source = [
-        ./macchiato.conf
+        "$HOME/hydenix/modules/hm/dots/hypr/macchiato.conf"
         "$XDG_CONFIG_HOME/hypr/themes/colors.conf"
       ];
       "$BACKGROUND_PATH" = "$XDG_CACHE_HOME/hyde/wall.set.png";
