@@ -1,5 +1,5 @@
 {
-  imports = [];
+  imports = [./hyprlock.nix];
 
   hydenix.hm = {
     hyprland = {
