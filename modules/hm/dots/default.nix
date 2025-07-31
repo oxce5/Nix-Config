@@ -5,6 +5,7 @@
   ...
 }: {
   imports = [
+    ./ghostty
     ./hyde
     ./hypr
     ./mangohud
