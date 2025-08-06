@@ -18,8 +18,10 @@
           system = prev.system;
           config.allowUnfree = true;
         };
+        nh = inputs.nixpkgs.legacyPackages.${prev.system}.nh;
+        blender = inputs.nixpkgs.legacyPackages.${prev.system}.blender;
       })
-      (import ./modules/overlays/youtube-music-master-overlay.nix)
+      (import ./modules/overlays/youtube-music_master.nix)
     ];
   };
 in {
