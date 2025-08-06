@@ -3,6 +3,7 @@
     # ./example.nix - add your modules here
     inputs.nix-flatpak.nixosModules.nix-flatpak
     inputs.sops-nix.nixosModules.sops
+    ../development
 
     ./aagl.nix
     ./hardware.nix
@@ -12,6 +13,7 @@
     ./steam.nix
     ./programs.nix
     ./nvidia.nix
+    ./graphics.nix
     ./virtualization.nix
   ];
 

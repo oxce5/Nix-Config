@@ -10,8 +10,13 @@ in {
     inputs.nixos-hardware.nixosModules.common-gpu-nvidia
   ];
 
+  hardware.graphics = {
+    enable = true;
+  };
+
   hardware.nvidia = {
     open = lib.mkOverride 990 (nvidiaPackage ? open && nvidiaPackage ? firmware);
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
     primeBatterySaverSpecialisation = true;
     powerManagement.enable = true;
     powerManagement.finegrained = true;
