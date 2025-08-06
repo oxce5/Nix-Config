@@ -28,7 +28,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-gaming.url = "github:fufexan/nix-gaming";
-    elyprism-launcher.url = "github:elyprismlauncher/elyprismlauncher";
+    elyprism-launcher.url = "github:elyprismlauncher/elyprismlauncher/0488e68254273905d886d5e784c5504028685281";
+    ghostty = {
+      url = "github:ghostty-org/ghostty/fde50e0f1c7b902c6c96344fd94b46ad509179b5";
+    };
   };
 
   outputs = {nixpkgs, ...} @ inputs: let

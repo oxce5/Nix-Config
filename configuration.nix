@@ -1,7 +1,6 @@
 {
   inputs,
   config,
-  lib,
   ...
 }: let
   # Package declaration
@@ -19,15 +18,13 @@
           system = prev.system;
           config.allowUnfree = true;
         };
-        nh = inputs.nixpkgs.legacyPackages.${prev.system}.nh;
-        blender = inputs.nixpkgs.legacyPackages.${prev.system}.blender;
       })
+      (import ./modules/overlays/youtube-music-master-overlay.nix)
     ];
   };
 in {
   # Set pkgs for hydenix globally, any file that imports pkgs will use this
   nixpkgs.pkgs = pkgs;
-
   imports = [
     inputs.hydenix.inputs.home-manager.nixosModules.home-manager
     ./hardware-configuration.nix
@@ -70,17 +67,13 @@ in {
     timezone = "Asia/Manila"; # Change to your timezone
     locale = "en_PH.UTF-8"; # Change to your preferred locale
 
-    /*
-    Optionally edit the below values, or leave to use hydenix defaults
-    visit ./modules/hm/default.nix for more options
-    */
     audio.enable = true; # enable audio module
     boot = {
       enable = true; # enable boot module
       useSystemdBoot = false; # disable for GRUBcpufreq
       grubTheme = "Retroboot"; # or pkgs.hydenix.grub-pochita
       grubExtraConfig = ""; # additional GRUB configuration
-      kernelPackages = pkgs.linuxPackages_xanmod_latest; # default zen kernel
+      kernelPackages = pkgs.linuxPackages_zen; # default zen kernel
     };
     gaming.enable = false;
     hardware.enable = true; # enable hardware module
@@ -163,12 +156,15 @@ in {
       "https://ezkea.cachix.org"
       "https://nix-gaming.cachix.org"
       "https://prismlauncher.cachix.org"
+      "https://devenv.cachix.org"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:vliehR4ZkL9QFXy3yF3XYxkq8vA2BNB8+HF9zGml8Xg="
       "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
       "prismlauncher.cachix.org-1:9/n/FGyABA2jLUVfY+DEp4hKds/rwO+SCOtbOkDzd+c="
+      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
     ];
   };
+  documentation.nixos.enable = false; 
 }
