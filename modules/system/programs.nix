@@ -2,8 +2,7 @@
   inputs,
   pkgs,
   ...
-}:
-{
+}: {
   environment.systemPackages = with pkgs; [
     inputs.jerry.packages.${pkgs.system}.default
     (obs-studio.override {
@@ -18,11 +17,11 @@
     ouch
     p7zip
     ffmpeg-full
-    python314Full
     uv
+    python314Full
     inputs.nix-gaming.packages.${pkgs.system}.wine-tkg-ntsync
-    unstable.winetricks
-    unstable.protontricks
+    winetricks
+    protontricks
     ripgrep
     alejandra
     timeshift
@@ -31,6 +30,8 @@
     nextdns
     lenovo-legion
 
-    unstable.python313Packages.aria2p
+    python313Packages.aria2p
   ];
+
+  programs.gpu-screen-recorder.enable = true;
 }
