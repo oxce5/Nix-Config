@@ -4,6 +4,7 @@
   ...
 }: {
   home.packages = with pkgs; [
+    # kitty
     inputs.elyprism-launcher.packages.${pkgs.system}.default
     (discord.override {
       withOpenASAR = true;

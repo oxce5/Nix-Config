@@ -1,13 +1,10 @@
-{
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
     inputs.nix-index-database.hmModules.nix-index
     inputs.zen-browser.homeModules.twilight
     inputs.impermanence.homeManagerModules.impermanence
 
-    ./dots
+    ../dots
     ./packages.nix
     ./programs.nix
     ./symlink.nix
