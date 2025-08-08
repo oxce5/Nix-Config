@@ -23,6 +23,7 @@
     winetricks
     protontricks
     ripgrep
+    bc
     alejandra
     timeshift
     bat
