@@ -23,6 +23,11 @@
           python.enable = true;
         };
 
+        diagnostics = {
+          enable = true;
+          nvim-lint.enable = true;
+        };
+
         clipboard = {
           enable = true;
           providers.wl-copy.enable = true;
