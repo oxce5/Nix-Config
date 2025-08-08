@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
-# Get the current uptime (in seconds and idle time)
-uptime_value=$(cat /proc/uptime)
+UPTIME_TOTAL_FILE=~/.uptime_total
+current_uptime=$(awk '{print $1}' /proc/uptime)
 
-# Get the current date/time (optional, for timestamping)
-timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+if [ -f "$UPTIME_TOTAL_FILE" ]; then
+    previous_total=$(cat "$UPTIME_TOTAL_FILE")
+else
+    previous_total=0
+fi
 
-# Save to a file
-echo "$timestamp $uptime_value" >> ~/uptime_log.txt
+new_total=$(echo "$previous_total + $current_uptime" | bc)
+echo "$new_total" > "$UPTIME_TOTAL_FILE"
+
