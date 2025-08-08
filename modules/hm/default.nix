@@ -1,6 +1,6 @@
 {inputs, ...}: {
   imports = [
-    inputs.nix-index-database.hmModules.nix-index
+    inputs.nix-index-database.homeModules.nix-index
     inputs.zen-browser.homeModules.twilight
     inputs.impermanence.homeManagerModules.impermanence
 
@@ -26,6 +26,7 @@
     directories = [
       ".zen"
     ];
+    allowOther = false;
   };
 
   home.sessionVariables = {
