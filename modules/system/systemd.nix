@@ -1,3 +1,5 @@
+{pkgs, ...}:
+
 {
   systemd.timers."save-uptime" = {
     wantedBy = [ "timers.target" ];
@@ -8,11 +10,12 @@
       };
   };
 
-  systemd.services."save-uptime.service" = {
-    script = ../../scripts/save_uptime.sh;
+  systemd.services."save-uptime" = {
     serviceConfig = {
       Type = "oneshot";
       User = "oxce5";
+      ExecStart = "${pkgs.bash}/bin/bash ${toString ../../scripts/save_uptime.sh}";
     };
+    path = with pkgs; [ coreutils gawk bc ];
   };
 }

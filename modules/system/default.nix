@@ -13,10 +13,11 @@
     ./steam.nix
     ./programs.nix
     ./nvidia.nix
-    ./graphics.nix
     ./virtualization.nix
+    ./systemd.nix
   ];
 
   environment.localBinInPath = true;
   nix.settings.accept-flake-config = true;
+
 }
