@@ -3,5 +3,5 @@
     ./direnv
   ];
 
-  environment.systemPackages = [pkgs.devenv];
+  environment.systemPackages = [pkgs.unstable.devenv];
 }
