@@ -1,10 +1,12 @@
-{ lib, config, pkgs, ... }:
-
-with lib;
-
-let
-  riceCursor = pkgs.callPackage ./rice_cursor { };
-  tetoCursor = pkgs.callPackage ./teto_cursor { };
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+with lib; let
+  riceCursor = pkgs.callPackage ./rice_cursor {};
+  tetoCursor = pkgs.callPackage ./teto_cursor {};
 
   cursorMap = {
     rice_cursor = {
@@ -18,20 +20,18 @@ let
   };
 
   selected = cursorMap.${config.cursor};
-in
-{
+in {
   options.cursor = mkOption {
-    type = types.enum [ "rice_cursor" "teto_cursor" ];
+    type = types.enum ["rice_cursor" "teto_cursor"];
     default = "rice_cursor";
-    description = "Choose which cursor theme to use.";
   };
 
   config = {
-    home.packages = [ selected.pkg ];
+    home.packages = [selected.pkg];
 
     home.sessionVariables = {
       XCURSOR_THEME = selected.name;
-      XCURSOR_SIZE  = "24";
+      XCURSOR_SIZE = 24;
     };
 
     home.pointerCursor = {
@@ -39,6 +39,7 @@ in
       name = selected.name;
       size = 24;
       gtk.enable = true;
+      x11.enable = false; # No .Xresources clobber
     };
   };
 }
