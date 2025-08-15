@@ -5,6 +5,8 @@
 }: {
   imports = [inputs.nvf.homeManagerModules.default];
 
+  home.packages = [pkgs.jdt-language-server];
+
   programs.nvf = {
     enable = true;
     enableManpages = true;
@@ -25,7 +27,10 @@
 
           nix.enable = true;
           python.enable = true;
-          java.enable = true;
+          java = {
+            enable = true;
+            lsp.enable = false;
+          };
           ts.enable = true;
         };
 
@@ -128,56 +133,54 @@
               end
             end,
           })
+
         '';
         extraPlugins = {
           nvim-jdtls = {
             package = pkgs.vimPlugins.nvim-jdtls;
             setup = ''
-              local jdtls_share = '${pkgs.jdt-language-server}/share/java/jdtls'
-              local launcher_jar = vim.fn.glob(jdtls_share .. '/plugins/org.eclipse.equinox.launcher_*.jar')
-              local config_dir = vim.fn.stdpath('cache') .. '/jdtls/config_linux'
-              local workspace_dir = vim.fn.stdpath('cache') .. '/jdtls/workspace'
-              -- Add java-debug jar
-              local bundles = {
-                "/home/oxce5/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.53.2.jar",
-              }
-              -- Add vscode-java-test jars
-              vim.list_extend(
-                bundles,
-                vim.split(vim.fn.glob("/home/oxce5/vscode-java-test/server/*.jar", 1), "\n")
-              )
-              require('jdtls').start_or_attach({
-                cmd = {
-                  '$(echo $JAVA_HOME)',
-                  '-Declipse.application=org.eclipse.jdt.ls.core.id1',
-                  '-Dosgi.bundles.defaultStartLevel=4',
-                  '-Declipse.product=org.eclipse.jdt.ls.core.product',
-                  '-Dlog.protocol=true',
-                  '-Dlog.level=ALL',
-                  '-Xms1G',
-                  '-Xmx2G',
-                  '-jar', launcher_jar,
-                  '-configuration', config_dir,
-                  '-data', workspace_dir,
-                },
-                root_dir = vim.fs.dirname(vim.fs.find({'pom.xml', 'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
-                settings = {
-                  java = {
-                    signatureHelp = { enabled = true },
-                    completion = { favoriteStaticMembers = {} },
-                    contentProvider = { preferred = 'fernflower' },
-                    extendedClientCapabilities = require('jdtls').extendedClientCapabilities
-                  }
-                },
-                init_options = {
-                  bundles = bundles
+                local jdtls_share = '${pkgs.jdt-language-server}/share/java/jdtls'
+                local launcher_jar = '${pkgs.jdt-language-server}/share/java/jdtls/plugins/org.eclipse.equinox.launcher_1.7.0.v20250424-1814.jar'
+                local config_dir = vim.fn.stdpath('cache') .. '/jdtls/config_linux'
+                local workspace_dir = vim.fn.stdpath('cache') .. '/jdtls/workspace'
+                -- Add java-debug jar
+                local debugBundles = {
+                  "/home/oxce5/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.53.2.jar",
                 }
-              })
+                local config = {
+                  cmd = {
+                    '${pkgs.jre_headless}/bin/java',
+                    '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+                    '-Dosgi.bundles.defaultStartLevel=4',
+                    '-Declipse.product=org.eclipse.jdt.ls.core.product',
+                    '-Dlog.protocol=true',
+                    '-Dlog.level=ALL',
+                    '-Xms1G',
+                    '-Xmx2G',
+                    '-jar', launcher_jar,
+                    '-configuration', config_dir,
+                    '-data', workspace_dir,
+                  },
+                  root_dir = vim.fs.dirname(vim.fs.find({'pom.xml', 'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+                  settings = {
+                    java = {
+                      signatureHelp = { enabled = true },
+                      completion = { favoriteStaticMembers = {} },
+                      contentProvider = { preferred = 'fernflower' },
+                      extendedClientCapabilities = require('jdtls').extendedClientCapabilities
+                    }
+                  },
+                  init_options = {
+                    bundles = debugBundles
+                  }
+                }
 
-              vim.list_extend(
-                bundles,
-                vim.split(vim.fn.glob("/home/oxce5/vscode-java-test/server/*.jar", 1), "\n")
-              )
+              vim.api.nvim_create_autocmd('FileType', {
+                pattern = 'java',
+                callback = function(args)
+                  require('jdtls').start_or_attach(config)
+                end
+              })
             '';
           };
         };
