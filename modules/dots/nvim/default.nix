@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [inputs.nvf.homeManagerModules.default];
 
   programs.nvf = {
@@ -21,11 +25,21 @@
 
           nix.enable = true;
           python.enable = true;
+          java.enable = true;
+          ts.enable = true;
+        };
+
+        debugger.nvim-dap = {
+          enable = true;
+          ui.enable = true;
         };
 
         diagnostics = {
           enable = true;
           nvim-lint.enable = true;
+        };
+        formatter = {
+          conform-nvim.enable = true;
         };
 
         clipboard = {
@@ -48,7 +62,6 @@
           avante-nvim = {
             enable = true;
             setupOpts = {
-              # Set GitHub Copilot as the main provider
               provider = "copilot";
               auto_suggestions_provider = "copilot";
               behaviour = {
@@ -73,16 +86,6 @@
           surround.enable = true;
           snacks-nvim = {
             enable = true;
-            setupOpts = {
-              explorer = {
-                replace_netrw = true;
-              };
-              picker = {
-                sources = {
-                  explorer = {};
-                };
-              };
-            };
           };
           yanky-nvim.enable = false;
           yazi-nvim = {
@@ -111,7 +114,73 @@
           vim.opt.expandtab = true
           vim.opt.smartindent = true
           vim.opt.clipboard = "unnamedplus"
+
+          vim.api.nvim_create_autocmd({ "CursorHold" }, {
+            callback = function()
+              local opts = { focusable = false }
+              local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line('.') - 1 })
+              local col = vim.fn.col('.') - 1
+              for _, diag in ipairs(diagnostics) do
+                if diag.col <= col and col < diag.end_col then
+                  vim.diagnostic.open_float(nil, opts)
+                  return
+                end
+              end
+            end,
+          })
         '';
+        extraPlugins = {
+          nvim-jdtls = {
+            package = pkgs.vimPlugins.nvim-jdtls;
+            setup = ''
+              local jdtls_share = '${pkgs.jdt-language-server}/share/java/jdtls'
+              local launcher_jar = vim.fn.glob(jdtls_share .. '/plugins/org.eclipse.equinox.launcher_*.jar')
+              local config_dir = vim.fn.stdpath('cache') .. '/jdtls/config_linux'
+              local workspace_dir = vim.fn.stdpath('cache') .. '/jdtls/workspace'
+              -- Add java-debug jar
+              local bundles = {
+                "/home/oxce5/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.53.2.jar",
+              }
+              -- Add vscode-java-test jars
+              vim.list_extend(
+                bundles,
+                vim.split(vim.fn.glob("/home/oxce5/vscode-java-test/server/*.jar", 1), "\n")
+              )
+              require('jdtls').start_or_attach({
+                cmd = {
+                  '$(echo $JAVA_HOME)',
+                  '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+                  '-Dosgi.bundles.defaultStartLevel=4',
+                  '-Declipse.product=org.eclipse.jdt.ls.core.product',
+                  '-Dlog.protocol=true',
+                  '-Dlog.level=ALL',
+                  '-Xms1G',
+                  '-Xmx2G',
+                  '-jar', launcher_jar,
+                  '-configuration', config_dir,
+                  '-data', workspace_dir,
+                },
+                root_dir = vim.fs.dirname(vim.fs.find({'pom.xml', 'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+                settings = {
+                  java = {
+                    signatureHelp = { enabled = true },
+                    completion = { favoriteStaticMembers = {} },
+                    contentProvider = { preferred = 'fernflower' },
+                    extendedClientCapabilities = require('jdtls').extendedClientCapabilities
+                  }
+                },
+                init_options = {
+                  bundles = bundles
+                }
+              })
+
+              vim.list_extend(
+                bundles,
+                vim.split(vim.fn.glob("/home/oxce5/vscode-java-test/server/*.jar", 1), "\n")
+              )
+            '';
+          };
+        };
       };
     };
   };
