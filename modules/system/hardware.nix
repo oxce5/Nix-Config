@@ -13,6 +13,14 @@
     enable = true;
     algorithm = "zstd";
     memoryPercent = 75;
-    priority = 80;
+    priority = 100;
+  };
+
+  services.swapspace = {
+    enable = true;
+    settings = {
+      min_swapsize = "1m";
+      max_swapsize = "10g";
+    };
   };
 }

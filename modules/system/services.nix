@@ -18,7 +18,7 @@
     };
     tlp = {
       enable = true;
-      settings.CPU_MAX_PERF_ON_BAT = 30;
+      settings.CPU_MAX_PERF_ON_BAT = 50;
       settings.CPU_MAX_PERF_ON_AC = 100;
     };
     undervolt = {

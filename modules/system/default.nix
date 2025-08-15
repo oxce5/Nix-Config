@@ -19,5 +19,4 @@
 
   environment.localBinInPath = true;
   nix.settings.accept-flake-config = true;
-
 }
