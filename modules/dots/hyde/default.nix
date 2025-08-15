@@ -49,7 +49,7 @@
       fish.enable = false; # enable fish shell
       pokego.enable = true; # enable Pokemon ASCII art scripts
       p10k.enable = false; # enable p10k prompt
-      starship.enable = true; # enable starship prompt
+      starship.enable = false; # enable starship prompt
     };
     social = {
       enable = false; # enable social module
@@ -66,7 +66,7 @@
     };
     theme = {
       enable = true; # enable theme module
-      active = "Oxo Carbon"; # active theme name
+      active = ""; # active theme name
       themes = [
         "Oxo Carbon"
         "Tokyo Night"
