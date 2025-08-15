@@ -168,5 +168,5 @@ in {
       "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
     ];
   };
-  documentation.nixos.enable = false; 
+  documentation.nixos.enable = false;
 }
