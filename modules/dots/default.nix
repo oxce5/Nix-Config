@@ -10,10 +10,9 @@
     ./hypr
     ./mangohud
     ./nvim
-    # ./ricecursor
-    ./tetocur
+    ./cursors
     ./yazi
-    ./zsh
+    ./shell
   ];
 
   home.packages = with pkgs; [
@@ -28,4 +27,6 @@
     # })
     inputs.zaphkiel.packages.${pkgs.system}.kurukurubar-unstable
   ];
+
+  cursor = "teto_cursor";
 }
