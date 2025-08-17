@@ -2,7 +2,9 @@
   inputs,
   pkgs,
   ...
-}: {
+}: let
+  java-debug = pkgs.callPackage ./java-debug.nix {};
+in {
   imports = [inputs.nvf.homeManagerModules.default];
 
   home.packages = [pkgs.jdt-language-server];
@@ -142,11 +144,10 @@
                 local jdtls_share = '${pkgs.jdt-language-server}/share/java/jdtls'
                 local launcher_jar = '${pkgs.jdt-language-server}/share/java/jdtls/plugins/org.eclipse.equinox.launcher_1.7.0.v20250424-1814.jar'
                 local config_dir = vim.fn.stdpath('cache') .. '/jdtls/config_linux'
-                local workspace_dir = vim.fn.stdpath('cache') .. '/jdtls/workspace'
+                local project_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+                local workspace_dir = vim.fn.stdpath('cache') .. '/jdtls/workspace' .. project_dir
                 -- Add java-debug jar
-                local debugBundles = {
-                  "/home/oxce5/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.53.2.jar",
-                }
+                local debugBundles = { "${java-debug}/share/java-debug/java-debug.jar" }
                 local config = {
                   cmd = {
                     '${pkgs.jre_headless}/bin/java',
