@@ -4,7 +4,6 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    inputs.jerry.packages.${pkgs.system}.default
     (obs-studio.override {
       cudaSupport = true;
     })
