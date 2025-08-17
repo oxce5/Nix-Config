@@ -6,7 +6,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    jerry.url = "github:justchokingaround/jerry";
+    fastanime.url = "github:Benexl/FastAnime";
     aagl = {
       url = "github:ezKEa/aagl-gtk-on-nix/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs-stable";
