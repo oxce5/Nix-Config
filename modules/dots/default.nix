@@ -6,8 +6,6 @@
 }: {
   imports = [
     ./ghostty
-    ./hyde
-    ./hypr
     ./mangohud
     ./nvim
     ./cursors
