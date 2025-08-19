@@ -6,6 +6,18 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    hyprland.url = "github:hyprwm/Hyprland";
+    nix-colors.url = "github:misterio77/nix-colors";
+    omarchy-nix = {
+        url = "github:henrysipp/omarchy-nix";
+        inputs.nixpkgs.follows = "nixpkgs";
+        inputs.home-manager.follows = "home-manager";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     fastanime.url = "github:Benexl/FastAnime";
     aagl = {
       url = "github:ezKEa/aagl-gtk-on-nix/release-24.11";
@@ -18,10 +30,6 @@
     nix-autobahn.url = "github:Lassulus/nix-autobahn";
     impermanence.url = "github:nix-community/impermanence";
 
-    # Hydenix and its nixpkgs - kept separate to avoid conflicts
-    hydenix = {
-      url = "github:richen604/hydenix";
-    };
     zaphkiel.url = "github:Rexcrazy804/Zaphkiel";
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -34,20 +42,23 @@
     };
   };
 
-  outputs = {nixpkgs, ...} @ inputs: let
-    HOSTNAME = "hydenix";
-
-    hydenixConfig = inputs.hydenix.inputs.hydenix-nixpkgs.lib.nixosSystem {
-      inherit (inputs.hydenix.lib) system;
-      specialArgs = {
-        inherit inputs;
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: let
+      omanixConfig = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+        };
+        modules = [
+          ./configuration.nix
+        ];
       };
-      modules = [
-        ./configuration.nix
-      ];
+
+    in
+    {
+      nixosConfigurations.overlord = omanixConfig;
     };
-  in {
-    nixosConfigurations.nixos = hydenixConfig;
-    nixosConfigurations.${HOSTNAME} = hydenixConfig;
-  };
 }

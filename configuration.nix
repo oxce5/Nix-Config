@@ -1,36 +1,15 @@
 {
   inputs,
   config,
+  pkgs,
   ...
-}: let
-  # Package declaration
-  # ---------------------
-  pkgs = import inputs.hydenix.inputs.hydenix-nixpkgs {
-    inherit (inputs.hydenix.lib) system;
-    config.allowUnfree = true;
-    config.packageOverrides = pkgs: {
-      obs-studio = pkgs.obs-studio.override {ffmpeg = pkgs.ffmpeg-full;};
-    };
-    overlays = [
-      inputs.hydenix.lib.overlays
-      (final: prev: {
-        unstable = import inputs.nixpkgs {
-          system = prev.system;
-          config.allowUnfree = true;
-        };
-        nh = inputs.nixpkgs.legacyPackages.${prev.system}.nh;
-        blender = inputs.nixpkgs.legacyPackages.${prev.system}.blender;
-      })
-      (import ./modules/overlays/youtube-music_master.nix)
-    ];
-  };
-in {
+}:
+{
   # Set pkgs for hydenix globally, any file that imports pkgs will use this
-  nixpkgs.pkgs = pkgs;
   imports = [
-    inputs.hydenix.inputs.home-manager.nixosModules.home-manager
+    inputs.omarchy-nix.nixosModules.default
+    inputs.home-manager.nixosModules.home-manager
     ./hardware-configuration.nix
-    inputs.hydenix.lib.nixOsModules
     ./modules/system
 
     # === GPU-specific configurations ===
@@ -54,40 +33,49 @@ in {
     #! EDIT THIS USER (must match users defined below)
     users."oxce5" = {...}: {
       imports = [
-        inputs.hydenix.lib.homeModules
+        inputs.omarchy-nix.homeManagerModules.default
         ./modules/hm
       ];
+      home.stateVersion = "25.05";
     };
+  };
+
+  omarchy = {
+    full_name = "oxce5";
+    email_address = "avg.gamer@proton.me";
+    theme = "tokyo-night";
+    theme_overrides = ./wallpapers/tetoes4.jpg;
   };
 
   # IMPORTANT: Customize the following values to match your preferences
-  hydenix = {
-    enable = true; # Enable the Hydenix module
+  networking.hostName = "overlord";
+  time.timeZone = "Asia/Manila";
+  i18n.defaultLocale = "en_PH.UTF-8";
 
-    #! EDIT THESE VALUES
-    hostname = "hydenix"; # Change to your preferred hostname
-    timezone = "Asia/Manila"; # Change to your timezone
-    locale = "en_PH.UTF-8"; # Change to your preferred locale
+  # Boot
+  boot.loader.systemd-boot.enable = false;
+  boot.loader.grub.extraConfig = ""; # Add GRUB config here
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
-    audio.enable = true; # enable audio module
-    boot = {
-      enable = true; # enable boot module
-      useSystemdBoot = false; # disable for GRUBcpufreq
-      grubTheme = "Retroboot"; # or pkgs.hydenix.grub-pochita
-      grubExtraConfig = ""; # additional GRUB configuration
-      kernelPackages = pkgs.linuxPackages_zen; # default zen kernel
-    };
-    gaming.enable = false;
-    hardware.enable = true; # enable hardware module
-    network.enable = true; # enable network module
-    nix.enable = true; # enable nix module
-    sddm = {
-      enable = true; # enable sddm module
-      theme = "Candy"; # or pkgs.hydenix.sddm-corners
-    };
-    system.enable = true; # enable system module
+  # Network
+  networking.networkmanager.enable = true; # Enable NetworkManager
+
+  programs.zsh.enable = true;
+
+  # Nix
+  nix.settings = {
+    # Add your desired nix settings here
   };
 
+  # SDDM
+  # services.displayManager.sddm.wayland.enable = true;
+  # services.displayManager.sddm.enable = true;
+  # services.displayManager.sddm.theme = "Candy"; # Or pkgs.hydenix.sddm-corners
+
+  # System module
+  # system.enable = true; # No direct option, system config is in this file
+
+  # You may want to add more options as needed for your system.
   #! EDIT THESE VALUES (must match users defined above)
   users.users.oxce5 = {
     isNormalUser = true; # Regular user account
@@ -101,7 +89,7 @@ in {
       "lp"
       "gamemode"
       "adbusers"
-      "aria"
+      "aria2"
       # Add other groups as needed
     ];
     shell = pkgs.zsh; # Change if you prefer a different shell
@@ -123,7 +111,13 @@ in {
     loader = {
       timeout = 5;
       systemd-boot.configurationLimit = 3;
-      grub.configurationLimit = 3;
+      grub = {
+        enable = true;
+        efiSupport = true;
+        device = "nodev";
+        useOSProber = true;
+        configurationLimit = 3;
+      };
     };
     kernelModules = [
       "msr"
@@ -169,4 +163,5 @@ in {
     ];
   };
   documentation.nixos.enable = false;
+  system.stateVersion = "25.05";
 }
