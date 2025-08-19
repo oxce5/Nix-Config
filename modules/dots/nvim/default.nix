@@ -26,6 +26,8 @@ in {
         lsp.enable = true;
         languages = {
           enableTreesitter = true;
+          enableExtraDiagnostics = true;
+          enableFormat = true;
 
           nix.enable = true;
           python.enable = true;
@@ -34,6 +36,10 @@ in {
             lsp.enable = false;
           };
           ts.enable = true;
+          php = {
+            enable = true;
+            lsp.enable = true;
+          };
         };
 
         debugger.nvim-dap = {
@@ -56,11 +62,35 @@ in {
 
         statusline.lualine.enable = true;
         telescope.enable = true;
-        autocomplete.nvim-cmp.enable = true;
+        autocomplete = {
+          blink-cmp = {
+            enable = true;
+            friendly-snippets.enable = true;
+            # mappings = {
+            #   close = null;
+            #   complete = null;
+            #   confirm = null;
+            #   next = null;
+            #   previous = null;
+            #   scrollDocsDown = null;
+            #   scrollDocsUp = null;
+            # };
+            setupOpts.keymap = {
+              preset = "none";
+              # "<C-n>" = ["select_next"];
+              # "<Up>" = ["select_prev"];
+              # "<CR>" = ["confirm"];
+            };
+          };
+        };
         binds.whichKey.enable = true;
         tabline.nvimBufferline.enable = true;
         notify.nvim-notify.enable = true;
-        ui.noice.enable = true;
+        ui = {
+          noice.enable = true;
+          nvim-ufo.enable = true;
+        };
+
         autopairs.nvim-autopairs.enable = true;
         lazy.enable = true;
         mini.ai = {enable = true;};
@@ -98,6 +128,7 @@ in {
           yazi-nvim = {
             enable = true;
           };
+          motion.leap.enable = true;
         };
 
         visuals.indent-blankline.enable = true;
@@ -162,7 +193,7 @@ in {
                     '-configuration', config_dir,
                     '-data', workspace_dir,
                   },
-                  root_dir = vim.fs.dirname(vim.fs.find({'pom.xml', 'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+                  root_dir = vim.fs.dirname(vim.fs.find({'pom.xml', 'gradlew', '.git', 'mvnw', '.classpath'}, { upward = true })[1]),
                   settings = {
                     java = {
                       signatureHelp = { enabled = true },
