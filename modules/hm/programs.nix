@@ -1,4 +1,4 @@
-{config, ...}: {
+{config, lib, ...}: {
   programs = {
     lazygit.enable = true;
     gh.enable = true;
@@ -16,7 +16,9 @@
         then true
         else false;
       clean.extraArgs = "--keep-since 4d --keep 5";
-      flake = "/home/oxce5/hydenix/";
+      flake = "/home/oxce5/omanix/";
     };
+    waybar.enable = lib.mkForce false;
   };
+  
 }
