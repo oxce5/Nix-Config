@@ -14,7 +14,6 @@
     ./programs.nix
     ./nvidia.nix
     ./virtualization.nix
-    ./systemd.nix
   ];
 
   environment.localBinInPath = true;
