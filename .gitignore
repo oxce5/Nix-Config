@@ -1,0 +1,7 @@
+debug.txt
+nix-switch.log
+node_modules/
+
+package.json
+package-lock.json
+.sops.yaml

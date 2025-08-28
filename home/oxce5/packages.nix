@@ -1,0 +1,37 @@
+{
+  pkgs,
+  inputs,
+  ...
+}: {
+  home.packages = with pkgs; [
+    # kitty
+    inputs.elyprism-launcher.packages.${pkgs.system}.default
+    inputs.fastanime.packages.${pkgs.system}.default
+    (unstable.discord.override {
+      withOpenASAR = true;
+      withVencord = true;
+    })
+    comma
+    satty
+    grim
+    slurp
+    brave
+    networkmanagerapplet
+    youtube-music
+    trackma-curses
+    heroic
+    bottles
+    lutris
+    unstable.blender
+    obsidian
+    zoxide
+    krita
+    clang
+    mpv
+    tealdeer
+    motrix
+    thunderbird
+    proton-caller
+  ];
+
+}
