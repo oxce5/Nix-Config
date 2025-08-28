@@ -11,8 +11,8 @@
     inputs.zen-browser.homeModules.twilight
     inputs.impermanence.homeManagerModules.impermanence
     outputs.nixosModules.mutable
+    outputs.homeManagerModules.oxce5-dots
 
-    ../../machines/dots
     ./packages.nix
     ./programs.nix
     ./wm
