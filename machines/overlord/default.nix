@@ -10,7 +10,6 @@
     inputs.home-manager.nixosModules.default
     inputs.nix-flatpak.nixosModules.nix-flatpak
     outputs.nixosModules.berkeley-mono
-    inputs.niri.nixosModules.niri
 
     ./hardware-configuration.nix
     ../../modules/users/oxce5.nix # Includes home-manager config
@@ -29,15 +28,6 @@
   home-manager.extraSpecialArgs = {inherit inputs outputs;};
   home-manager.users.oxce5 = import ../../home/oxce5;
 
-  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
-  programs = { 
-    niri = {
-      enable = true;
-      package = pkgs.niri-unstable;
-    }; 
-  };
-
-
   boot.loader = {
     timeout = 5;
     efi.canTouchEfiVariables = true;
@@ -49,7 +39,7 @@
   boot.extraModulePackages = with config.boot.kernelPackages; [
     lenovo-legion-module
   ];
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.fix.linuxPackages_zen;
 
 
   nix.settings = {
@@ -60,6 +50,7 @@
       "https://nix-gaming.cachix.org"
       "https://prismlauncher.cachix.org"
       "https://devenv.cachix.org"
+      "https://niri.cachix.org"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:vliehR4ZkL9QFXy3yF3XYxkq8vA2BNB8+HF9zGml8Xg="
@@ -68,6 +59,7 @@
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
       "prismlauncher.cachix.org-1:9/n/FGyABA2jLUVfY+DEp4hKds/rwO+SCOtbOkDzd+c="
       "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+      "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
     ];
   };
 
@@ -78,7 +70,7 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     modesetting.enable = true;
     powerManagement.enable = true;
-    open = false;
+    open = true;
     nvidiaSettings = true;
 	  prime = {
       offload = {
