@@ -1,4 +1,8 @@
-{inputs, pkgs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   users.users.oxce5 = {
     isNormalUser = true; # Regular user account
     initialPassword = "hydenix"; # Default password (CHANGE THIS after first login with passwd)
