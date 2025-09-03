@@ -12,53 +12,63 @@
     inputs.impermanence.homeManagerModules.impermanence
     outputs.nixosModules.mutable
     outputs.homeManagerModules.oxce5-dots
+    outputs.homeManagerModules.oxce5_niri
 
     ./packages.nix
     ./programs.nix
-    ./wm
+    ./services.nix
   ];
 
-  home.stateVersion = "25.05";
+  stylix = {
+    targets = {
+      blender.enable = true;
+      cava = {
+        enable = true; 
+        rainbow.enable = true;
+      };
+      gnome.enable = lib.mkForce false;
+      vencord.enable = true;
+      fzf.enable = true;
+      lazygit.enable = true;
+      nvf = {
+        enable = true;
+        transparentBackground = true;
+      };
+      qt.enable =  true;
+      wofi.enable = true;
+      yazi.enable = true;
+    };
+    image = ./tetoes4.jpg;
+  };
 
   programs.home-manager.enable = true;
 
-  programs.git = {
-    enable = true;
-    extraConfig = {
-      credential.helper = "store";
-    };
-    userName  = "oxce5";
-    userEmail = "avg.gamer@proton.me";
-  };
-
-  programs.gh = {
-    enable = true;
-    gitCredentialHelper = {
+  xdg = {
+    mimeApps = {
       enable = true;
+      defaultApplications = {
+        "x-scheme-handler/roblox-player" = "org.vinegarhq.Sober.desktop";
+      };
+    };
+    portal = lib.mkForce {
+      enable = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-gnome
+      ];
     };
   };
 
-
-
-  # home-manager options go here/
-
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "x-scheme-handler/roblox-player" = "org.vinegarhq.Sober.desktop";
+  home = {
+    stateVersion = "25.05";
+    persistence."/persistent" = {
+      directories = [
+        ".zen"
+      ];
+      allowOther = false;
+    };
+    sessionVariables = {
+      TERMINAL = "ghostty";
     };
   };
-
-  home.persistence."/persistent" = {
-    directories = [
-      ".zen"
-    ];
-    allowOther = false;
-  };
-
-  home.sessionVariables = {
-    TERMINAL = "ghostty";
-  };
-
-  services.clipse.enable = true;
 }

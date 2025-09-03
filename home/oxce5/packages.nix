@@ -4,10 +4,10 @@
   ...
 }: {
   home.packages = with pkgs; [
-    # kitty
+    kitty
     inputs.elyprism-launcher.packages.${pkgs.system}.default
     inputs.fastanime.packages.${pkgs.system}.default
-    (unstable.discord.override {
+    (discord.override {
       withOpenASAR = true;
       withVencord = true;
     })
@@ -33,5 +33,4 @@
     thunderbird
     proton-caller
   ];
-
 }
