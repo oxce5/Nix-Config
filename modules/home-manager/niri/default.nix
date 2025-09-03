@@ -1,6 +1,10 @@
-{inputs, outputs, pkgs, ...}:
-
-let 
+{
+  inputs,
+  outputs,
+  pkgs,
+  lib,
+  ...
+}: let
   swww = inputs.swww.packages.${pkgs.system}.swww;
 in {
   imports = [
@@ -8,6 +12,7 @@ in {
     ./niri-layouts.nix
     ./niri-env.nix
     ./niri-binds.nix
+    ./niri-rules.nix
   ];
 
   home.packages = with pkgs; [
@@ -23,31 +28,36 @@ in {
     };
   };
 
+  nixpkgs.overlays = [inputs.niri-flake.overlays.niri];
+
   programs.niri = {
+    package = pkgs.niri-unstable;
     settings = {
       prefer-no-csd = true;
       hotkey-overlay.skip-at-startup = true;
 
-      outputs."eDP-1" = { 
+      outputs."eDP-1" = {
         mode = {
           width = 1920;
           height = 1080;
-          refresh = 144;
         };
-        scale = 1.0; 
+        scale = 1.0;
         position.x = 0;
         position.y = 0;
       };
 
       overview.workspace-shadow.enable = false;
       spawn-at-startup = [
-        { command = [ "kurukurubar" ]; }
-        { command = [ "swww-daemon" ]; }
-        { command = [ "swww-daemon" "-n" "backdrop"]; }
-        { command = [ "swww" "img" "~/nix-setup/home/oxce5/tetoes4.jpg" ]; }
-        { command = ["swww" "img" "-n" "backdrop" "~/nix-setup/home/oxce5/tetoes4_blur.jpg"]; }
-        { command = ["xwayland-satellite"]; }
+        {command = ["mako"];}
+        {command = ["kurukurubar"];}
+        {command = ["swww-daemon"];}
+        {command = ["swww-daemon" "-n" "backdrop"];}
+        {command = ["swww" "img" "~/nix-setup/home/oxce5/tetoes4.jpg"];}
+        {command = ["swww" "img" "-n" "backdrop" "~/nix-setup/home/oxce5/tetoes4_blur.jpg"];}
+        {command = ["xwayland-satellite"];}
+        {command = ["systemctl" "--user" "restart" "xdg-desktop-portal-gtk"];}
+        {command = ["flatpak" "run" "com.dec05eba.gpu_screen_recorder"];}
       ];
-    }; 
+    };
   };
 }
