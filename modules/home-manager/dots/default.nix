@@ -6,13 +6,12 @@
 }: {
   imports = [
     ./ghostty
-    # ./hyde
-    # ./hypr
     ./mangohud
     ./nvim
     ./cursors
     ./yazi
     ./wofi
+    ./mako
     ./shell
   ];
 
