@@ -16,13 +16,13 @@
       font-size = 10;
 
       gtk-titlebar = false;
-      
+
       background = "#111111";
       background-opacity = 0.8;
-      
+
       unfocused-split-opacity = 1;
       focus-follows-mouse = true;
-      
+
       keybind = ["ctrl+shift+d=close_surface"];
     };
   };
