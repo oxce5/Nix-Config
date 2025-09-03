@@ -14,7 +14,7 @@ in {
       enableZshIntegration = true;
     };
     zsh = {
-      enable = true; 
+      enable = true;
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
@@ -22,9 +22,10 @@ in {
         EDITOR = "nvim";
       };
 
-      oh-my-zsh = { # "ohMyZsh" without Home Manager
+      oh-my-zsh = {
+        # "ohMyZsh" without Home Manager
         enable = true;
-        plugins = [ "git" "thefuck" ];
+        plugins = ["git" "thefuck"];
         theme = "robbyrussell";
       };
     };
