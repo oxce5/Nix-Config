@@ -6,6 +6,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-fix-nvidia.url = "github:nixos/nixpkgs/d3f05ad2d8df25c226e58754239235acf9a11357";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    chaotic-nyx.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # Note: Currently pinned to 25.05
     home-manager.url = "github:nix-community/home-manager/release-25.05";
@@ -14,9 +15,12 @@
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    stylix = {
+      url = "github:nix-community/stylix/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     niri-unstable.url = "github:YaLTeR/niri";
-    niri = {
+    niri-flake = {
       url = "github:sodiboo/niri-flake";
       inputs.niri-unstable.follows = "niri-unstable";
     };
@@ -36,7 +40,7 @@
     nix-gaming.url = "github:fufexan/nix-gaming";
     elyprism-launcher.url = "github:elyprismlauncher/elyprismlauncher/0488e68254273905d886d5e784c5504028685281";
     ghostty = {
-      url = "github:ghostty-org/ghostty/fde50e0f1c7b902c6c96344fd94b46ad509179b5";
+      url = "github:ghostty-org/ghostty";
     };
   };
 
@@ -62,7 +66,9 @@
     nixosConfigurations = {
       overlord = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        modules = [./machines/overlord];
+        modules = [
+        ./machines/overlord
+        ];
       };
 
       # nixos-anywhere --flake .#homelab --generate-hardware-config nixos-generate-config ./machines/homelab/hardware-configuration.nix nixos@<hostname>
