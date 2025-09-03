@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   virtualisation.containers.enable = true;
-  virtualisation.docker = { 
+  virtualisation.docker = {
     enable = true;
     rootless = {
       enable = true;

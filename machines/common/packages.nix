@@ -7,6 +7,9 @@
     wl-clipboard
     cliphist
     bibata-cursors
+    kitty
+    alacritty
+    xterm
 
     # Shell tools
     fzf
@@ -21,6 +24,7 @@
     unzip
     wget
     gnumake
+    libnotify
 
     # TUIs
     lazygit
@@ -33,7 +37,6 @@
     # Archive and Decompression
     ouch
     p7zip
-
 
     nextdns
 
