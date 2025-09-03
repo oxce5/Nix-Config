@@ -21,14 +21,14 @@ in {
     # most settings are documented in the appendix
     settings = {
       vim = {
-        theme = {
-          enable = true;
-          name = "gruvbox";
-          style = "dark";
-          transparent = true;
-        };
+        # theme = {
+        #   enable = true;
+        #   name = "gruvbox";
+        #   style = "dark";
+        #   transparent = true;
+        # };
 
-        luaConfigRC = { 
+        luaConfigRC = {
           tab = ''
             vim.opt.expandtab = true
             vim.opt.smartindent = true
@@ -51,6 +51,12 @@ in {
             vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#e06c75", bg = "none" })
             vim.api.nvim_set_hl(0, "NotifyBackground", { fg = "#000000", bg = "#000000" })
           '';
+          optionsScript = ''
+            vim.o.foldcolumn = 'auto:9'
+            vim.o.foldlevel = 99
+            vim.o.foldlevelstart = 99
+            vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldsep:▏,foldclose:'
+          '';
         };
 
         autocmds = [
@@ -69,9 +75,20 @@ in {
                   end
                 end
               end
-              '';
-            }
-          ];
+            '';
+          }
+          {
+            event = ["FileType"];
+            pattern = ["dashboard"];
+            desc = "Attach and disable folding for dashboard file type";
+            callback = lib.generators.mkLuaInline ''
+              function()
+                require("ufo").detach()
+                vim.opt_local.foldenable = false
+              end
+            '';
+          }
+        ];
         lsp.enable = true;
         lsp.trouble.enable = true;
         languages = {
@@ -126,10 +143,8 @@ in {
         ui = {
           noice.enable = true;
           nvim-ufo = {
-            enable = true; 
-            setupOpts = {
-
-            };
+            enable = true;
+            setupOpts = {};
           };
         };
 
@@ -177,13 +192,13 @@ in {
         };
 
         visuals.indent-blankline = {
-          enable = true; 
+          enable = true;
           setupOpts = {
             indent = {
               char = "";
               priority = 36;
             };
-            exclude = { 
+            exclude = {
               buftypes = [
                 "terminal"
                 "nofile"
@@ -217,7 +232,7 @@ in {
           enable = true;
           setupOpts = {
             theme = "doom";
-            config = { 
+            config = {
               header = [
                 "                                                                       "
                 "                                      ██████                           "
@@ -262,61 +277,61 @@ in {
           };
         };
 
-      options = {
-        tabstop = 2;
-        shiftwidth = 2;
-        autoindent = true;
-      };
+        options = {
+          tabstop = 2;
+          shiftwidth = 2;
+          autoindent = true;
+        };
 
-      # keymaps = [
-      # ];
+        # keymaps = [
+        # ];
 
-      extraPlugins = {
-        nvim-jdtls = {
-          package = vimPlug.nvim-jdtls;
-          setup = ''
-            local jdtls_share = '${pkgs.jdt-language-server}/share/java/jdtls'
-            local launcher_jar = '${pkgs.jdt-language-server}/share/java/jdtls/plugins/org.eclipse.equinox.launcher_1.7.0.v20250331-1702.jar'
-            local config_dir = vim.fn.stdpath('cache') .. '/jdtls/config_linux'
-            local project_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-            local workspace_dir = vim.fn.stdpath('cache') .. '/jdtls/workspace' .. project_dir
-            -- Add java-debug jar
-            local debugBundles = { "${java-debug}/share/java-debug/java-debug.jar" }
-            local config = {
-              cmd = {
-                '${pkgs.jre_headless}/bin/java',
-                '-Declipse.application=org.eclipse.jdt.ls.core.id1',
-                '-Dosgi.bundles.defaultStartLevel=4',
-                '-Declipse.product=org.eclipse.jdt.ls.core.product',
-                '-Dlog.protocol=true',
-                '-Dlog.level=ALL',
-                '-Xms1G',
-                '-Xmx2G',
-                '-jar', launcher_jar,
-                '-configuration', config_dir,
-                '-data', workspace_dir,
-              },
-              root_dir = vim.fs.dirname(vim.fs.find({'pom.xml', 'gradlew', '.git', 'mvnw', '.classpath'}, { upward = true })[1]),
-              settings = {
-                java = {
-                  signatureHelp = { enabled = true },
-                  completion = { favoriteStaticMembers = {} },
-                  contentProvider = { preferred = 'fernflower' },
-                  extendedClientCapabilities = require('jdtls').extendedClientCapabilities
+        extraPlugins = {
+          nvim-jdtls = {
+            package = vimPlug.nvim-jdtls;
+            setup = ''
+              local jdtls_share = '${pkgs.jdt-language-server}/share/java/jdtls'
+              local launcher_jar = '${pkgs.jdt-language-server}/share/java/jdtls/plugins/org.eclipse.equinox.launcher_1.7.0.v20250331-1702.jar'
+              local config_dir = vim.fn.stdpath('cache') .. '/jdtls/config_linux'
+              local project_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+              local workspace_dir = vim.fn.stdpath('cache') .. '/jdtls/workspace' .. project_dir
+              -- Add java-debug jar
+              local debugBundles = { "${java-debug}/share/java-debug/java-debug.jar" }
+              local config = {
+                cmd = {
+                  '${pkgs.jre_headless}/bin/java',
+                  '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+                  '-Dosgi.bundles.defaultStartLevel=4',
+                  '-Declipse.product=org.eclipse.jdt.ls.core.product',
+                  '-Dlog.protocol=true',
+                  '-Dlog.level=ALL',
+                  '-Xms1G',
+                  '-Xmx2G',
+                  '-jar', launcher_jar,
+                  '-configuration', config_dir,
+                  '-data', workspace_dir,
+                },
+                root_dir = vim.fs.dirname(vim.fs.find({'pom.xml', 'gradlew', '.git', 'mvnw', '.classpath'}, { upward = true })[1]),
+                settings = {
+                  java = {
+                    signatureHelp = { enabled = true },
+                    completion = { favoriteStaticMembers = {} },
+                    contentProvider = { preferred = 'fernflower' },
+                    extendedClientCapabilities = require('jdtls').extendedClientCapabilities
+                  }
+                },
+                init_options = {
+                  bundles = debugBundles
                 }
-              },
-              init_options = {
-                bundles = debugBundles
               }
-            }
 
-            vim.api.nvim_create_autocmd('FileType', {
-              pattern = 'java',
-              callback = function(args)
-                require('jdtls').start_or_attach(config)
-              end
-            })
-          '';
+              vim.api.nvim_create_autocmd('FileType', {
+                pattern = 'java',
+                callback = function(args)
+                  require('jdtls').start_or_attach(config)
+                end
+              })
+            '';
           };
           no-neck-pain = {
             package = vimPlug.no-neck-pain-nvim;
