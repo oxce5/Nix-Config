@@ -48,12 +48,6 @@
         "org.vinegarhq.Sober"
       ];
     };
-    cron = {
-      enable = true;
-      systemCronJobs = [
-        "*/20 * * * * /home/0xce5/hydenix/scripts/weather.sh /tmp/hyprlock-weather.txt >/dev/null 2>&1"
-      ];
-    };
     nextdns = {
       enable = true;
       arguments = [

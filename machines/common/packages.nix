@@ -37,15 +37,12 @@
     # Archive and Decompression
     ouch
     p7zip
-
     nextdns
-
     lenovo-legion
 
     python313Packages.aria2p
 
     # Containers
     docker-compose
-    # podman-compose
   ];
 }
