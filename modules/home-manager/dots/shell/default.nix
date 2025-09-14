@@ -20,6 +20,11 @@ in {
       syntaxHighlighting.enable = true;
       sessionVariables = {
         EDITOR = "nvim";
+        TERMINAL = "ghostty";
+      };
+      shellAliases = {
+        cd = "z";
+        lg = "lazygit";
       };
 
       oh-my-zsh = {
@@ -33,6 +38,7 @@ in {
     starship = {
       enable = true;
       enableZshIntegration = true;
+      enableBashIntegration = true;
       settings =
         tokyoNight
         // {
