@@ -6,11 +6,8 @@
   home.packages = with pkgs; [
     kitty
     inputs.elyprism-launcher.packages.${pkgs.system}.default
-    inputs.fastanime.packages.${pkgs.system}.default
-    (discord.override {
-      withOpenASAR = true;
-      withVencord = true;
-    })
+    inputs.viu.packages.${pkgs.system}.default
+    vesktop
     comma
     satty
     grim
@@ -31,6 +28,6 @@
     tealdeer
     motrix
     thunderbird
-    proton-caller
+    libreoffice
   ];
 }
