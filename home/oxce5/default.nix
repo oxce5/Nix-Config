@@ -27,7 +27,7 @@
         rainbow.enable = true;
       };
       gnome.enable = lib.mkForce false;
-      vencord.enable = true;
+      vesktop.enable = true;
       fzf.enable = true;
       lazygit.enable = true;
       nvf = {
@@ -38,26 +38,11 @@
       wofi.enable = true;
       yazi.enable = true;
     };
-    image = ./tetoes4.jpg;
+    image = ./wallpapers/tetoes5.jpg;
+    polarity = "dark";
   };
 
   programs.home-manager.enable = true;
-
-  xdg = {
-    mimeApps = {
-      enable = true;
-      defaultApplications = {
-        "x-scheme-handler/roblox-player" = "org.vinegarhq.Sober.desktop";
-      };
-    };
-    portal = lib.mkForce {
-      enable = true;
-      extraPortals = [
-        pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-gnome
-      ];
-    };
-  };
 
   home = {
     stateVersion = "25.05";
