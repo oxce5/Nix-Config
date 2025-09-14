@@ -1,16 +1,23 @@
-{config, lib, inputs, outputs, pkgs, ...}:
-
-let
+{
+  config,
+  lib,
+  inputs,
+  outputs,
+  pkgs,
+  ...
+}: let
   cfg = config.omarchy;
-  userBinds = cfg.quick_app_bindings ++ [
-    "Alt_R, Control_R, exec, ${builtins.toString ../../bin/reset_notif.sh}"
-    "SUPER, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
+  userBinds =
+    cfg.quick_app_bindings
+    ++ [
+      "Alt_R, Control_R, exec, ${builtins.toString ../../bin/reset_notif.sh}"
+      "SUPER, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy"
 
-    ''SUPER, P, exec, grim -g "$(slurp)" - | satty -f - -o ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png''
-    "SUPER ALT_L, P, exec, grim -o eDP-1 - | satty -f - -o ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png"
+      ''SUPER, P, exec, grim -g "$(slurp)" - | satty -f - -o ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png''
+      "SUPER ALT_L, P, exec, grim -o eDP-1 - | satty -f - -o ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png"
 
-    "SUPER SHIFT, V, togglefloating,"
-  ];
+      "SUPER SHIFT, V, togglefloating,"
+    ];
   baseBinds = [
     "SUPER, space, exec, wofi --show drun --sort-order=alphabetical"
 
@@ -45,7 +52,7 @@ let
     "SUPER, 8, workspace, 8"
     "SUPER, 9, workspace, 9"
     "SUPER, 0, workspace, 10"
-    
+
     "SUPER, comma, workspace, -1"
     "SUPER, period, workspace, +1"
 
@@ -91,77 +98,75 @@ let
   ];
   finalBinds = userBinds ++ baseBinds;
 in {
+  imports = [
+    inputs.omarchy-nix.homeManagerModules.default
+    outputs.nixosModules.omarchy-config
+  ];
 
-    imports = [
-      inputs.omarchy-nix.homeManagerModules.default
-      outputs.nixosModules.omarchy-config
+  omarchy = {
+    theme = "gruvbox";
+    theme_overrides = {
+      wallpaper_path = ../../home/oxce5/tetoes4.jpg;
+    };
+    scale = 1;
+    monitors = [
+      "eDP-1, 1920x1080@144, 0x0, 1"
     ];
+  };
 
-    omarchy = {
-      theme = "gruvbox";
-      theme_overrides = {
-        wallpaper_path = ../../home/oxce5/tetoes4.jpg;
+  wayland.windowManager.hyprland = {
+    package = lib.mkForce inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage = lib.mkForce inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+
+    settings = {
+      "$terminal" = "ghostty";
+      "$fileManager" = "nautilus --new-window";
+      "$browser" = "zen";
+      "$music" = "youtube-music";
+      "$passwordManager" = "1password";
+      "$messenger" = "telegram-desktop";
+      "$webapp" = "$browser --app";
+
+      exec-once = [
+        "mako"
+        "nm-applet"
+        "sleep 0.5 && kurukurubar"
+        "flatpak run com.dec05eba.gpu_screen_recorder"
+      ];
+
+      exec = [
+        "wl-paste --watch cliphist store &"
+      ];
+
+      env = [
+        "GTK_THEME,Teto_Cursor"
+        "XCURSOR_SIZE,24"
+        "HYPRCURSOR_SIZE,24"
+        "XCURSOR_THEME,Teto_Cursor"
+        "HYPRCURSOR_THEME,Teto_Cursor"
+      ];
+
+      input = {
+        kb_options = "ctrl:nocaps";
+        accel_profile = "flat";
+        sensitivity = 0.25;
+        touchpad = {
+          natural_scroll = true;
+          tap-to-click = true;
+          drag_lock = true;
+        };
       };
-      scale = 1;
-      monitors = [
-        "eDP-1, 1920x1080@144, 0x0, 1"
+      gestures = {
+        workspace_swipe = true;
+      };
+
+      windowrule = [
+        "noscreenshare, title:.*Messenger.*"
+        "noscreenshare, initialClass:discord"
+        "noscreenshare, title:.*X — Zen Twilight"
       ];
     };
+  };
 
-    wayland.windowManager.hyprland = {
-      package = lib.mkForce inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      portalPackage = lib.mkForce inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-
-      settings = {
-        "$terminal" = "ghostty";
-        "$fileManager" = "nautilus --new-window";
-        "$browser" = "zen";
-        "$music" = "youtube-music";
-        "$passwordManager" = "1password";
-        "$messenger" = "telegram-desktop";
-        "$webapp" = "$browser --app";
-        
-
-        exec-once = [
-          "mako"
-          "nm-applet"
-          "sleep 0.5 && kurukurubar"
-          "flatpak run com.dec05eba.gpu_screen_recorder"
-        ];
-
-        exec = [
-          "wl-paste --watch cliphist store &"
-        ];
-
-        env = [
-          "GTK_THEME,Teto_Cursor"
-          "XCURSOR_SIZE,24"
-          "HYPRCURSOR_SIZE,24"
-          "XCURSOR_THEME,Teto_Cursor"
-          "HYPRCURSOR_THEME,Teto_Cursor"
-        ];
-
-        input = {
-          kb_options = "ctrl:nocaps";
-          accel_profile = "flat";
-          sensitivity = 0.25;
-          touchpad = {
-            natural_scroll = true;
-            tap-to-click = true;
-            drag_lock = true;
-          };
-        };
-        gestures = {
-          workspace_swipe = true;
-        };
-
-        windowrule = [
-          "noscreenshare, title:.*Messenger.*"
-          "noscreenshare, initialClass:discord"
-          "noscreenshare, title:.*X — Zen Twilight"
-        ];
-      };
-    };
-
-    wayland.windowManager.hyprland.settings.bind = lib.mkForce finalBinds;
+  wayland.windowManager.hyprland.settings.bind = lib.mkForce finalBinds;
 }
