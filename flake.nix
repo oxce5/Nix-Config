@@ -1,10 +1,10 @@
 {
-  description = "Henry's Nix Config";
+  description = "oxce5's Nix Config";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-fix-nvidia.url = "github:nixos/nixpkgs/d3f05ad2d8df25c226e58754239235acf9a11357";
+    # nixpkgs-fix-nvidia.url = "github:nixos/nixpkgs/d3f05ad2d8df25c226e58754239235acf9a11357";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     chaotic-nyx.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
@@ -19,6 +19,7 @@
       url = "github:nix-community/stylix/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    matugen.url = "github:/InioX/Matugen";
     niri-unstable.url = "github:YaLTeR/niri";
     niri-flake = {
       url = "github:sodiboo/niri-flake";
@@ -30,17 +31,20 @@
     omarchy.inputs.nixpkgs.follows = "nixpkgs";
     omarchy.inputs.home-manager.follows = "home-manager";
 
-    fastanime.url = "github:Benexl/FastAnime";
+    viu.url = "github:viu-media/viu";
     zen-browser.url = "github:0xc000022070/zen-browser-flake/1.15t-1755743862";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     nvf.url = "github:notashelf/nvf";
     impermanence.url = "github:nix-community/impermanence";
-    zaphkiel.url = "github:Rexcrazy804/Zaphkiel";
-    nix-gaming.url = "github:fufexan/nix-gaming";
+    ignis = {
+      url = "github:ignis-sh/ignis";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";  # recommended
+    };
     elyprism-launcher.url = "github:elyprismlauncher/elyprismlauncher/0488e68254273905d886d5e784c5504028685281";
     ghostty = {
       url = "github:ghostty-org/ghostty";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
