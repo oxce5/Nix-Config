@@ -7,6 +7,7 @@
   imports = [
     ./ghostty
     ./mangohud
+    ./ignis
     ./nvim
     ./cursors
     ./yazi
@@ -25,7 +26,7 @@
     #   asGreeter = false;
     #   customColors = null;
     # })
-    inputs.zaphkiel.packages.${pkgs.system}.kurukurubar-unstable
+    # inputs.zaphkiel.packages.${pkgs.system}.kurukurubar-unstable
   ];
 
   cursor = "teto_cursor";
