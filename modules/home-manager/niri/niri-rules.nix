@@ -31,6 +31,18 @@
         ];
         block-out-from = "screencast";
       }
+      {
+        matches = [
+          {
+            title = "^gsr notify$";
+          }
+        ];
+        default-floating-position = {
+          relative-to = "top-right";
+          x = 12;
+          y = 24;
+        };
+      }
     ];
   };
 }

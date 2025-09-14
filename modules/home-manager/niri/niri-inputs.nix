@@ -1,6 +1,10 @@
 {
   programs.niri.settings.input = {
-    keyboard.numlock = true;
+    keyboard = {
+      repeat-delay = 300;
+      repeat-rate = 35;
+      numlock = true;
+    };
     touchpad = {
       accel-speed = 0.2;
       accel-profile = "flat";

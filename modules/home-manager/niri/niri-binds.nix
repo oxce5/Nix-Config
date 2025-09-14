@@ -2,7 +2,7 @@
   programs.niri.settings.binds = with config.lib.niri.actions; {
     "Mod+Shift+Slash".action = show-hotkey-overlay;
     "Mod+T".action = spawn "ghostty";
-    "Mod+Space".action = spawn "wofi" "--show" "drun" "--sort-order=alphabetical";
+    "Mod+Space".action = spawn "ignis" "open-window" "Launcher";
     "Mod+Alt+L".action = spawn "swaylock";
 
     "XF86AudioRaiseVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+";

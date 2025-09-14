@@ -49,11 +49,10 @@ in {
       overview.workspace-shadow.enable = false;
       spawn-at-startup = [
         {command = ["mako"];}
-        {command = ["kurukurubar"];}
+        {command = ["ignis" "init"];}
         {command = ["swww-daemon"];}
         {command = ["swww-daemon" "-n" "backdrop"];}
-        {command = ["swww" "img" "~/nix-setup/home/oxce5/tetoes4.jpg"];}
-        {command = ["swww" "img" "-n" "backdrop" "~/nix-setup/home/oxce5/tetoes4_blur.jpg"];}
+        {command = ["swww" "img" "-n" "backdrop" "~/nix-setup/home/oxce5/wallpapers/tetoes5_blur.jpg"];}
         {command = ["xwayland-satellite"];}
         {command = ["systemctl" "--user" "restart" "xdg-desktop-portal-gtk"];}
         {command = ["flatpak" "run" "com.dec05eba.gpu_screen_recorder"];}
