@@ -6,6 +6,7 @@
 }: let
   java-debug = pkgs.callPackage ./java-debug.nix {};
   vimPlug = pkgs.vimPlugins;
+  inherit (inputs.nvf.lib.nvim.dag) entryAfter;
 in {
   imports = [
     inputs.nvf.homeManagerModules.default
@@ -22,13 +23,15 @@ in {
     settings = {
       vim = {
         # theme = {
-        #   enable = true;
-        #   name = "gruvbox";
-        #   style = "dark";
-        #   transparent = true;
         # };
 
         luaConfigRC = {
+          transparentTheme = ''
+             vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+             vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+             vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+             vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+          '';
           tab = ''
             vim.opt.expandtab = true
             vim.opt.smartindent = true
@@ -57,6 +60,7 @@ in {
             vim.o.foldlevelstart = 99
             vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldsep:▏,foldclose:'
           '';
+
         };
 
         autocmds = [
