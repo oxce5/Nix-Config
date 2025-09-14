@@ -20,13 +20,14 @@
     ./hardware-configuration.nix
     ../../modules/users/oxce5.nix # Includes home-manager config
     ../common/global.nix
-    ../common/container.nix
     ../common/development.nix
+    ../common/pentesting.nix
     ../common/desktop.nix
     ../common/gaming.nix
     ../common/hardware.nix
     ../common/services.nix
     ../common/packages.nix
+    ../common/matugen
   ];
 
   home-manager = { 
@@ -84,7 +85,8 @@
     targets = {
       gtk.enable = true;
     };
-    image = ./../../home/oxce5/tetoes4.jpg;
+    image = ./../../home/oxce5/wallpapers/tetoes5.jpg;
+    polarity = "dark";
   };
 
   networking.hostName = "overlord";
