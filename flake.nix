@@ -37,10 +37,16 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     nvf.url = "github:notashelf/nvf";
     impermanence.url = "github:nix-community/impermanence";
+
     ignis = {
       url = "github:ignis-sh/ignis";
       inputs.nixpkgs.follows = "nixpkgs-unstable";  # recommended
     };
+    caelestia-shell = {
+      url = "github:jutraim/niri-caelestia-shell";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     elyprism-launcher.url = "github:elyprismlauncher/elyprismlauncher/0488e68254273905d886d5e784c5504028685281";
     ghostty = {
       url = "github:ghostty-org/ghostty";
