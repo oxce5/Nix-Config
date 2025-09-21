@@ -48,11 +48,14 @@ in {
 
       overview.workspace-shadow.enable = false;
       spawn-at-startup = [
+        {command = ["${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1"];}
         {command = ["mako"];}
-        {command = ["ignis" "init"];}
+        {command = ["caelestia-shell"];}
         {command = ["swww-daemon"];}
         {command = ["swww-daemon" "-n" "backdrop"];}
         {command = ["swww" "img" "-n" "backdrop" "~/nix-setup/home/oxce5/wallpapers/tetoes5_blur.jpg"];}
+        {command = ["caelestia-shell" "ipc" "call" "wallpaper" "set" "/home/oxce5/nix-setup/home/oxce5/wallpapers/tetoes5.jpg"];}
+
         {command = ["xwayland-satellite"];}
         {command = ["systemctl" "--user" "restart" "xdg-desktop-portal-gtk"];}
         {command = ["flatpak" "run" "com.dec05eba.gpu_screen_recorder"];}
