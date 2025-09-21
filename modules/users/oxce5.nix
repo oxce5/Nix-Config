@@ -11,12 +11,16 @@
       "networkmanager" # For network management
       "video" # For display/graphics access
       "docker"
+      "kvm"
+      "libvirtd"
+      "qemu"
       "scanner"
       "lp"
       "gamemode"
       "adbusers"
       "aria2"
       "docker"
+      "wireshark"
       # Add other groups as needed
     ];
     shell = pkgs.zsh; # Change if you prefer a different shell
