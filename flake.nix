@@ -33,7 +33,10 @@
 
     viu.url = "github:viu-media/viu";
     zen-browser.url = "github:0xc000022070/zen-browser-flake/1.15t-1755743862";
-    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     nvf.url = "github:notashelf/nvf";
     impermanence.url = "github:nix-community/impermanence";
