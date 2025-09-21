@@ -2,6 +2,8 @@
   environment.systemPackages = with pkgs; [
     devenv
     distrobox
+
+    eclipses.eclipse-java
   ];
 
   programs.direnv = {

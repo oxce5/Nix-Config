@@ -28,6 +28,7 @@
     ../common/services.nix
     ../common/packages.nix
     ../common/matugen
+    ../common/virtualization.nix
   ];
 
   home-manager = { 
