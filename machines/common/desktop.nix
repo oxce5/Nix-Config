@@ -7,6 +7,8 @@
   home-manager.backupFileExtension = "backup";
   environment.systemPackages = with pkgs; [
 
+    mate.mate-polkit
+
     # Scanning and Printing
     xsane
 
