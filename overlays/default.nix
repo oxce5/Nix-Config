@@ -28,8 +28,8 @@
       src = super.fetchFromGitHub {
         owner = "th-ch";
         repo = "youtube-music";
-        rev = "master";
-        hash = "sha256-+2hM98j7IO1LuGwdt+YItDz4dE4cFc3qabZM/Mrtyis=";
+        rev = "c9ae7cb27769820fd5cedb70e70a83557c81e270";
+        hash = "sha256-mxS09NrkExlDW3CSl560BSEModBcNZ/8TnsFpsTIghw=";
       };
       pnpmDeps = super.pnpm.fetchDeps {
         pname = "youtube-music";
