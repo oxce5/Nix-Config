@@ -8,7 +8,6 @@
     inputs.elyprism-launcher.packages.${pkgs.system}.default
     inputs.viu.packages.${pkgs.system}.default
     vesktop
-    comma
     satty
     grim
     slurp

@@ -43,17 +43,13 @@
   };
 
   programs.home-manager.enable = true;
+  programs.nix-index-database.comma.enable = true;
 
   home = {
     stateVersion = "25.05";
-    persistence."/persistent" = {
-      directories = [
-        ".zen"
-      ];
-      allowOther = false;
-    };
     sessionVariables = {
       TERMINAL = "ghostty";
     };
   };
+
 }
