@@ -9,6 +9,9 @@
       accel-speed = 0.2;
       accel-profile = "flat";
     };
+    mouse = {
+      accel-speed = -0.95;
+    };
     warp-mouse-to-focus.enable = true;
     focus-follows-mouse = {
       enable = true;
