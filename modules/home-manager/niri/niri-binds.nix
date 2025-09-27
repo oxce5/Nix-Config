@@ -3,7 +3,7 @@
     "Mod+Shift+Slash".action = show-hotkey-overlay;
     "Mod+T".action = spawn "ghostty";
     "Mod+Space".action = spawn "caelestia-shell" "ipc" "call" "drawers" "toggle" "launcher";
-    "Mod+Alt+L".action = spawn "swaylock";
+    "Mod+L".action = spawn "caelestia-shell" "ipc" "call" "lock" "lock";
 
     "XF86AudioRaiseVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+";
     "XF86AudioLowerVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-";
@@ -20,10 +20,6 @@
     "Mod+Down".action = focus-window-down; # nix: Mod+Down  { focus-window-down; }
     "Mod+Up".action = focus-window-up; # nix: Mod+Up    { focus-window-up; }
     "Mod+Right".action = focus-column-right; # nix: Mod+Right { focus-column-right; }
-    "Mod+H".action = focus-column-left; # nix: Mod+H     { focus-column-left; }
-    "Mod+J".action = focus-window-down; # nix: Mod+J     { focus-window-down; }
-    "Mod+K".action = focus-window-up; # nix: Mod+K     { focus-window-up; }
-    "Mod+L".action = focus-column-right; # nix: Mod+L     { focus-column-right; }
 
     "Mod+Ctrl+Left".action = move-column-left; # nix: Mod+Ctrl+Left  { move-column-left; }
     "Mod+Ctrl+Down".action = move-window-down; # nix: Mod+Ctrl+Down  { move-window-down; }
