@@ -3,7 +3,7 @@
     layer-rules = [
       {
         matches = [
-          {namespace = "^swww-daemonbackdrop$";}
+          {namespace = "^caelestia-background$";}
         ];
         place-within-backdrop = true;
       }
