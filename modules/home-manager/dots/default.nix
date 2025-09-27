@@ -5,14 +5,13 @@
   ...
 }: {
   imports = [
+    ./caelestia
     ./ghostty
     ./mangohud
-    ./ignis
     ./nvim
     ./cursors
     ./yazi
     ./wofi
-    ./mako
     ./shell
   ];
 
