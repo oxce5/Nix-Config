@@ -1,18 +1,18 @@
-{pkgs, ...}: let
+{pkgs, lib, ...}: let
   tokyoNight = builtins.fromTOML (builtins.readFile (pkgs.fetchurl {
     url = "https://starship.rs/presets/toml/tokyo-night.toml";
     sha256 = "0cdvypfxnfjvlcvnxb3dgq0pcsbp81ddapcfji0lvwrxdxaja8kr";
   }));
 in {
+  home.packages = with pkgs; [
+    zsh-vi-mode
+    zsh-fzf-tab
+    zsh-autopair
+    zsh-nix-shell
+    zsh-you-should-use
+  ];
+
   programs = {
-    zoxide = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-    atuin = {
-      enable = true;
-      enableZshIntegration = true;
-    };
     zsh = {
       enable = true;
       enableCompletion = true;
@@ -25,20 +25,83 @@ in {
       shellAliases = {
         cd = "z";
         lg = "lazygit";
+        df = "duf";
       };
+      initContent = ''
+        zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza --color=always $realpath' 
+        zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'eza --color=always $realpath' 
+        zstyle ':fzf-tab:complete:vim:*' fzf-preview 'eza --color=always $realpath'
 
-      oh-my-zsh = {
-        # "ohMyZsh" without Home Manager
-        enable = true;
-        plugins = ["git" "thefuck"];
-        theme = "robbyrussell";
-      };
+        if [[ "\$\{widgets[zle-keymap-select]#user:}" == "starship_zle-keymap-select" || \
+              "\$\{widgets[zle-keymap-select]#user:}" == "starship_zle-keymap-select-wrapped" ]]; then
+            zle -N zle-keymap-select "";
+        fi
+
+        eval "$(${pkgs.starship}/bin/starship init zsh)"
+
+        chafa $HOME/tetoes.png --align center
+        echo "You really are an idiot aren't you?"
+
+      '';
+      plugins = [
+        {
+          name = "fzf-tab";
+          src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
+        }
+        { 
+          name = "you-should-use";
+          src = "${pkgs.zsh-you-should-use}/share/zsh/plugins/you-should-use";
+        }
+        {
+          name = "autopair";
+          src = pkgs.zsh-autopair;
+          file = "share/zsh/zsh-autopair/autopair.zsh";
+        }
+        {
+          name = "vi-mode";
+          src = "${pkgs.zsh-vi-mode}/share/zsh-vi-mode";
+        }
+        {
+          name = "nix-shell";
+          src = "${pkgs.zsh-nix-shell}/share/zsh-nix-shell";
+        }
+      ];
     };
     bash.enable = true;
+
+
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+    };
+    atuin = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+    };
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+    };
+    fd.enable = true;
+    eza = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      colors = "always";
+      icons = "always";
+    };
     starship = {
       enable = true;
       enableZshIntegration = true;
       enableBashIntegration = true;
+      enableFishIntegration = true;
       settings =
         tokyoNight
         // {
