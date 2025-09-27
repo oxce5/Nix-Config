@@ -7,8 +7,12 @@
       ll = "ls -l";
       gs = "git status";
       cd = "z";
-      lg = "lazygit";
       df = "duf";
+      ga = "git add";
+      lg = "lazygit";
+      ld = "lazydocker";
+      nos = "nh os switch";
+      nosu = "nh os switch --update";
     };
     plugins = [
       {
