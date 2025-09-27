@@ -16,10 +16,6 @@
         turbo = "auto";
       };
     };
-    undervolt = {
-      enable = true;
-      coreOffset = -85;
-    };
     earlyoom = {
       enable = true;
       enableNotifications = true;

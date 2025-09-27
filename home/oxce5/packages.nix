@@ -7,6 +7,7 @@
     kitty
     inputs.elyprism-launcher.packages.${pkgs.system}.default
     inputs.viu.packages.${pkgs.system}.default
+    pavucontrol
     vesktop
     satty
     grim
@@ -20,7 +21,6 @@
     lutris
     unstable.blender
     obsidian
-    zoxide
     krita
     clang
     mpv

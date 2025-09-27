@@ -17,6 +17,7 @@
 
   ];
   programs.zsh.enable = true;
+  programs.fish.enable = true;
   programs.adb.enable = true;
 
   services.searx = {

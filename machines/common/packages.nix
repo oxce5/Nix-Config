@@ -12,14 +12,12 @@
     xterm
 
     # Shell tools
-    fzf
-    zoxide
     ripgrep
     bat
     bc
+    chafa
+    duf
 
-    eza
-    fd
     curl
     unzip
     wget
