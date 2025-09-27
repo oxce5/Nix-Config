@@ -1,12 +1,11 @@
 {
   inputs,
   outputs,
+  config,
   pkgs,
-  lib,
   ...
-}: let
-  swww = inputs.swww.packages.${pkgs.system}.swww;
-in {
+}:
+{
   imports = [
     ./niri-inputs.nix
     ./niri-layouts.nix
@@ -19,12 +18,53 @@ in {
     xwayland-satellite
     alacritty
     mako
-    swww
+    sway-audio-idle-inhibit
   ];
 
   services = {
-    swayidle = {
-      enable = true;
+    swayidle =  let
+      lock = "${config.programs.caelestia.package}/bin/caelestia-shell ipc call lock lock";
+      display = status: "${pkgs.niri}/bin/niri msg action power-${status}-monitors";
+    in 
+    {
+    enable = true;
+    timeouts = [
+      {
+        timeout = 15; 
+        command = "${pkgs.libnotify}/bin/notify-send 'Locking in 5 seconds' -t 5000";
+      }
+      {
+        timeout = 45;
+        command = lock;
+      }
+      {
+        timeout = 75;
+        command = display "off";
+        resumeCommand = display "on";
+      }
+      {
+        timeout = 100;
+        command = "${pkgs.systemd}/bin/systemctl suspend";
+      }
+    ];
+    events = [
+        {
+          event = "before-sleep";
+          command = (display "off") + "; " + lock;
+        }
+        {
+          event = "after-resume";
+          command = display "on";
+        }
+        {
+          event = "lock";
+          command = (display "off") + "; " + lock;
+        }
+        {
+          event = "unlock";
+          command = display "on";
+        }
+      ];
     };
   };
 
@@ -49,14 +89,11 @@ in {
       overview.workspace-shadow.enable = false;
       spawn-at-startup = [
         {command = ["${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1"];}
-        {command = ["mako"];}
         {command = ["caelestia-shell"];}
-        {command = ["swww-daemon"];}
-        {command = ["swww-daemon" "-n" "backdrop"];}
-        {command = ["swww" "img" "-n" "backdrop" "~/nix-setup/home/oxce5/wallpapers/tetoes5_blur.jpg"];}
         {command = ["caelestia-shell" "ipc" "call" "wallpaper" "set" "/home/oxce5/nix-setup/home/oxce5/wallpapers/tetoes5.jpg"];}
 
         {command = ["xwayland-satellite"];}
+        {command = ["sway-audio-idle-inhibit"];}
         {command = ["systemctl" "--user" "restart" "xdg-desktop-portal-gtk"];}
         {command = ["flatpak" "run" "com.dec05eba.gpu_screen_recorder"];}
       ];
