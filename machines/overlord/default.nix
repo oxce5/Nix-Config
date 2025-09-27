@@ -86,7 +86,7 @@
     targets = {
       gtk.enable = true;
     };
-    image = ./../../home/oxce5/wallpapers/tetoes5.jpg;
+    image = ./../../home/oxce5/wallpapers/KASANE_TETO.png;
     polarity = "dark";
   };
 
@@ -95,7 +95,7 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = true;
+    powerManagement.enable = false;
     open = true;
     nvidiaSettings = true;
     prime = {
@@ -124,12 +124,12 @@
       };
     };
     dbus.packages = [pkgs.nautilus];
-    acpid = {
-      enable = true;
-      acEventCommands = ''
-        exec ${pkgs.bash}/bin/bash /home/oxce5/nix-setup/bin/daemons/batterydaemon.sh
-      '';
-    };
+    # acpid = {
+    #   enable = true;
+    #   acEventCommands = ''
+    #     exec ${pkgs.bash}/bin/bash /home/oxce5/nix-setup/bin/daemons/batterydaemon.sh
+    #   '';
+    # };
   };
   systemd.user.services."plugdaemon" = {
     description = "Plug in/out Daemon";

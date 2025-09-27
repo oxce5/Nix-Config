@@ -38,7 +38,7 @@
       wofi.enable = true;
       yazi.enable = true;
     };
-    image = ./wallpapers/tetoes5.jpg;
+    image = ./wallpapers/KASANE_TETO.png;
     polarity = "dark";
   };
 
@@ -52,4 +52,14 @@
     };
   };
 
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "x-scheme-handler/http" = ["zen-twilight.desktop"];
+      "x-scheme-handler/https" = ["zen-twilight.desktop"];
+      "x-scheme-handler/about" = ["zen-twilight.desktop"];
+      "x-scheme-handler/unknown" = ["zen-twilight.desktop"];
+    };
+  };
 }
+
