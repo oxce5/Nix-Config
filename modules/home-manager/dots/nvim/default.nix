@@ -4,7 +4,8 @@
   lib,
   ...
 }: let
-  java-debug = pkgs.callPackage ./java-debug.nix {};
+  # java-debug = pkgs.callPackage ./java-debug.nix {};
+  java-debug = builtins.toString ./com.microsoft.java.debug.plugin-0.53.2.jar;
   vimPlug = pkgs.vimPlugins;
   inherit (inputs.nvf.lib.nvim.dag) entryAfter;
 in {
@@ -22,15 +23,14 @@ in {
     # most settings are documented in the appendix
     settings = {
       vim = {
-        # theme = {
-        # };
-
         luaConfigRC = {
           transparentTheme = ''
              vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
              vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
              vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
              vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+            vim.api.nvim_set_hl(0, "FoldColumn", { bg = "none"  })
+            vim.api.nvim_set_hl(0, "LineNr", { bg = "none"  })
           '';
           tab = ''
             vim.opt.expandtab = true
@@ -39,8 +39,6 @@ in {
           '';
           pluginConfigs = ''
             local hooks = require "ibl.hooks"
-            -- create the highlight groups in the highlight setup hook, so they are reset
-            -- every time the colorscheme changes
             hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
                 vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
                 vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
@@ -51,7 +49,7 @@ in {
                 vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
             end)
 
-            vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#e06c75", bg = "none" })
+            vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#e06c75", bg = "#000000" })
             vim.api.nvim_set_hl(0, "NotifyBackground", { fg = "#000000", bg = "#000000" })
           '';
           optionsScript = ''
@@ -89,6 +87,21 @@ in {
               function()
                 require("ufo").detach()
                 vim.opt_local.foldenable = false
+              end
+            '';
+          }
+          {
+            event = [ "VimEnter" ];
+            desc = "Toggle Avante's suggestions (FIX FOR COPILOT.LUA PLENARY DEPENDENCY)";
+            callback = lib.generators.mkLuaInline ''
+	    	function()
+		      local h = io.popen("ping -c 1 8.8.8.8")
+		      local r = h:read("*a")
+		      h:close()
+		      if not r:find("1 received") then
+			require("avante").toggle.suggestion()
+			vim.notify("Offline! avante suggestions are off.", vim.log.levels.WARN)
+		end
               end
             '';
           }
@@ -300,7 +313,7 @@ in {
               local project_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
               local workspace_dir = vim.fn.stdpath('cache') .. '/jdtls/workspace' .. project_dir
               -- Add java-debug jar
-              local debugBundles = { "${java-debug}/share/java-debug/java-debug.jar" }
+              local debugBundles = { "${java-debug}" }
               local config = {
                 cmd = {
                   '${pkgs.jre_headless}/bin/java',
