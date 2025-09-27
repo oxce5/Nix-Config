@@ -12,6 +12,9 @@
     };
     settings = {
       bar = {
+        workspaces = {
+          windowIconSize = 28;
+        };
         status = {
           showBattery =  true;
         };
