@@ -23,7 +23,7 @@
       "wireshark"
       # Add other groups as needed
     ];
-    shell = pkgs.zsh; # Change if you prefer a different shell
+    shell = pkgs.fish; # Change if you prefer a different shell
   };
   security.sudo.extraRules = [
     {
