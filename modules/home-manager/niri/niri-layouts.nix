@@ -1,6 +1,6 @@
 {
   programs.niri.settings.layout = {
-    gaps = 16;
+    gaps = 0;
     background-color = "transparent";
     center-focused-column = "never";
 
