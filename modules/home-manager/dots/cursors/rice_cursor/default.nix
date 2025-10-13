@@ -2,10 +2,10 @@
 stdenv.mkDerivation {
   pname = "rice-cursor";
   version = "1.0";
-  src = ./RiceShower;
+  src = ./RiceShower.tar.xz;
 
   installPhase = ''
-    mkdir -p $out/share/icons/Teto_Cursor
-    cp -r $src/* $out/share/icons/Teto_Cursor
+    mkdir -p $out/share/icons/Rice_Cursor
+    tar -xf $src -C $out/share/icons/Rice_Cursor
   '';
 }
