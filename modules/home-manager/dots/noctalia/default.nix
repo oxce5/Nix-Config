@@ -1,18 +1,14 @@
 {
   inputs,
+  pkgs,
   config,
   lib,
   ...
 }: {
-  imports = [inputs.caelestia-shell.homeManagerModules.default];
+  imports = [inputs.noctalia.homeModules.default];
 
-  programs.caelestia = {
-    enable = lib.mkIf (config.dots.bar == "caelestia");
-    systemd = {
-      enable = true; # if you prefer starting from your compositor
-      target = "graphical-session.target";
-      environment = [];
-    };
+  programs.noctalia-shell = {
+    enable = config.dots.bar == "noctalia";
     settings = {
       appLauncher = {
         enableClipboardHistory = true;
@@ -84,8 +80,8 @@
             }
             {
               customFont = "";
-              formatHorizontal = "HH:mm ddd, MMM dd";
-              formatVertical = "HH mm - dd MM";
+              formatHorizontal = "hh:mm ddd, MMM dd";
+              formatVertical = "hh mm AP - dd MM";
               id = "Clock";
               useCustomFont = false;
               usePrimaryColor = true;
@@ -119,7 +115,7 @@
 
       location = {
         name = "Manila";
-        use12hourFormat = false;
+        use12hourFormat = true;
         useFahrenheit = false;
       };
 
@@ -141,12 +137,6 @@
             wallpaper = "/home/oxce5/Pictures/Wallpaper/teto_unedited.png";
           }
         ];
-      };
-    };
-    cli = {
-      enable = true;
-      settings = {
-        theme.enableGtk = true;
       };
     };
   };

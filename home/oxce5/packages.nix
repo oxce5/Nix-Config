@@ -5,6 +5,8 @@
 }: {
   home.packages = with pkgs; [
     kitty
+    inputs.winboat.packages.${pkgs.system}.winboat
+    freerdp
     inputs.elyprism-launcher.packages.${pkgs.system}.default
     inputs.viu.packages.${pkgs.system}.default
     pavucontrol
@@ -19,9 +21,9 @@
     heroic
     bottles
     lutris
-    unstable.blender
+    blender
     obsidian
-    krita
+    # krita
     clang
     mpv
     tealdeer

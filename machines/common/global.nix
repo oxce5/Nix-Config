@@ -15,10 +15,15 @@
     overlays = [
       # outputs.overlays.additions
       # outputs.overlays.modifications
+      # inputs.niri-flake.overlays.niri
       outputs.overlays.unstable-packages
+      # outputs.overlays.winboat-overlay
     ];
     config = {
       allowUnfree = true;
+      permittedInsecurePackages = [
+        "mbedtls-2.28.10"
+      ];
     };
   };
   nix.settings.experimental-features = "nix-command flakes";

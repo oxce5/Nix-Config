@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   lib,
+  config,
   ...
 }: let
   # java-debug = pkgs.callPackage ./java-debug.nix {};
@@ -17,7 +18,7 @@ in {
   home.packages = [pkgs.jdt-language-server];
 
   programs.nvf = {
-    enable = true;
+    enable = config.dots.nvim;
     enableManpages = true;
     # your settings need to go into the settings attribute set
     # most settings are documented in the appendix
@@ -58,7 +59,6 @@ in {
             vim.o.foldlevelstart = 99
             vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldsep:▏,foldclose:'
           '';
-
         };
 
         autocmds = [
@@ -91,19 +91,29 @@ in {
             '';
           }
           {
-            event = [ "VimEnter" ];
+            event = ["VimEnter"];
             desc = "Toggle Avante's suggestions (FIX FOR COPILOT.LUA PLENARY DEPENDENCY)";
             callback = lib.generators.mkLuaInline ''
-	    	function()
-		      local h = io.popen("ping -c 1 8.8.8.8")
-		      local r = h:read("*a")
-		      h:close()
-		      if not r:find("1 received") then
-			require("avante").toggle.suggestion()
-			vim.notify("Offline! avante suggestions are off.", vim.log.levels.WARN)
-		end
+                 	function()
+                    local h = io.popen("ping -c 1 8.8.8.8")
+                    local r = h:read("*a")
+                    h:close()
+                    if not r:find("1 received") then
+              	require("avante").toggle.suggestion()
+              	vim.notify("Offline! avante suggestions are off.", vim.log.levels.WARN)
               end
+                          end
             '';
+          }
+        ];
+
+        keymaps = [
+          {
+            key = "<leader>q";
+            mode = "n";
+            silent = true;
+            action = "vi\"";
+            noremap = true;
           }
         ];
         lsp.enable = true;

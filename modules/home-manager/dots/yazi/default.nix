@@ -1,8 +1,12 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   programs = {
     yazi = {
-      package = pkgs.unstable.yazi;
-      enable = true;
+      package = pkgs.yazi;
+      enable = config.dots.yazi;
       initLua = ''
         require("git"):setup()
         require("relative-motions"):setup({ show_numbers="relative", show_motion = true, enter_mode ="first" })

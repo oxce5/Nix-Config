@@ -10,11 +10,12 @@
     inputs.home-manager.nixosModules.default
     inputs.nix-flatpak.nixosModules.nix-flatpak
     inputs.stylix.nixosModules.stylix
-    # inputs.chaotic-nyx.nixosModules.default
-    inputs.chaotic-nyx.nixosModules.nyx-cache
-    inputs.chaotic-nyx.nixosModules.nyx-overlay
-    inputs.chaotic-nyx.nixosModules.nyx-registry
+    inputs.chaotic-nyx.nixosModules.default
+    # inputs.chaotic-nyx.nixosModules.nyx-cache
+    # inputs.chaotic-nyx.nixosModules.nyx-overlay
+    # inputs.chaotic-nyx.nixosModules.nyx-registry
     outputs.nixosModules.niri-flake
+    outputs.nixosModules.noctalia
     outputs.nixosModules.berkeley-mono
 
     ./hardware-configuration.nix
@@ -31,11 +32,11 @@
     ../common/virtualization.nix
   ];
 
-  home-manager = { 
-   useGlobalPkgs = true;
-   backupFileExtension = "backup";
-   extraSpecialArgs = {inherit inputs outputs;};
-   users.oxce5 = import ../../home/oxce5;
+  home-manager = {
+    useGlobalPkgs = true;
+    backupFileExtension = "backup";
+    extraSpecialArgs = {inherit inputs outputs;};
+    users.oxce5 = import ../../home/oxce5;
   };
 
   chaotic.nyx.cache.enable = true;
@@ -51,8 +52,17 @@
   boot.extraModulePackages = with config.boot.kernelPackages; [
     lenovo-legion-module
   ];
+
+  boot.plymouth = {
+    enable = true;
+    theme = "prts-plymouth";
+    themePackages = let
+      prts-plymouth = pkgs.callPackage ../../modules/nixos/prts-plymouth {};
+    in [prts-plymouth];
+  };
+
   # fix chaotic-nyx cache
-  system.modulesTree = [ (lib.getOutput "modules" pkgs.linuxPackages_cachyos.kernel) ];
+  # system.modulesTree = [(lib.getOutput "modules" pkgs.linuxPackages_cachyos.kernel)];
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
   services.scx.enable = true;
 
@@ -80,11 +90,12 @@
       "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
     ];
   };
-  
+
   stylix = {
     enable = true;
     targets = {
       gtk.enable = true;
+      plymouth.enable = false;
     };
     image = ./../../home/oxce5/wallpapers/KASANE_TETO.png;
     polarity = "dark";
@@ -106,10 +117,13 @@
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
     };
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
   };
   services.xserver.videoDrivers = ["nvidia"];
-  hardware.graphics.enable = true;
+  hardware = {
+    graphics.enable = true;
+    bluetooth.enable = true;
+  };
   networking.networkmanager = {
     enable = true;
   };
@@ -124,12 +138,21 @@
       };
     };
     dbus.packages = [pkgs.nautilus];
-    # acpid = {
-    #   enable = true;
-    #   acEventCommands = ''
-    #     exec ${pkgs.bash}/bin/bash /home/oxce5/nix-setup/bin/daemons/batterydaemon.sh
-    #   '';
-    # };
+    keyd = {
+      enable = true;
+      keyboards = {
+        default = {
+          ids = ["048d:c996:20fedd66"];
+          settings = {
+            main = {
+              capslock = "timeout(esc, 200, capslock)";
+              esc = "esc";
+              kpasterisk = "\"";
+            };
+          };
+        };
+      };
+    };
   };
   systemd.user.services."plugdaemon" = {
     description = "Plug in/out Daemon";
@@ -148,12 +171,12 @@
     };
   };
   systemd.user.timers."plugdaemon" = {
-    wantedBy = [ "timers.target" ];
-      timerConfig = {
-        OnBootSec = "5m";
-        OnUnitActiveSec = "5m";
-        Unit = "plugdaemon.service";
-      };
+    wantedBy = ["timers.target"];
+    timerConfig = {
+      OnBootSec = "5m";
+      OnUnitActiveSec = "5m";
+      Unit = "plugdaemon.service";
+    };
   };
   xdg.portal = lib.mkForce {
     enable = true;

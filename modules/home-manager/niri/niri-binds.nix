@@ -2,17 +2,15 @@
   programs.niri.settings.binds = with config.lib.niri.actions; {
     "Mod+Shift+Slash".action = show-hotkey-overlay;
     "Mod+T".action = spawn "ghostty";
-    "Mod+Space".action = spawn "caelestia-shell" "ipc" "call" "drawers" "toggle" "launcher";
-    "Mod+L".action = spawn "caelestia-shell" "ipc" "call" "lock" "lock";
+    "Mod+Space".action = spawn "noctalia-shell" "ipc" "call" "launcher" "toggle";
+    "Mod+L".action = spawn "noctalia-shell" "ipc" "call" "lockScreen" "toggle";
 
-    "XF86AudioRaiseVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+";
-    "XF86AudioLowerVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-";
-    "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
-    "XF86AudioMicMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle";
-
-    "XF86MonBrightnessUp".action = spawn "brightnessctl" "--class=backlight" "set" "+10%";
-    "XF86MonBrightnessDown".action = spawn "brightnessctl" "--class=backlight" "set" "10%-";
-
+    "XF86AudioRaiseVolume".action = spawn "noctalia-shell" "ipc" "call" "volume" "increase";
+    "XF86AudioLowerVolume".action = spawn "noctalia-shell" "ipc" "call" "volume" "decrease";
+    "XF86AudioMute".action = spawn "noctalia-shell" "ipc" "call" "volume" "muteOutput";
+    "XF86AudioMicMute".action = spawn "noctalia-shell" "ipc" "call" "volume" "muteInput";
+    "XF86MonBrightnessUp".action = spawn "noctalia-shell" "ipc" "call" "brightness" "increase";
+    "XF86MonBrightnessDown".action = spawn "noctalia-shell" "ipc" "call" "brightness" "decrease";
     "Mod+O".action = toggle-overview; # nix: Mod+O repeat=false { toggle-overview; }
     "Mod+Q".action = close-window; # nix: Mod+Q repeat=false { close-window; }
 

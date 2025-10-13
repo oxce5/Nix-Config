@@ -42,6 +42,7 @@
         "io.mrarm.mcpelauncher"
         "org.vinegarhq.Vinegar"
         "org.vinegarhq.Sober"
+        "com.dec05eba.gpu_screen_recorder"
       ];
     };
     nextdns = {
