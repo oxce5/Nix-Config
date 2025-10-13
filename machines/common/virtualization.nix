@@ -1,15 +1,12 @@
-{pkgs, ...}:
-
-{
+{pkgs, ...}: {
   virtualisation = {
     waydroid = {
       enable = true;
-      package = pkgs.unstable.waydroid;
+      package = pkgs.waydroid;
     };
     libvirtd.enable = true;
   };
 
-  environment.systemPackages = [ pkgs.unstable.waydroid-helper ];
+  environment.systemPackages = [pkgs.waydroid-helper];
   programs.virt-manager.enable = true;
 }
-

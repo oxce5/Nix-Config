@@ -10,6 +10,7 @@
     kitty
     alacritty
     xterm
+    busybox
 
     # Shell tools
     ripgrep

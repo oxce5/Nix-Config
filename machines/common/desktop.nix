@@ -6,7 +6,6 @@
 }: {
   home-manager.backupFileExtension = "backup";
   environment.systemPackages = with pkgs; [
-
     mate.mate-polkit
 
     # Scanning and Printing
@@ -14,7 +13,6 @@
 
     # Wine
     # inputs.nix-gaming.packages.${pkgs.system}.wine-tkg-ntsync
-
   ];
   programs.zsh.enable = true;
   programs.fish.enable = true;

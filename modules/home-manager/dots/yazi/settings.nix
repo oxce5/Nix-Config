@@ -1,5 +1,12 @@
 {
   settings = {
+    mgr.prepend_keymap = [
+      {
+        on = ["C"];
+        run = "plugin ouch";
+        desc = "Compress with ouch";
+      }
+    ];
     opener = {
       extract = [
         {
@@ -66,6 +73,18 @@
         }
         {
           mime = "application/xz";
+          run = "ouch";
+        }
+        {
+          mime = "application/x-zstd";
+          run = "ouch";
+        }
+        {
+          mime = "application/zstd";
+          run = "ouch";
+        }
+        {
+          mime = "application/java-archive";
           run = "ouch";
         }
       ];

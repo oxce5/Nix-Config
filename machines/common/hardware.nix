@@ -16,6 +16,13 @@
     extraPackages = with pkgs; [
       nvidia-vaapi-driver
       ocl-icd
+
+      vaapiVdpau
+      libvdpau
+      libvdpau-va-gl
+      vdpauinfo
+      libva
+      libva-utils
     ];
   };
   hardware.enableRedistributableFirmware = true; # update Intel CPU microcode

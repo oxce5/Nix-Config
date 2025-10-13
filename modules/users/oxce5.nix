@@ -21,6 +21,7 @@
       "aria2"
       "docker"
       "wireshark"
+      "keyd"
       # Add other groups as needed
     ];
     shell = pkgs.fish; # Change if you prefer a different shell

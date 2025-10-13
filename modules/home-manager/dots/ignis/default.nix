@@ -1,10 +1,14 @@
-{pkgs, inputs, ...}:
-
 {
+  pkgs,
+  inputs,
+  config,
+  lib,
+  ...
+}: {
   imports = [inputs.ignis.homeManagerModules.default];
 
   programs.ignis = {
-    enable = true;
+    enable = lib.mkIf (config.dots.bar == "exa");
     package = inputs.ignis.packages.${pkgs.system}.default;
 
     configDir = ./ignis;

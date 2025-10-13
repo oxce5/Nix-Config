@@ -14,16 +14,16 @@
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid"];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = [];
+  boot.kernelModules = ["kvm-intel" "ip_tables" "iptable_nat"];
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/355fbece-b5e3-4188-a4bb-8e4d9d3fd634";
+    device = "/dev/disk/by-uuid/5768cdb0-f45a-46a6-9802-738595c7e079";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/5962-25A7";
+    device = "/dev/disk/by-uuid/1A3A-626E";
     fsType = "vfat";
     options = ["fmask=0077" "dmask=0077"];
   };
@@ -35,9 +35,7 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.docker0.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp7s0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.tailscale0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

@@ -1,17 +1,18 @@
 {
   inputs,
   pkgs,
+  config,
   ...
 }: {
   programs.ghostty = {
-    enable = true;
-    package = inputs.ghostty.packages.${pkgs.system}.default;
+    enable = config.dots.ghostty;
+    package = pkgs.ghostty;
     enableBashIntegration = true;
     enableZshIntegration = true;
     enableFishIntegration = true;
     installVimSyntax = true;
     settings = {
-      theme = "Tomorrow Night Burns"; 
+      theme = "Tomorrow Night Burns";
       custom-shader = builtins.toString ./manga_slash.glsl;
       custom-shader-animation = true;
 
@@ -28,7 +29,6 @@
       unfocused-split-opacity = 1;
       focus-follows-mouse = true;
 
-      
       window-padding-x = 10;
       window-padding-y = 10;
 
