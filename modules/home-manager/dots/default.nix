@@ -11,11 +11,11 @@ with lib; let
   cursorMap = {
     rice_cursor = {
       pkg = riceCursor;
-      name = "Rice_Cursor";
+      name = "RiceCursor";
     };
     teto_cursor = {
       pkg = tetoCursor;
-      name = "Teto_Cursor";
+      name = "TetoCursor";
     };
   };
 
