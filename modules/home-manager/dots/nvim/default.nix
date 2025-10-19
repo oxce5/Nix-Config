@@ -318,7 +318,7 @@ in {
             package = vimPlug.nvim-jdtls;
             setup = ''
               local jdtls_share = '${pkgs.jdt-language-server}/share/java/jdtls'
-              local launcher_jar = '${pkgs.jdt-language-server}/share/java/jdtls/plugins/org.eclipse.equinox.launcher_1.7.0.v20250331-1702.jar'
+              local launcher_jar = '${pkgs.jdt-language-server}/share/java/jdtls/plugins/org.eclipse.equinox.launcher_1.7.0.v20250519-0528.jar'
               local config_dir = vim.fn.stdpath('cache') .. '/jdtls/config_linux'
               local project_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
               local workspace_dir = vim.fn.stdpath('cache') .. '/jdtls/workspace' .. project_dir
@@ -326,7 +326,7 @@ in {
               local debugBundles = { "${java-debug}" }
               local config = {
                 cmd = {
-                  '${pkgs.jre_headless}/bin/java',
+                  '${pkgs.jdk}/bin/java',
                   '-Declipse.application=org.eclipse.jdt.ls.core.id1',
                   '-Dosgi.bundles.defaultStartLevel=4',
                   '-Declipse.product=org.eclipse.jdt.ls.core.product',
