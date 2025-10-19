@@ -5,7 +5,7 @@ stdenv.mkDerivation {
   src = ./RiceShower.tar.xz;
 
   installPhase = ''
-    mkdir -p $out/share/icons/Rice_Cursor
-    tar -xf $src -C $out/share/icons/Rice_Cursor
+    mkdir -p $out/share/icons/RiceCursor
+    tar --strip-components=1 -xf $src -C $out/share/icons/RiceCursor
   '';
 }
