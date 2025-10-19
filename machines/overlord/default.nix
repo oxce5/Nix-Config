@@ -52,6 +52,7 @@
   boot.extraModulePackages = with config.boot.kernelPackages; [
     lenovo-legion-module
   ];
+  boot.kernelParams = ["quiet" "splash" "loglevel=3" "vt.global_cursor_default=0"];
 
   boot.plymouth = {
     enable = true;
@@ -64,7 +65,6 @@
   # fix chaotic-nyx cache
   # system.modulesTree = [(lib.getOutput "modules" pkgs.linuxPackages_cachyos.kernel)];
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
-  services.scx.enable = true;
 
   nix.settings = {
     substituters = [
@@ -107,7 +107,7 @@
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;
-    open = true;
+    open = false;
     nvidiaSettings = true;
     prime = {
       offload = {
@@ -145,7 +145,7 @@
           ids = ["048d:c996:20fedd66"];
           settings = {
             main = {
-              capslock = "timeout(esc, 200, capslock)";
+              capslock = "timeout(esc, 150, capslock)";
               esc = "esc";
               kpasterisk = "\"";
             };
