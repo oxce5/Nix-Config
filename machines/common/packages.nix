@@ -34,7 +34,9 @@
     gh
 
     # Archive and Decompression
-    ouch
+    (ouch.override {
+      enableUnfree = true;
+    })
     p7zip
     nextdns
     lenovo-legion

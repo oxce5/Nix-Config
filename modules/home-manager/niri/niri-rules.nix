@@ -47,9 +47,9 @@
       }
       {
         matches = [
-          {app-id = "^at.yrlf.wl_mirror*";}
+          {app-id = "^at.yrlf.wl_mirror$";}
         ];
-        open-on-output = "HDMI-A-1";
+        open-on-output = "HDMI-A-5";
       }
     ];
   };

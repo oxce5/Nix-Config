@@ -83,9 +83,13 @@
         position.y = 0;
       };
 
-      outputs."HDMI-A-1" = {
+      outputs."HDMI-A-5" = {
+        mode = {
+          width = 1920;
+          height = 1080;
+        };
         scale = 1.0;
-        position.x = 1920;
+        position.x = 0;
         position.y = 0;
       };
 

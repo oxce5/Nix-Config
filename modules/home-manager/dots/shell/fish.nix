@@ -9,9 +9,11 @@
       enable = true;
       shellAliases = {
         aj = "alejandra ~/nix-setup";
+        ls = "eza";
+        ll = "eza -l";
+        lt = "eza -T";
       };
       shellAbbrs = {
-        ll = "ls -l";
         gs = "git status";
         cd = "z";
         df = "duf";
@@ -26,6 +28,7 @@
         bind up _atuin_bind_up
 
         set -gx EDITOR "nvim"
+        enable_transience
 
         if status is-interactive
             if type -q zellij
@@ -67,7 +70,7 @@
       };
       plugins = [
         {
-          name = "replay.fish";
+          name = "replay";
           src = pkgs.fetchFromGitHub {
             owner = "jorgebucaran";
             repo = "replay.fish";
@@ -76,31 +79,28 @@
           };
         }
         {
-          name = "done";
-          src = pkgs.fetchFromGitHub {
-            owner = "franciscolourenco";
-            repo = "done";
-            rev = "0bfe402753681f705a482694fcaf20c2bfc6deb7";
-            hash = "sha256-WA6DBrPBuXRIloO05UBunTJ9N01d6tO1K1uqojjO0mo=";
-          };
-        }
-        {
           name = "pisces";
-          src = pkgs.fetchFromGitHub {
-            owner = "laughedelic";
-            repo = "pisces";
-            rev = "e45e0869855d089ba1e628b6248434b2dfa709c4";
-            hash = "sha256-Oou2IeNNAqR00ZT3bss/DbhrJjGeMsn9dBBYhgdafBw=";
-          };
+          src = pkgs.fishPlugins.pisces;
         }
         {
           name = "fzf";
-          src = pkgs.fetchFromGitHub {
-            owner = "PatrickF1";
-            repo = "fzf.fish";
-            rev = "8920367cf85eee5218cc25a11e209d46e2591e7a";
-            hash = "sha256-T8KYLA/r/gOKvAivKRoeqIwE2pINlxFQtZJHpOy9GMM=";
-          };
+          src = pkgs.fishPlugins.fzf-fish;
+        }
+        {
+          name = "bass";
+          src = pkgs.fishPlugins.bass;
+        }
+        {
+          name = "done";
+          src = pkgs.fishPlugins.done;
+        }
+        {
+          name = "you-should-use";
+          src = pkgs.fishPlugins.fish-you-should-use;
+        }
+        {
+          name = "z";
+          src = pkgs.fishPlugins.z;
         }
       ];
     };
