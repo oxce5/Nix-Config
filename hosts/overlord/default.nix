@@ -11,6 +11,7 @@
       plymouth
       bar
       gaming
+      zellij
     ];
 
     primaryDisplay = config.unify.hosts.nixos.overlord.displays.eDP-1;
