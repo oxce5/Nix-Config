@@ -1,5 +1,4 @@
-{ inputs, ...}:
-{
+{inputs, ...}: {
   unify.home = {
     pkgs,
     config,
@@ -22,7 +21,7 @@
         })
         shells);
   in {
-    imports = [ inputs.nix-index-database.homeModules.nix-index ];
+    imports = [inputs.nix-index-database.homeModules.nix-index];
 
     home.shellAliases = {
       cd = "z";
