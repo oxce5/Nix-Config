@@ -23,6 +23,7 @@
         column.ui = "auto";
         fetch.prune = true;
         interactive.singlekey = true;
+        gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
       };
     };
   };
