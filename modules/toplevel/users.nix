@@ -31,17 +31,6 @@
           shell = pkgs.fish;
         };
       };
-      security.sudo.extraRules = [
-        {
-          users = ["oxce5"];
-          commands = [
-            {
-              command = "ALL";
-              options = ["NOPASSWD"]; # "SETENV" # Adding the following could be a good idea
-            }
-          ];
-        }
-      ];
     };
   };
 }
