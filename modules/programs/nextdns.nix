@@ -1,8 +1,6 @@
 {
   unify = {
-    nixos = 
-    { pkgs, ... }:
-    {
+    nixos = {pkgs, ...}: {
       services.nextdns = {
         enable = true;
         arguments = [
