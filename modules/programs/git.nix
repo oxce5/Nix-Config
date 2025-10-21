@@ -3,7 +3,7 @@
     programs.git = {
       enable = true;
       lfs.enable = true;
-      userName = "oxce5";
+      userName = "avg.gamer";
       userEmail = "avg.gamer@proton.me";
       difftastic.enable = true;
       aliases = {
