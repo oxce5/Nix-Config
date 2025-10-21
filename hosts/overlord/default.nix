@@ -1,9 +1,16 @@
-{ inputs, config, ... }:
 {
+  inputs,
+  config,
+  ...
+}: {
   unify.hosts.nixos.overlord = {
     modules = with config.unify.modules; [
       workstation
       laptop
+      neovim
+      plymouth
+      bar
+      gaming
     ];
 
     primaryDisplay = config.unify.hosts.nixos.overlord.displays.eDP-1;
@@ -24,26 +31,46 @@
 
     users.oxce5.modules = config.unify.hosts.nixos.overlord.modules;
 
-    nixos =
-      { pkgs, ... }:
-      {
-        facter.reportPath = ./facter.json;
-        imports = with inputs.nixos-hardware.nixosModules; [
-          common-cpu-amd
-          common-gpu-amd
-          common-pc-ssd
-        ];
+    nixos = {pkgs, ...}: {
+      facter.reportPath = ./facter.json;
+      imports = with inputs; [
+        nixos-hardware.nixosModules.common-cpu-amd
+        nixos-hardware.nixosModules.common-gpu-amd
+        nixos-hardware.nixosModules.common-pc-ssd
 
-        boot.kernelPackages = inputs.chaotic.legacyPackages.${pkgs.system}.linuxPackages_cachyos;
+        nix-flatpak.nixosModules.nix-flatpak
+        stylix.nixosModules.stylix
+        chaotic.nixosModules.default
+      ];
 
-        networking = {
-          networkmanager.enable = false;
-          hostName = "overlord";
-        };
+      chaotic.nyx.cache.enable = true;
 
-        services = {
-          fwupd.enable = true;
+      boot.kernelPackages = pkgs.linuxPackages_6_17;
+
+      networking = {
+        networkmanager.enable = true;
+        hostName = "overlord";
+      };
+
+      services = {
+        fwupd.enable = true;
+
+        keyd = {
+          enable = true;
+          keyboards = {
+            default = {
+              ids = ["048d:c996:20fedd66"];
+              settings = {
+                main = {
+                  capslock = "timeout(esc, 150, capslock)";
+                  esc = "esc";
+                  kpasterisk = "\"";
+                };
+              };
+            };
+          };
         };
       };
+    };
   };
 }
