@@ -1,3 +1,4 @@
+{ inputs, ...}:
 {
   unify.home = {
     pkgs,
@@ -21,6 +22,8 @@
         })
         shells);
   in {
+    imports = [ inputs.nix-index-database.homeModules.nix-index ];
+
     home.shellAliases = {
       cd = "z";
       lj = "lazyjj";
