@@ -1,12 +1,8 @@
-debug.txt
-nix-switch.log
-node_modules/
-
-package.json
-package-lock.json
 .sops.yaml
+*
+!*/
 
-modules/home-manager/ignis/ignis/
-modules/home-manager/kurukuru/kurukurubar/
-
-
+!*.nix
+!flake.lock
+!*.glsl
+!.git*
