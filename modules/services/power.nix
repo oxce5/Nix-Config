@@ -3,6 +3,7 @@
     services.power-profiles-daemon.enable = false;
     hardware.system76.power-daemon.enable = true;
     services = {
+      upower.enable = true;
       thermald.enable = true;
       auto-cpufreq = {
         enable = true;
