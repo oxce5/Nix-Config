@@ -1,10 +1,13 @@
 {
   description = "0xCE5's NixOS config";
 
-  outputs =
-    { flake-parts, import-tree, ... }@inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" ];
+  outputs = {
+    flake-parts,
+    import-tree,
+    ...
+  } @ inputs:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux"];
       imports = [
         inputs.unify.flakeModule
         (import-tree [
@@ -12,18 +15,16 @@
           ./modules
         ])
       ];
-      perSystem =
-        { pkgs, ... }:
-        {
-          formatter = pkgs.alejandra;
-        };
+      perSystem = {pkgs, ...}: {
+        formatter = pkgs.alejandra;
+      };
     };
 
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
 
-    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     unify = {
       url = "git+https://codeberg.org/quasigod/unify";
@@ -116,7 +117,7 @@
   };
   nixConfig = {
     extra-substituters = [
-      "https://cache.lix.systems"
+      "https://cache.nixos.org"
       "https://chaotic-nyx.cachix.org/"
       "https://nix-community.cachix.org"
       "https://nix-gaming.cachix.org"
