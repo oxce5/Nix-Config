@@ -22,7 +22,6 @@
         whois
         aria2
         choose
-        difftastic
         dua
         du-dust
         edir
