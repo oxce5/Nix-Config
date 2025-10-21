@@ -78,6 +78,11 @@
         enableFishIntegration = true;
       };
       nix-your-shell.enable = true;
+      nix-index =
+        {
+          enable = true;
+        }
+        // enableIntegrations ["Bash" "Zsh" "Fish"];
       skim.enable = true;
       tealdeer = {
         enable = true;
