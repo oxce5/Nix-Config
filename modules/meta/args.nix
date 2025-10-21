@@ -1,11 +1,13 @@
-{ lib, config, ... }:
-let
-  inherit (lib) types mkOption;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib) types mkOption;
+in {
   options.args = mkOption {
     type = types.lazyAttrsOf types.unspecified;
-    default = { };
+    default = {};
   };
   config = {
     _module.args = config.args;

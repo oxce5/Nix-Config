@@ -1,18 +1,19 @@
-{ lib, ... }:
-let
+{lib, ...}: let
   inherit (lib) mkOption types;
-in
-{
+in {
   unify.options = {
     primaryDisplay = mkOption {
       type = types.lazyAttrsOf types.raw;
-      default = { };
+      default = {};
     };
     displays = mkOption {
       type = types.lazyAttrsOf (
         types.submodule (
-          { name, config, ... }:
           {
+            name,
+            config,
+            ...
+          }: {
             options = {
               name = mkOption {
                 default = name;
