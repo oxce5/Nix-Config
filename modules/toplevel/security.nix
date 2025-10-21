@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   unify.nixos.security = {
     sudo.enable = false;
     sudo-rs = {
@@ -8,7 +7,7 @@
     };
     polkit.enable = true;
     pam = {
-      services.systemd-run0 = { };
+      services.systemd-run0 = {};
       loginLimits = lib.singleton {
         domain = "*";
         item = "nofile";

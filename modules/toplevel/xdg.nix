@@ -2,7 +2,7 @@
   unify = {
     modules.workstation = {
       nixos.xdg = {
-        portal.enable = true;
+        # portal.enable = true;
         terminal-exec.enable = true;
       };
       home.xdg = {
