@@ -12,6 +12,7 @@
       bar
       gaming
       zellij
+      tuigreet
     ];
 
     primaryDisplay = config.unify.hosts.nixos.overlord.displays.eDP-1;
