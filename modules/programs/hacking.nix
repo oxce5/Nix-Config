@@ -1,6 +1,7 @@
 {
   inputs,
   lib,
+  self,
   withSystem,
   ...
 }: {
@@ -51,7 +52,7 @@
         interactsh
         katana
         cvemap
-        (withSystem system (p: p.config.packages.shuffledns))
+        # self.packages.x86_64-linux.shuffledns
         massdns
 
         # Vulnerability Analysis
