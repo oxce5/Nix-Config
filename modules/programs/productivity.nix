@@ -8,11 +8,13 @@
         remmina
         varia
         proton-pass
+        krita
         element-desktop
         obsidian
         gearlever
         vesktop
         blender
+        youtube-music
       ];
     };
   };
