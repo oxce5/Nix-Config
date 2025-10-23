@@ -2,7 +2,12 @@
 *
 !*/
 
-!*.nix
+!*.nix*
+!*.tar*
 !flake.lock
+!facter.json
+!*.jar
+!*.md
 !*.glsl
 !.git*
+!.git/*
