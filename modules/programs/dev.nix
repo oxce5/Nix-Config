@@ -5,6 +5,9 @@
       lazyjj
       lazygit
       jq
+
+      devenv
+      uv
     ];
   };
 }
