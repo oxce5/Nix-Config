@@ -314,7 +314,12 @@
                 package = vimPlug.nvim-jdtls;
                 setup = ''
                   local jdtls_share = '${pkgs.jdt-language-server}/share/java/jdtls'
-                  local launcher_jar = '${pkgs.jdt-language-server}/share/java/jdtls/plugins/org.eclipse.equinox.launcher_1.7.0.v20250519-0528.jar'
+
+                  local pattern = jdtls_share .. "/plugins/org.eclipse.equinox.launcher_1.7.0.*.jar"
+                  local matches = vim.fn.glob(pattern, false, true)
+
+                  local launcher_jar = (#matches > 0) and matches[1] or nil
+
                   local config_dir = vim.fn.stdpath('cache') .. '/jdtls/config_linux'
                   local project_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
                   local workspace_dir = vim.fn.stdpath('cache') .. '/jdtls/workspace' .. project_dir
