@@ -1,7 +1,9 @@
 {
-  unify.modules.workstation.nixos =
-  { inputs, pkgs, ... }:
-  {
+  unify.modules.workstation.nixos = {
+    inputs,
+    pkgs,
+    ...
+  }: {
     appstream.enable = true;
     services.flatpak = {
       enable = true;
