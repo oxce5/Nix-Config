@@ -62,7 +62,7 @@
           batwatch
           batpipe
           batman
-          batgrep
+          # batgrep
           batdiff
         ];
       };
