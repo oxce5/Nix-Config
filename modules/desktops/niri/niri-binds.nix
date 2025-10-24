@@ -21,8 +21,8 @@
       "Mod+Right".action = focus-column-right; # nix: Mod+Right { focus-column-right; }
 
       "Mod+Ctrl+Left".action = move-column-left; # nix: Mod+Ctrl+Left  { move-column-left; }
-      "Mod+Ctrl+Down".action = move-window-down; # nix: Mod+Ctrl+Down  { move-window-down; }
-      "Mod+Ctrl+Up".action = move-window-up; # nix: Mod+Ctrl+Up    { move-window-up; }
+      # "Mod+Ctrl+Down".action = move-window-down; # nix: Mod+Ctrl+Down  { move-window-down; }
+      # "Mod+Ctrl+Up".action = move-window-up; # nix: Mod+Ctrl+Up    { move-window-up; }
       "Mod+Ctrl+Right".action = move-column-right; # nix: Mod+Ctrl+Right { move-column-right; }
       "Mod+Ctrl+H".action = move-column-left; # nix: Mod+Ctrl+H     { move-column-left; }
       "Mod+Ctrl+J".action = move-window-down; # nix: Mod+Ctrl+J     { move-window-down; }
@@ -56,8 +56,8 @@
       "Mod+Page_Up".action = focus-workspace-up; # nix: Mod+Page_Up        { focus-workspace-up; }
       "Mod+U".action = focus-workspace-down; # nix: Mod+U              { focus-workspace-down; }
       "Mod+I".action = focus-workspace-up; # nix: Mod+I              { focus-workspace-up; }
-      "Mod+Ctrl+Page_Down".action = move-column-to-workspace-down; # nix: Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
-      "Mod+Ctrl+Page_Up".action = move-column-to-workspace-up; # nix: Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
+      "Mod+Ctrl+Down".action = move-column-to-workspace-down; # nix: Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
+      "Mod+Ctrl+Up".action = move-column-to-workspace-up; # nix: Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
       "Mod+Ctrl+U".action = move-column-to-workspace-down; # nix: Mod+Ctrl+U         { move-column-to-workspace-down; }
       "Mod+Ctrl+I".action = move-column-to-workspace-up; # nix: Mod+Ctrl+I         { move-column-to-workspace-up; }
 
@@ -134,7 +134,7 @@
       "Mod+Shift+V".action = switch-focus-between-floating-and-tiling; # nix: Mod+Shift+V { switch-focus-between-floating-and-tiling; }
       "Mod+W".action = toggle-column-tabbed-display; # nix: Mod+W { toggle-column-tabbed-display; }
 
-      "Mod+P".action = screenshot; # nix: Mod+P { screenshot; }
+      "Mod+P".action = spawn "niri" "msg" "action" "screenshot"; # nix: Mod+P { screenshot; }
       "Mod+Alt+P".action = spawn "niri" "msg" "action" "screenshot-screen"; # nix: Mod+Alt+P { screenshot-screen; }
 
       "Mod+Escape" = {
