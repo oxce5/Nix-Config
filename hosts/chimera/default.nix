@@ -5,24 +5,21 @@
 }: {
   unify.hosts.nixos.chimera = {
     modules = with config.unify.modules; [
-      workstation
       server
-      neovim
-      zellij
-      tuigreet
+      ssh
     ];
 
-    primaryDisplay = config.unify.hosts.nixos.chimera.displays.eDP-1;
-    displays = {};
-
+    primaryUser = "teto";
     users.teto.modules = config.unify.hosts.nixos.chimera.modules;
 
     nixos = {pkgs, ...}: {
       facter.reportPath = ./facter.json;
       imports = with inputs; [
         nixos-hardware.nixosModules.common-cpu-amd
+        nixos-hardware.nixosModules.common-cpu-intel
         nixos-hardware.nixosModules.common-gpu-amd
         nixos-hardware.nixosModules.common-pc-ssd
+        nixos-hardware.nixosModules.common-pc-hdd
 
         nix-flatpak.nixosModules.nix-flatpak
         stylix.nixosModules.stylix
@@ -40,7 +37,6 @@
 
       services = {
         fwupd.enable = true;
-
       };
     };
   };

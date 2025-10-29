@@ -1,11 +1,16 @@
-
 {
   unify.modules.server = {
-      nixos = {
-
+    nixos = {
+      services = {
+        searx = {
+          enable = true;
+          configureNginx = true;
+          domain = "searxng.nix";
+        };
       };
-      home = {
+    };
 
-      };
+    home = {
+    };
   };
 }

@@ -2,6 +2,7 @@
   unify.modules.workstation.home = {
     imports = [inputs.zen-browser.homeModules.default];
     programs.zen-browser.enable = true;
+
     home.sessionVariables.BROWSER = "zen";
     xdg.desktopEntries.zen-beta = {
       name = "Zen Browser (Beta)";

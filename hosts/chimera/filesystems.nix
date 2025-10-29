@@ -1,8 +1,8 @@
 {
-  unify.hosts.nixos.overlord = {
+  unify.hosts.nixos.chimera = {
     nixos = {lib, ...}: {
       fileSystems."/" = {
-        device = "/dev/disk/by-uuid/5768cdb0-f45a-46a6-9802-738595c7e079";
+        device = "/dev/disk/nvme-SK_hynix_BC501_HFM128GDJTNG-8310A_NI94M00031310460X";
         fsType = "ext4";
       };
       fileSystems."/boot" = {

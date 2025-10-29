@@ -1,10 +1,8 @@
 {
   unify.modules.server = {
-      nixos = {
-
-      };
-      home = {
-
-      };
+    nixos = {
+    };
+    home = {
+    };
   };
 }

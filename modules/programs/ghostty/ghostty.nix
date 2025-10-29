@@ -7,7 +7,8 @@
       enableFishIntegration = true;
       enableZshIntegration = true;
       settings = {
-        shell-integration-features = true;
+        shell-integration = true;
+        shell-integration-features = "ssh-env,ssh-terminfo";
         window-decoration = "server";
         window-padding-x = 4;
         window-padding-color = "extend";

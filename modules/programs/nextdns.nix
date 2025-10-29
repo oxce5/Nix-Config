@@ -2,7 +2,7 @@
   unify = {
     nixos = {pkgs, ...}: {
       services.nextdns = {
-        enable = true;
+        enable = false;
         arguments = [
           "-config"
           "9a438c"

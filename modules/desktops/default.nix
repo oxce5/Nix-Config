@@ -7,6 +7,7 @@
           enable = true;
           binfmt = true;
         };
+        nix-ld.enable = true;
       };
       services.pipewire = {
         enable = true;
