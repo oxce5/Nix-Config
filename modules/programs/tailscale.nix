@@ -1,5 +1,5 @@
 {
-  unify= {
+  unify = {
     nixos = {
       services.tailscale = {
         enable = true;
@@ -10,4 +10,3 @@
     };
   };
 }
-
