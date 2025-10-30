@@ -18,6 +18,7 @@
           trusted-users = [
             "root"
             "oxce5"
+            "teto"
           ];
           experimental-features = [
             "nix-command"
