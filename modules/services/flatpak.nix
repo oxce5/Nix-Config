@@ -25,13 +25,6 @@
           flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
         '';
       };
-      services.nextdns-activate = {
-        script = ''
-          /run/current-system/sw/bin/nextdns activate
-        '';
-        after = ["nextdns.service"];
-        wantedBy = ["multi-user.target"];
-      };
     };
   };
 }

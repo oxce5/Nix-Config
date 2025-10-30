@@ -10,15 +10,15 @@
           "10MB"
         ];
       };
-      systemd = {
-        services.nextdns-activate = {
-          script = ''
-            ${pkgs.nextdns}/bin/nextdns activate
-          '';
-          after = ["nextdns.service"];
-          wantedBy = ["multi-user.target"];
-        };
-      };
+      # systemd = {
+      #   services.nextdns-activate = {
+      #     script = ''
+      #       ${pkgs.nextdns}/bin/nextdns activate
+      #     '';
+      #     after = ["nextdns.service"];
+      #     wantedBy = ["multi-user.target"];
+      #   };
+      # };
     };
   };
 }
