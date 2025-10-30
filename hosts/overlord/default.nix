@@ -52,6 +52,10 @@
       networking = {
         networkmanager.enable = true;
         hostName = "overlord";
+        nameservers = [
+          "192.168.1.26"
+          "8.8.8.8"
+        ];
       };
 
       services = {
