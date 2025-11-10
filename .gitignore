@@ -4,6 +4,8 @@
 
 !*.nix*
 !*.tar*
+!*.yaml*
+!*.yml*
 !flake.lock
 !facter.json
 !*.jar
