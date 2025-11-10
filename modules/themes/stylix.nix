@@ -13,6 +13,7 @@
             rainbow.enable = true;
           };
           gnome.enable = lib.mkForce false;
+          ghostty.enable = lib.mkForce false;
           vesktop.enable = true;
           fzf.enable = true;
           lazygit.enable = true;
