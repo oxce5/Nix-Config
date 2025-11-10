@@ -5,7 +5,7 @@
       hostConfig,
       ...
     }: {
-      boot.kernelParams = ["kvm-intel" "ip_tables" "iptable_nat"];
+      boot.kernelParams = ["kvm-intel"];
       users.users.${hostConfig.primaryUser}.extraGroups = ["kvm" "libvirtd" "qemu"];
       programs.virt-manager.enable = true;
       environment.systemPackages = with pkgs; [
