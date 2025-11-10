@@ -11,6 +11,17 @@
         xwayland-satellite
       ];
 
+      xdg.portal = {
+        enable = true;
+        extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+        config = {
+          niri = {
+            default = ["gnome" "gtk"];
+            "org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
+          };
+        };
+      };
+
       services = {
         swayidle = let
           lock = "${config.programs.caelestia.package}/bin/caelestia-shell ipc call lock lock";
@@ -58,7 +69,6 @@
       };
 
       programs.niri = {
-        package = pkgs.niri-unstable;
         settings = {
           prefer-no-csd = true;
           hotkey-overlay.skip-at-startup = true;
@@ -94,12 +104,13 @@
       };
     };
 
-    nixos = {
+    nixos = {pkgs, ...}: {
       imports = [inputs.niri-flake.nixosModules.niri];
 
       nixpkgs.overlays = [inputs.niri-flake.overlays.niri];
       programs.niri = {
         enable = true;
+        package = pkgs.niri-unstable;
       };
       niri-flake.cache.enable = true;
     };
