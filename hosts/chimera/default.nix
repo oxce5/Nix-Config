@@ -6,6 +6,13 @@
   unify.hosts.nixos.chimera = {
     modules = with config.unify.modules; [
       server
+      proxy
+      samba
+      nextcloud
+      pihole
+      jellyfin
+      anime
+      downloader
       ssh
     ];
 
@@ -33,6 +40,7 @@
       networking = {
         networkmanager.enable = true;
         hostName = "chimera";
+        firewall.allowedTCPPorts = [80];
       };
 
       services = {
