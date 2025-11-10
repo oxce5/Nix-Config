@@ -10,6 +10,7 @@
         proton-pass
         krita
         element-desktop
+        nextcloud-client
         obsidian
         gearlever
         vesktop
