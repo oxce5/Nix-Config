@@ -23,16 +23,20 @@
         aria2
         choose
         dua
-        du-dust
+        dust
         edir
         fd
+        duf
         gdu
         gh
         glow
         isd
+        btop
         lurk
         mprocs
-        ouch
+        (ouch.override {
+          enableUnfree = true;
+        })
         procs
         progress
         psmisc
