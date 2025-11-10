@@ -41,7 +41,6 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     nixos-facter-modules.url = "github:nix-community/nixos-facter-modules/7641b72e58c59ebb3c753fc36ff8ee3506ae8e05";
-
     chaotic = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -85,7 +84,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    viu.url = "github:viu-media/viu";
+    seanime.url = "github:rishabh5321/seanime-flake";
 
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
@@ -93,7 +92,9 @@
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
-    nvf.url = "github:notashelf/nvf";
+    nvf = {
+      url = "github:notashelf/nvf";
+    };
 
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
@@ -109,10 +110,6 @@
 
     zjstatus = {
       url = "github:dj95/zjstatus";
-    };
-
-    winboat = {
-      url = "github:TibixDev/winboat";
     };
   };
   nixConfig = {
