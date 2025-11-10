@@ -13,7 +13,7 @@
         # Launchers
         heroic
         lutris
-        prismlauncher
+        # inputs.elyprism-launcher.
 
         # Utility
         goverlay
