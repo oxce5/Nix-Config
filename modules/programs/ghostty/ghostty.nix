@@ -7,7 +7,9 @@
       enableFishIntegration = true;
       enableZshIntegration = true;
       settings = {
-        shell-integration = true;
+        theme = "noctalia";
+        shell-integration = "detect";
+        background-opacity = 0.8;
         shell-integration-features = "ssh-env,ssh-terminfo";
         window-decoration = "server";
         window-padding-x = 4;
