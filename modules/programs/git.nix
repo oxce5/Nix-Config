@@ -3,13 +3,16 @@
     programs.git = {
       enable = true;
       lfs.enable = true;
-      userName = "avg.gamer";
-      userEmail = "avg.gamer@proton.me";
-      difftastic.enable = true;
-      aliases = {
-        ci = "commit";
-        co = "checkout";
-        st = "status";
+      settings = {
+        user = {
+          name = "avg.gamer";
+          email = "avg.gamer@proton.me";
+        };
+        aliases = {
+          ci = "commit";
+          co = "checkout";
+          st = "status";
+        };
       };
       signing = {
         format = "ssh";
@@ -26,5 +29,6 @@
         gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
       };
     };
+    programs.difftastic.enable = true;
   };
 }
