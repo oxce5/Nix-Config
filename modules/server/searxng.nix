@@ -1,5 +1,5 @@
 {
-  unify.modules.server = {
+  unify.modules.searx = {
     nixos = {
       networking.firewall.allowedTCPPorts = [8080];
 
@@ -11,7 +11,7 @@
           settings = {
             server.port = 8080;
             server.bind_address = "0.0.0.0";
-            server.secret_key = "lalalala";
+            server.secret_key = "replace_this_lol";
           };
         };
       };
