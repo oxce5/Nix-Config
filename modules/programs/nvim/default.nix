@@ -46,7 +46,7 @@
                     vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
                 end)
 
-                vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#e06c75", bg = "#000000" })
+                vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#e06c75" })
                 vim.api.nvim_set_hl(0, "NotifyBackground", { fg = "#000000", bg = "#000000" })
               '';
               optionsScript = ''
