@@ -10,6 +10,11 @@
         fsType = "vfat";
         options = ["fmask=0077" "dmask=0077"];
       };
+      fileSystems."/mnt/ChimeraNAS" = {
+        device = "/dev/disk/by-uuid/be51bb91-c6bf-4084-93a6-def02a5ebcb6";
+        fsType = "btrfs";
+        options = ["defaults" "noatime" "compress=zstd" "space_cache=v2"];
+      };
     };
   };
 }
