@@ -51,16 +51,23 @@
             setup = ''
               local jdtls_share = '${pkgs.jdt-language-server}/share/java/jdtls'
 
-              local pattern = jdtls_share .. "/plugins/org.eclipse.equinox.launcher_1.7.0.*.jar"
+              -- Glob any launcher jar, don't hardcode version
+              local pattern = jdtls_share .. "/plugins/org.eclipse.equinox.launcher_*.jar"
               local matches = vim.fn.glob(pattern, false, true)
+              local launcher_jar = matches[1]
 
-              local launcher_jar = (#matches > 0) and matches[1] or nil
+              if not launcher_jar then
+                vim.notify("jdtls: launcher jar not found!", vim.log.levels.ERROR)
+                return
+              end
 
               local config_dir = vim.fn.stdpath('cache') .. '/jdtls/config_linux'
               local project_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
               local workspace_dir = vim.fn.stdpath('cache') .. '/jdtls/workspace' .. project_dir
+
               -- Add java-debug jar
               local debugBundles = { "${java-debug}" }
+
               local config = {
                 cmd = {
                   '${pkgs.jdk}/bin/java',
