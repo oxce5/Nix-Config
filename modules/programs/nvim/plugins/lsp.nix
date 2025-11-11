@@ -12,7 +12,6 @@
       vimPlug = pkgs.vimPlugins;
       # inherit (inputs.nvf.lib.nvim.dag) entryAfter;
     in {
-      imports = [inputs.nvf.homeManagerModules.default];
       programs.nvf.settings.vim = {
         lsp.enable = true;
         lsp.trouble.enable = true;
