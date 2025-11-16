@@ -13,6 +13,7 @@
       gaming
       zellij
       tuigreet
+      comfy
     ];
 
     primaryDisplay = config.unify.hosts.nixos.overlord.displays.eDP-1;
@@ -45,9 +46,7 @@
         chaotic.nixosModules.default
       ];
 
-      chaotic.nyx.cache.enable = true;
-
-      boot.kernelPackages = pkgs.linuxPackages_cachyos;
+      boot.kernelPackages = pkgs.linuxPackages_zen;
 
       networking = {
         networkmanager.enable = true;
@@ -76,6 +75,17 @@
             };
           };
         };
+        swapspace = {
+          enable = true;
+          settings = {
+            max_swapsize = "20g";
+            min_swapsize = "1g";
+          };
+        };
+      };
+      zramSwap = {
+        enable = true;
+        memoryPercent = 75;
       };
     };
   };
