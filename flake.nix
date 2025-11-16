@@ -43,8 +43,6 @@
     nixos-facter-modules.url = "github:nix-community/nixos-facter-modules/7641b72e58c59ebb3c753fc36ff8ee3506ae8e05";
     chaotic = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
     };
 
     wrapper-manager.url = "github:viperML/wrapper-manager";
@@ -62,6 +60,7 @@
 
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
+
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
@@ -93,7 +92,7 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
     nvf = {
-      url = "github:notashelf/nvf";
+      url = "github:notashelf/nvf/v0.8";
     };
 
     noctalia = {
@@ -130,7 +129,6 @@
       "prismlauncher.cachix.org-1:9/n/FGyABA2jLUVfY+DEp4hKds/rwO+SCOtbOkDzd+c="
       "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
-      "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
     ];
   };
 }
