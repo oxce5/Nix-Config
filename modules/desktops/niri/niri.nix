@@ -13,7 +13,7 @@
 
       xdg.portal = {
         enable = true;
-        extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+        extraPortals = with pkgs; [xdg-desktop-portal-gnome xdg-desktop-portal-gtk];
         config = {
           niri = {
             default = ["gnome" "gtk"];
@@ -72,6 +72,9 @@
         settings = {
           prefer-no-csd = true;
           hotkey-overlay.skip-at-startup = true;
+          debug = {
+            honor-xdg-activation-with-invalid-serial = true;
+          };
 
           outputs."eDP-1" = {
             mode = {

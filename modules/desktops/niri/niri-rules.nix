@@ -3,12 +3,8 @@
     programs.niri.settings = {
       layer-rules = [
         {
-          matches = [{namespace = "^quickshell-wallpaper$";}];
+          matches = [{namespace = "^noctalia-overview*";}];
           place-within-backdrop = true;
-        }
-        {
-          matches = [{namespace = "^quickshell-overview$";}];
-          opacity = 0.0;
         }
       ];
 
@@ -51,6 +47,15 @@
             {app-id = "^at.yrlf.wl_mirror$";}
           ];
           open-on-output = "HDMI-A-5";
+        }
+        {
+          clip-to-geometry = true;
+          geometry-corner-radius = {
+            bottom-left = 20.0;
+            bottom-right = 20.0;
+            top-left = 20.0;
+            top-right = 20.0;
+          };
         }
       ];
     };
