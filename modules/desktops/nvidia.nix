@@ -17,4 +17,7 @@
     };
     services.xserver.videoDrivers = ["nvidia"];
   };
+  unify.modules.comfy.nixos = {
+    hardware.nvidia-container-toolkit.enable = true;
+  };
 }
