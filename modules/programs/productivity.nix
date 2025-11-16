@@ -9,7 +9,7 @@
         varia
         proton-pass
         krita
-        element-desktop
+        mpv
         nextcloud-client
         obsidian
         gearlever
