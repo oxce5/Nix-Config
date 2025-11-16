@@ -12,6 +12,7 @@
       defaultPackages = lib.mkForce [];
     };
     zramSwap.enable = true;
+    documentation.man.generateCaches = lib.mkForce false;
     documentation.doc.enable = false;
     documentation.info.enable = false;
     time.timeZone = "Asia/Manila";
