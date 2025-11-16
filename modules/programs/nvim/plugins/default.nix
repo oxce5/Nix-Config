@@ -7,6 +7,7 @@
         extraPlugins = {
           no-neck-pain.package = vimPlug.no-neck-pain-nvim;
           firenvim.package = vimPlug.firenvim;
+          distant.package = vimPlug.distant-nvim;
           tiny-glimmer = {
             package = vimPlug.tiny-glimmer-nvim;
             setup = ''
