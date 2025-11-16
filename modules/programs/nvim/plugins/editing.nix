@@ -14,7 +14,9 @@
         binds.whichKey.enable = true;
         autopairs.nvim-autopairs.enable = true;
         lazy.enable = true;
-        mini.ai = {enable = true;};
+        snippets = {
+          luasnip.enable = true;
+        };
         utility = {
           surround.enable = true;
           snacks-nvim = {
