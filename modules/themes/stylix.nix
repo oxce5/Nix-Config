@@ -2,7 +2,7 @@
   unify.modules.workstation = {
     home = {
       lib,
-      pkgs,
+      hostConfig,
       ...
     }: {
       stylix = {
@@ -26,17 +26,14 @@
           yazi.enable = true;
           zellij.enable = true;
         };
-        image = pkgs.fetchurl {
-          url = "https://static.wikia.nocookie.net/synthv/images/9/9b/Synthesizer_V_AI_KASANE_TETO_Illust.png/revision/latest?cb=20240831225511";
-          hash = "sha256-JFJJGc+84RCAes06wm8tpARaAfPwpWHDLtgSuqjn9DM=";
-        };
+        image = hostConfig.primaryWallpaper;
         polarity = "dark";
       };
     };
 
     nixos = {
       lib,
-      pkgs,
+      hostConfig,
       ...
     }: {
       stylix = {
@@ -45,10 +42,7 @@
           gtk.enable = true;
           plymouth.enable = false;
         };
-        image = pkgs.fetchurl {
-          url = "https://static.wikia.nocookie.net/synthv/images/9/9b/Synthesizer_V_AI_KASANE_TETO_Illust.png/revision/latest?cb=20240831225511";
-          hash = "sha256-JFJJGc+84RCAes06wm8tpARaAfPwpWHDLtgSuqjn9DM=";
-        };
+        image = hostConfig.primaryWallpaper;
         polarity = "dark";
       };
     };
