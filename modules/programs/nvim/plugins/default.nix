@@ -6,7 +6,26 @@
       programs.nvf.settings.vim = {
         extraPlugins = {
           no-neck-pain.package = vimPlug.no-neck-pain-nvim;
-          firenvim.package = vimPlug.firenvim;
+          firenvim = {
+            package = vimPlug.firenvim;
+            setup = ''
+              vim.g.firenvim_config = {
+                localSettings = {
+                  -- allow only this domain
+                  [ [[.*umindanao\.codechum\.com.*]] ] = {
+                    takeover = "always",
+                    priority = 10,
+                  },
+
+                  -- everything else: no takeover
+                  [ [[.*]] ] = {
+                    takeover = "never",
+                    priority = 0,
+                  },
+                },
+              }
+            '';
+          };
           distant.package = vimPlug.distant-nvim;
           tiny-glimmer = {
             package = vimPlug.tiny-glimmer-nvim;
