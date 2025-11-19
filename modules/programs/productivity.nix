@@ -11,6 +11,7 @@
         krita
         mpv
         nextcloud-client
+        zoom-us
         obsidian
         gearlever
         vesktop
