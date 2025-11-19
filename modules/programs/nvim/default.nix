@@ -6,7 +6,7 @@
       lib,
       ...
     }: let
-      # inherit (inputs.nvf.lib.nvim.dag) entryAfter;
+      inherit (inputs.nvf.lib.nvim.dag) entryAfter;
     in {
       imports = [inputs.nvf.homeManagerModules.default];
       programs.nvf = {
@@ -16,13 +16,21 @@
         # most settings are documented in the appendix
         settings.vim = {
           luaConfigRC = {
-            transparentTheme = ''
-              vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-              vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-              vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
-              vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
-              vim.api.nvim_set_hl(0, "FoldColumn", { bg = "none"  })
-              vim.api.nvim_set_hl(0, "LineNr", { bg = "none"  })
+            transparentTheme = entryAfter ["theme"] ''
+              local groups = {
+                "Normal", "NormalNC", "SignColumn", "VertSplit",
+                "StatusLine", "StatusLineNC", "LineNr", "CursorLineNr",
+                "TelescopeNormal", "TelescopeBorder",
+                "FoldColumn", "Folded"
+              }
+              vim.cmd("colorscheme base16-rose-pine-moon")
+
+              for _, group in ipairs(groups) do
+                vim.api.nvim_set_hl(0, group, { bg = "none" })
+              end
+
+              vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#e06c75" })
+              vim.api.nvim_set_hl(0, "NotifyBackground", { fg = "#000000", bg = "#000000" })
             '';
             tab = ''
               vim.opt.expandtab = true
@@ -40,9 +48,6 @@
                   vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
                   vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
               end)
-
-              vim.api.nvim_set_hl(0, "DashboardHeader", { fg = "#e06c75" })
-              vim.api.nvim_set_hl(0, "NotifyBackground", { fg = "#000000", bg = "#000000" })
             '';
             optionsScript = ''
               vim.o.foldcolumn = 'auto:9'
@@ -86,7 +91,7 @@
               desc = "Toggle Avante's suggestions (FIX FOR COPILOT.LUA PLENARY DEPENDENCY)";
               callback = lib.generators.mkLuaInline ''
                     function()
-                      local h = io.popen("ping -c 1 8.8.8.8")
+                      local h = io.popen("ping -c 1 -W 1 8.8.8.8")
                       local r = h:read("*a")
                       h:close()
                       if not r:find("1 received") then
