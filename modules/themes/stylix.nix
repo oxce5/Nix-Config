@@ -26,23 +26,19 @@
           yazi.enable = true;
           zellij.enable = true;
         };
-        image = hostConfig.primaryWallpaper;
+        image = hostConfig.baseImage;
         polarity = "dark";
       };
     };
 
-    nixos = {
-      lib,
-      hostConfig,
-      ...
-    }: {
+    nixos = {hostConfig, ...}: {
       stylix = {
         enable = true;
         targets = {
           gtk.enable = true;
           plymouth.enable = false;
         };
-        image = hostConfig.primaryWallpaper;
+        image = hostConfig.baseImage;
         polarity = "dark";
       };
     };

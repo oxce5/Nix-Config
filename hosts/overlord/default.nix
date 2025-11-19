@@ -15,8 +15,13 @@
       tuigreet
       comfy
     ];
-
     primaryDisplay = config.unify.hosts.nixos.overlord.displays.eDP-1;
+    primaryUser = "oxce5";
+    primaryWallpaper = ./wallhaven_6drw56.jpg;
+    baseImage = builtins.fetchurl {
+      url = "https://w.wallhaven.cc/full/xl/wallhaven-xlpm9z.jpg";
+      sha256 = "sha256-ttSsyebKbFRWHO7IpkLxh3jODA518dK47GIaIDeC+Vg=";
+    };
     displays = {
       eDP-1 = {
         primary = true;
