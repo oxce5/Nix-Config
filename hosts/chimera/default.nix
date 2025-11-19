@@ -7,12 +7,11 @@
     modules = with config.unify.modules; [
       server
       proxy
-      samba
       nextcloud
       pihole
-      jellyfin
       anime
       downloader
+      sillytavern
       ssh
     ];
 
