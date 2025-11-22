@@ -1,5 +1,5 @@
 {
-  unify.modules.workstation.home = {
+  unify.modules.niri.home = {
     programs.niri.settings.environment = {
       EDITOR = "nvim";
     };
