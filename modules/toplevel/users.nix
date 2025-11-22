@@ -6,6 +6,7 @@
       ...
     }: {
       users.users.${hostConfig.primaryUser} = {
+        isNormalUser = true;
         shell = pkgs.fish;
         extraGroups = [
           "wheel"
@@ -17,7 +18,6 @@
     };
     modules.server.nixos = {hostConfig, ...}: {
       users.users.${hostConfig.primaryUser} = {
-        isNormalUser = true;
         linger = true;
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIkV1+Pn73xbBHobsgg2DYgaE8T0e0ngpew50x3Silsg avg.gamer@proton.me"
@@ -28,7 +28,6 @@
       users = {
         groups.${hostConfig.primaryUser} = {};
         users.${hostConfig.primaryUser} = {
-          isNormalUser = true;
           initialPassword = hostConfig.primaryUser;
           extraGroups = [
             "lp"
