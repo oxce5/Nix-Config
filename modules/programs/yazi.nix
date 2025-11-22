@@ -126,6 +126,11 @@
             ];
           };
         };
+        # theme = {
+        #   flavor = {
+        #     dark = "rose-pine-moon";
+        #   };
+        # };
       };
     };
   };
