@@ -67,6 +67,8 @@
                 }
               ];
 
+              center = [];
+
               right = [
                 {
                   id = "Tray";
@@ -149,6 +151,7 @@
 
           templates = {
             discord = true;
+            enableUserTemplates = true;
             ghostty = true;
           };
 
