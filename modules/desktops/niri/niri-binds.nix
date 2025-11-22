@@ -1,5 +1,5 @@
 {
-  unify.modules.workstation.home = {config, ...}: {
+  unify.modules.niri.home = {config, ...}: {
     programs.niri.settings.binds = with config.lib.niri.actions; {
       "Mod+Shift+Slash".action = show-hotkey-overlay;
       "Mod+T".action = spawn "ghostty";
@@ -123,7 +123,6 @@
       "Mod+Shift+F".action = fullscreen-window; # nix: Mod+Shift+F { fullscreen-window; }
       "Mod+Ctrl+F".action = expand-column-to-available-width; # nix: Mod+Ctrl+F { expand-column-to-available-width; }
       "Mod+C".action = center-column; # nix: Mod+C { center-column; }
-      "Mod+Ctrl+C".action = center-visible-columns; # nix: Mod+Ctrl+C { center-visible-columns; }
 
       "Mod+Minus".action = set-column-width "-10%"; # nix: Mod+Minus { set-column-width "-10%"; }
       "Mod+Equal".action = set-column-width "+10%"; # nix: Mod+Equal { set-column-width "+10%"; }
@@ -144,6 +143,8 @@
       "Mod+Shift+E".action = quit; # nix: Mod+Shift+E { quit; }
       "Ctrl+Alt+Delete".action = quit; # nix: Ctrl+Alt+Delete { quit; }
       "Mod+Shift+P".action = power-off-monitors; # nix: Mod+Shift+P { power-off-monitors; }
+      "Mod+Ctrl+P".action = set-dynamic-cast-window;
+      "Mod+Ctrl+C".action = clear-dynamic-cast-target;
     };
   };
 }
