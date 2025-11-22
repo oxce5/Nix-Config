@@ -1,6 +1,6 @@
 {inputs, ...}: {
   unify.modules.neovim = {
-    home = {...}: {
+    home = {pkgs, ...}: {
       programs.nvf.settings.vim = {
         autocomplete = {
           blink-cmp = {
@@ -12,8 +12,31 @@
           };
         };
         binds.whichKey.enable = true;
-        autopairs.nvim-autopairs.enable = true;
-        lazy.enable = true;
+        autopairs.nvim-autopairs = {
+          enable = true;
+          setupOpts = {
+            map_bs = false;
+          };
+        };
+        lazy.plugins = {
+          "smart-backspace" = {
+            package = pkgs.vimUtils.buildVimPlugin {
+              pname = "smart-backspace";
+              version = "master";
+              src = pkgs.fetchFromGitHub {
+                owner = "qwavies";
+                repo = "smart-backspace.nvim";
+                rev = "main";
+                hash = "sha256-koQp1b5wTTTxQgifVfC90AQImLk0E40QSfihiNd1vVQ=";
+              };
+            };
+            event = ["InsertEnter" "CmdlineEnter"];
+            setupOpts = {
+              enable = true;
+              silent = true;
+            };
+          };
+        };
         snippets = {
           luasnip.enable = true;
         };
