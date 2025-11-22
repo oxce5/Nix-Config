@@ -1,5 +1,9 @@
 {
-  unify.modules.workstation.nixos = {config, ...}: {
+  unify.modules.nvidia.nixos = {
+    config,
+    pkgs,
+    ...
+  }: {
     hardware.nvidia = {
       modesetting.enable = true;
       powerManagement.enable = false;
@@ -16,6 +20,14 @@
       package = config.boot.kernelPackages.nvidiaPackages.production;
     };
     services.xserver.videoDrivers = ["nvidia"];
+    hardware.graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        libva
+        intel-media-driver
+        nvidia-vaapi-driver
+      ];
+    };
   };
   unify.modules.comfy.nixos = {
     hardware.nvidia-container-toolkit.enable = true;

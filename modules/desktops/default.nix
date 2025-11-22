@@ -16,6 +16,10 @@
         pulse.enable = true;
         jack.enable = true;
       };
+      xdg.portal = {
+        enable = true;
+        extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+      };
       environment = {
         systemPackages = [pkgs.wl-clipboard];
         sessionVariables.NIXOS_OZONE_WL = "1";
@@ -29,12 +33,12 @@
         gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
         gtk3 = {
           bookmarks = [
-            "file:///home/oxce5/Downloads Downloads"
-            "file:///home/oxce5/Documents Documents"
-            "file:///home/oxce5/Pictures Pictures"
-            "file:///home/oxce5/Videos Videos"
-            "file:///home/oxce5/Games Games"
-            "file:///home/oxce5/Downloads/tetoes Teto"
+            "file:///home/${config.home.homeDirectory}/Downloads Downloads"
+            "file:///home/${config.home.homeDirectory}/Documents Documents"
+            "file:///home/${config.home.homeDirectory}/Pictures Pictures"
+            "file:///home/${config.home.homeDirectory}/Videos Videos"
+            "file:///home/${config.home.homeDirectory}/Games Games"
+            "file:///home/${config.home.homeDirectory}/Downloads/tetoes Teto"
           ];
         };
       };
