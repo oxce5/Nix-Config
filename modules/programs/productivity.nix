@@ -6,7 +6,7 @@
         hunspell
         hunspellDicts.en_US-large
         remmina
-        varia
+        deluge
         proton-pass
         krita
         mpv
