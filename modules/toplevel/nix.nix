@@ -19,6 +19,7 @@
             "root"
             "oxce5"
             "teto"
+            "adachi"
           ];
           experimental-features = [
             "nix-command"
