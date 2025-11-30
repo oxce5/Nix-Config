@@ -1,5 +1,5 @@
 {self, ...}: {
-  unify.modules.laptop = {
+  unify.modules.ghostty = {
     nixos.xdg.terminal-exec.settings.default = ["com.mitchellh.ghostty.desktop"];
     home = {
       programs.ghostty = {
@@ -8,7 +8,6 @@
         enableFishIntegration = true;
         enableZshIntegration = true;
         settings = {
-          theme = "noctalia";
           shell-integration = "detect";
           background-opacity = 0.8;
           shell-integration-features = "ssh-env,ssh-terminfo";
