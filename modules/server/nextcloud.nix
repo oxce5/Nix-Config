@@ -13,7 +13,7 @@
     networking.firewall.allowedTCPPorts = [12800];
     services.nginx.virtualHosts."localhost".listen = [
       {
-        addr = "127.0.0.1";
+        addr = "0.0.0.0";
         port = 12800;
       }
     ];
@@ -32,13 +32,13 @@
         dbtype = "pgsql";
       };
       settings = {
-        trusted_domains = ["localhost" "100.104.244.93" "nextcloud.chimera"];
+        trusted_domains = ["localhost" "100.104.244.93" "nextcloud.tilapia-morpho.ts.net"];
       };
       database.createLocally = true;
       configureRedis = true;
       enable = true;
       hostName = "localhost";
-      https = false;
+      https = true;
       package = pkgs.nextcloud31;
     };
   };
