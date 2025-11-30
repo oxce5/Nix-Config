@@ -13,7 +13,9 @@
         # Launchers
         heroic
         lutris
-        # inputs.elyprism-launcher.
+        #minecraft
+        inputs.elyprism-launcher.packages.${system}.default
+        packwiz
 
         # Utility
         goverlay
