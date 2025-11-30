@@ -20,6 +20,7 @@
 
         just
         distant
+        gemini-cli
       ];
     };
   };
