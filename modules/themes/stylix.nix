@@ -1,5 +1,5 @@
 {
-  unify.modules.workstation = {
+  unify.modules.stylix = {
     home = {
       lib,
       hostConfig,
