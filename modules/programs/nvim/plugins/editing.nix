@@ -11,7 +11,6 @@
             };
           };
         };
-        binds.whichKey.enable = true;
         autopairs.nvim-autopairs = {
           enable = true;
           setupOpts = {
@@ -41,7 +40,23 @@
           luasnip.enable = true;
         };
         utility = {
-          surround.enable = true;
+          surround = {
+            enable = true;
+            setupOpts = {
+              keymaps = {
+                change = "sc";
+                change_line = "sC";
+                delete = "sd";
+                insert = "<C-s>r";
+                insert_line = "<C-s>R";
+                normal = "sa";
+                normal_cur = "sA";
+                normal_cur_line = "sAA";
+                visual = "sA";
+                visual_line = "sAA";
+              };
+            };
+          };
           snacks-nvim = {
             enable = true;
           };
@@ -49,7 +64,17 @@
           yazi-nvim = {
             enable = true;
           };
-          motion.leap.enable = true;
+          motion = {
+            flash-nvim = {
+              enable = true;
+              mappings = {
+                jump = "f";
+              };
+            };
+            precognition = {
+              enable = true;
+            };
+          };
         };
       };
     };
