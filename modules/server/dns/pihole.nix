@@ -6,7 +6,7 @@
       hostConfig,
       ...
     }: {
-      networking.firewall.allowedTCPPorts = [53 6053 6060 6443];
+      networking.firewall.allowedTCPPorts = [53 6053 6060 6443 6060];
       users.users.${hostConfig.primaryUser}.extraGroups = [
         "pihole"
       ];
@@ -41,7 +41,7 @@
           dns = {
             dnssec = true;
             domainNeeded = true;
-            domain = "chimera";
+            domain = "tilapia-morpho.ts.net";
             expandHosts = true;
             interface = "";
             listeningMode = "ALL";
@@ -49,14 +49,10 @@
               "127.0.0.1#5053"
             ];
             hosts = [
-              "100.104.244.93 pi-hole.chimera"
-              "100.104.244.93 home.chimera"
-              "100.104.244.93 jellyfin.chimera"
-              "100.104.244.93 sonarr.chimera"
-              "100.104.244.93 radarr.chimera"
-              "100.104.244.93 jackett.chimera"
-              "100.104.244.93 anime.chimera"
-              "100.104.244.93 nextcloud.chimera"
+              "100.104.244.93 auth.tilapia-morpho.ts.net"
+              "100.104.244.93 pihole.tilapia-morpho.ts.net"
+              "100.104.244.93 anime.tilapia-morpho.ts.net"
+              "100.104.244.93 sillytavern.tilapia-morpho.ts.net"
             ];
             rateLimit = {
               count = 2500;
