@@ -25,6 +25,8 @@
     import-tree.url = "github:vic/import-tree";
 
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # WARN: WINBOAT IS BROKEN UPSTREAM, PIN COMMIT.
+    node24-old.url = "github:NixOS/nixpkgs/release-25.05";
 
     unify = {
       url = "git+https://codeberg.org/quasigod/unify";
@@ -97,7 +99,6 @@
 
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
-      inputs.quickshell.url = "github:quickshell-mirror/quickshell";
     };
 
     elyprism-launcher.url = "github:elyprismlauncher/elyprismlauncher";
@@ -114,6 +115,7 @@
   nixConfig = {
     extra-substituters = [
       "https://cache.nixos.org"
+      "https://oxce5.cachix.org"
       "https://chaotic-nyx.cachix.org/"
       "https://nix-community.cachix.org"
       "https://nix-gaming.cachix.org"
@@ -124,6 +126,7 @@
     extra-trusted-public-keys = [
       "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
       "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+      "oxce5.cachix.org-1:I53+um/3S34NAiZcSdOuNweWRmBaj3q9pO+94RBGsYU="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
       "prismlauncher.cachix.org-1:9/n/FGyABA2jLUVfY+DEp4hKds/rwO+SCOtbOkDzd+c="
