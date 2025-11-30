@@ -4,7 +4,8 @@
       keyboard = {
         repeat-delay = 300;
         repeat-rate = 35;
-        numlock = true;
+        numlock = false;
+        xkb.options = "compose:ralt";
       };
       touchpad = {
         accel-speed = 0.2;
