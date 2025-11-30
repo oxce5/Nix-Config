@@ -3,6 +3,8 @@
     home = {hostConfig, ...}: {
       imports = [inputs.noctalia.homeModules.default];
 
+      programs.ghostty.settings.theme = "noctalia";
+
       programs.noctalia-shell = {
         enable = true;
         settings = {
