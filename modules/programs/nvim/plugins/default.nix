@@ -152,6 +152,18 @@
               })
             '';
           };
+          keys-nvim = {
+            package = pkgs.vimUtils.buildVimPlugin {
+              pname = "screenkey-nvim";
+              version = "main";
+              src = pkgs.fetchFromGitHub {
+                owner = "NStefan002";
+                repo = "screenkey.nvim";
+                rev = "main";
+                hash = "sha256-hVpIWF9M8Ef7Ku02hti1JS4e1vHwNk3gY9+1VZ6DB20=";
+              };
+            };
+          };
         };
       };
     };
