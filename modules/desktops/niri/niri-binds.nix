@@ -122,6 +122,7 @@
       "Mod+F".action = maximize-column; # nix: Mod+F { maximize-column; }
       "Mod+Shift+F".action = fullscreen-window; # nix: Mod+Shift+F { fullscreen-window; }
       "Mod+Ctrl+F".action = expand-column-to-available-width; # nix: Mod+Ctrl+F { expand-column-to-available-width; }
+      "Mod+Ctrl+W".action = toggle-windowed-fullscreen;
       "Mod+C".action = center-column; # nix: Mod+C { center-column; }
 
       "Mod+Minus".action = set-column-width "-10%"; # nix: Mod+Minus { set-column-width "-10%"; }
