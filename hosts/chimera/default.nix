@@ -13,6 +13,8 @@
       downloader
       sillytavern
       ssh
+      sso
+      automation
     ];
 
     primaryUser = "teto";
