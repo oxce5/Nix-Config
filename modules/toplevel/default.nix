@@ -12,9 +12,11 @@
       defaultPackages = lib.mkForce [];
     };
     zramSwap.enable = true;
-    documentation.man.generateCaches = lib.mkForce false;
-    documentation.doc.enable = false;
-    documentation.info.enable = false;
+    documentation = {
+      man.generateCaches = lib.mkForce false;
+      doc.enable = false;
+      info.enable = false;
+    };
     time.timeZone = "Asia/Manila";
     i18n.defaultLocale = "en_US.UTF-8";
     i18n.supportedLocales = ["all"];
