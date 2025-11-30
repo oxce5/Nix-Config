@@ -40,6 +40,50 @@
         diagnostics = {
           enable = true;
           nvim-lint.enable = true;
+          config = {
+            update_in_insert = true;
+            signs.text = lib.generators.mkLuaInline ''
+              {
+                [vim.diagnostic.severity.ERROR] = " ",
+                [vim.diagnostic.severity.WARN] = "󰀪 ",
+                [vim.diagnostic.severity.INFO] = " ",
+              }
+            '';
+            virtual_lines = false;
+            virtual_text = false;
+          };
+        };
+        lazy.plugins = {
+          "better-diagnostics-virtual-text" = {
+            package = pkgs.vimUtils.buildVimPlugin {
+              pname = "better-diagnostics-virtual-text";
+              version = "master";
+              src = pkgs.fetchFromGitHub {
+                owner = "sontungexpt";
+                repo = "better-diagnostic-virtual-text";
+                rev = "main";
+                hash = "sha256-x6DYr+w0FIwVgrXgip8/wSrUDqkRkAs5HxXdwjY76/I=";
+              };
+            };
+            setupModule = "better-diagnostic-virtual-text";
+            event = ["LspAttach"];
+            after = ''
+              require('better-diagnostic-virtual-text').setup(opts)
+            '';
+            setupOpts = {
+              ui = {
+                wrap_line_after = false;
+                left_kept_space = 3;
+                right_kept_space = 3;
+                arrow = "  ";
+                up_arrow = "  ";
+                down_arrow = "  ";
+                above = false;
+              };
+              priority = 2003;
+              inline = false;
+            };
+          };
         };
         formatter = {
           conform-nvim.enable = true;
