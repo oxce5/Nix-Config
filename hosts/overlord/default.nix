@@ -14,13 +14,20 @@
       zellij
       tuigreet
       comfy
+      virtualisation
+      waydroid
+      nvidia
+      niri
+      cachix
+      stylix
+      ghostty
     ];
     primaryDisplay = config.unify.hosts.nixos.overlord.displays.eDP-1;
     primaryUser = "oxce5";
     primaryWallpaper = ./wallhaven_6drw56.jpg;
     baseImage = builtins.fetchurl {
-      url = "https://w.wallhaven.cc/full/xl/wallhaven-xlpm9z.jpg";
-      sha256 = "sha256-ttSsyebKbFRWHO7IpkLxh3jODA518dK47GIaIDeC+Vg=";
+      url = "https://w.wallhaven.cc/full/21/wallhaven-2119vy.jpg";
+      sha256 = "0l67mxk5hz2vx1nz7bmk5pzszmw3pafzlw5m94x8b7yp6qnc6fmk";
     };
     displays = {
       eDP-1 = {
@@ -61,6 +68,18 @@
           "8.8.8.8"
         ];
       };
+
+      nixpkgs.overlays = [
+        (final: prev: {
+          oldNodejs_24 = (inputs.node24-old.legacyPackages.${prev.system}).nodejs_24;
+        })
+      ];
+
+      environment.systemPackages = [
+        (pkgs.winboat.override {
+          nodejs_24 = pkgs.oldNodejs_24;
+        })
+      ];
 
       services = {
         fwupd.enable = true;
