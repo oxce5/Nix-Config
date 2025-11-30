@@ -1,6 +1,6 @@
 {
   unify.modules.ssh.nixos = {
-    environment.enableAllTerminfo = true;
+    environment.enableAllTerminfo = false;
     services.openssh = {
       enable = true;
       settings = {
