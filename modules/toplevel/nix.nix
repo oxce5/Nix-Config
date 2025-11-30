@@ -4,6 +4,7 @@
       # programs.command-not-found.enable = true;
       # programs.command-not-found.dbPath = "${pkgs.path}/programs.sqlite";
       nixpkgs.config.allowUnfree = true;
+      programs.nix-ld.enable = true;
       nix = {
         package = pkgs.lixPackageSets.latest.lix;
         # much is copied from https://github.com/nix-community/srvos/blob/main/nixos/common/nix.nix
