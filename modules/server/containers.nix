@@ -29,7 +29,8 @@
       };
       networking = {
         firewall.allowedTCPPorts = [9117 8989 7878];
-        firewall.allowedUDPPorts = [53 54 5053];
+        firewall.allowedUDPPorts = [53 54 5053 5353];
+        nat.enable = true;
       };
       users.users.${hostConfig.primaryUser}.extraGroups = ["podman"];
     };
