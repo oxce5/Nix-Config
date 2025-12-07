@@ -53,6 +53,8 @@
               "100.104.244.93 pihole.tilapia-morpho.ts.net"
               "100.104.244.93 anime.tilapia-morpho.ts.net"
               "100.104.244.93 sillytavern.tilapia-morpho.ts.net"
+              "100.104.244.93 nextcloud.tilapia-morpho.ts.net"
+              "100.104.244.93 uptime.tilapia-morpho.ts.net"
             ];
             rateLimit = {
               count = 2500;
