@@ -46,7 +46,11 @@
 
     users.oxce5.modules = config.unify.hosts.nixos.overlord.modules;
 
-    nixos = {pkgs, ...}: {
+    nixos = {
+      pkgs,
+      config,
+      ...
+    }: {
       facter.reportPath = ./facter.json;
       imports = with inputs; [
         nixos-hardware.nixosModules.common-cpu-amd
@@ -59,6 +63,7 @@
       ];
 
       boot.kernelPackages = pkgs.linuxPackages_zen;
+      boot.extraModulePackages = with config.boot.kernelPackages; [lenovo-legion-module];
 
       networking = {
         networkmanager.enable = true;
@@ -71,7 +76,7 @@
 
       nixpkgs.overlays = [
         (final: prev: {
-          oldNodejs_24 = (inputs.node24-old.legacyPackages.${prev.system}).nodejs_24;
+          oldNodejs_24 = inputs.node24-old.legacyPackages.${prev.system}.nodejs_24;
         })
       ];
 
