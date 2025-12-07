@@ -20,7 +20,7 @@
 
         just
         distant
-        gemini-cli
+        opencode
       ];
     };
   };
