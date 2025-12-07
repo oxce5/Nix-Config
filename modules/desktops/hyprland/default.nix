@@ -28,6 +28,7 @@
           ];
           exec-once = [
             "dunst"
+            "waybar"
             "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP GTK_THEME"
             "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP GTK_THEME"
             "systemctl --user start hyprpolkitagent"
