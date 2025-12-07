@@ -1,7 +1,8 @@
 {inputs, ...}: {
-  unify.modules.workstation.home = {
+  unify.modules.workstation.home = {pkgs, ...}: {
     imports = [inputs.zen-browser.homeModules.default];
     programs.zen-browser.enable = true;
+    home.packages = with pkgs; [brave];
 
     home.sessionVariables.BROWSER = "zen";
     xdg.desktopEntries.zen-beta = {
