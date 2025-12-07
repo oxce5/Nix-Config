@@ -2,6 +2,7 @@
   unify.modules.proxy.nixos = {config, ...}: {
     networking.firewall.allowedTCPPorts = [
       81
+      40000
     ];
     services = {
       tailscale.permitCertUid = "traefik";
@@ -45,7 +46,7 @@
                 entryPoints = ["websecure"];
                 rule = "Host(`pihole.tilapia-morpho.ts.net`)";
                 service = "pihole";
-                middlewares = ["authelia-auth" ];
+                middlewares = ["authelia-auth"];
               };
 
               n8n = {
@@ -62,6 +63,27 @@
                 middlewares = ["authelia-auth"];
               };
 
+              anime = {
+                entryPoints = ["websecure"];
+                rule = "Host(`anime.tilapia-morpho.ts.net`)";
+                service = "anime";
+                middlewares = ["authelia-auth"];
+              };
+
+              uptime = {
+                entryPoints = ["websecure"];
+                rule = "Host(`uptime.tilapia-morpho.ts.net`)";
+                service = "uptime";
+                middlewares = ["authelia-auth"];
+              };
+
+              nextcloud = {
+                entryPoints = ["websecure"];
+                rule = "Host(`nextcloud.tilapia-morpho.ts.net`)";
+                service = "nextcloud";
+                middlewares = ["authelia-auth"];
+              };
+
               auth = {
                 entryPoints = ["websecure"];
                 rule = "Host(`auth.tilapia-morpho.ts.net`)";
@@ -71,41 +93,41 @@
 
             services = {
               auth = {
-                loadBalancer.servers = [{ url = "http://127.0.0.1:9091"; }];
+                loadBalancer.servers = [{url = "http://127.0.0.1:9091";}];
               };
 
               pihole = {
                 loadBalancer = {
-                  servers = [{ url = "http://127.0.0.1:6060"; }];
+                  servers = [{url = "http://127.0.0.1:6060";}];
                 };
+              };
+
+              anime = {
+                loadBalancer.servers = [{url = "http://127.0.0.1:43211";}];
+              };
+
+              uptime = {
+                loadBalancer.servers = [{url = "http://127.0.0.1:40000";}];
+              };
+
+              nextcloud = {
+                loadBalancer.servers = [{url = "http://127.0.0.1:12800";}];
               };
 
               n8n = {
                 loadBalancer = {
-                  servers = [{ url = "http://127.0.0.1:5678"; }];
+                  servers = [{url = "http://127.0.0.1:5678";}];
                 };
               };
 
               sillytavern = {
                 loadBalancer = {
-                  servers = [{ url = "http://127.0.0.1:8000"; }];
+                  servers = [{url = "http://127.0.0.1:8000";}];
                 };
               };
             };
 
             middlewares = {
-              strip-pihole = {
-                stripPrefix = {
-                  prefixes = ["/pihole"];
-                };
-              };
-
-              strip-n8n = {
-                stripPrefix = {
-                  prefixes = ["/n8n"];
-                };
-              };
-
               authelia-auth = {
                 forwardAuth = {
                   address = "http://127.0.0.1:9091/api/verify?rd=https://auth.tilapia-morpho.ts.net";

@@ -11,14 +11,17 @@
       pihole
       anime
       downloader
-      sillytavern
       ssh
       sso
-      automation
+      sillytavern
+      monitoring
     ];
 
     primaryUser = "teto";
-    users.teto.modules = config.unify.hosts.nixos.chimera.modules;
+    users = {
+      teto.modules = config.unify.hosts.nixos.chimera.modules;
+      # sillytavern.modules = [config.unify.modules.sillytavern];
+    };
 
     nixos = {pkgs, ...}: {
       facter.reportPath = ./facter.json;
