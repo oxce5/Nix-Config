@@ -3,10 +3,9 @@
     config,
     pkgs,
     ...
-  }: 
-    let
-      authelia_user  = "main";
-    in{
+  }: let
+    authelia_user = "main";
+  in {
     sops.secrets = {
       jwt = {
         owner = "authelia-${authelia_user}";
@@ -30,12 +29,14 @@
         theme = "dark";
 
         session = {
-          cookies = [{
-            domain = "tilapia-morpho.ts.net";
-            authelia_url = "https://auth.tilapia-morpho.ts.net";
-            expiration = "1h";
-            name = "authelia_session";
-          }];
+          cookies = [
+            {
+              domain = "tilapia-morpho.ts.net";
+              authelia_url = "https://authenticate.tilapia-morpho.ts.net";
+              expiration = "1h";
+              name = "authelia_session";
+            }
+          ];
         };
 
         storage.local.path = "/var/lib/authelia-main/authelia.db";
