@@ -34,18 +34,18 @@
         };
       };
     };
-    home.nix.registry = {
-      develop = {
-        exact = true;
-        from = {
-          id = "develop";
-          type = "indirect";
-        };
-        to = {
-          type = "git";
-          url = "https://codeberg.org/quasigod/develop";
-        };
-      };
-    };
+    # home.nix.registry = {
+    #   develop = {
+    #     exact = true;
+    #     from = {
+    #       id = "develop";
+    #       type = "indirect";
+    #     };
+    #     to = {
+    #       type = "git";
+    #       url = "https://codeberg.org/quasigod/develop";
+    #     };
+    #   };
+    # };
   };
 }
