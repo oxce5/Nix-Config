@@ -10,6 +10,8 @@
 !facter.json
 !*.jar
 !*.md
-!*.glsl
+*.glsl
 !.git*
 !.git/*
+!Justfile
+modules/server/n8n.nix
