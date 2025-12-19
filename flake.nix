@@ -30,9 +30,11 @@
 
     unify = {
       url = "git+https://codeberg.org/quasigod/unify";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-      inputs.flake-parts.follows = "flake-parts";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+        flake-parts.follows = "flake-parts";
+      };
     };
 
     home-manager = {
@@ -41,12 +43,8 @@
     };
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
-
     nixos-facter-modules.url = "github:nix-community/nixos-facter-modules/7641b72e58c59ebb3c753fc36ff8ee3506ae8e05";
-    chaotic = {
-      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    };
-
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     wrapper-manager.url = "github:viperML/wrapper-manager";
 
     nix-colors = {
@@ -56,15 +54,23 @@
 
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
+    };
+
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
     };
 
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
-
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
     };
 
     sops-nix = {
@@ -76,14 +82,14 @@
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri-flake = {
-      url = "github:sodiboo/niri-flake";
-    };
 
+    niri-flake.url = "github:sodiboo/niri-flake";
     omarchy = {
       url = "github:henrysipp/omarchy-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
     };
     seanime.url = "github:rishabh5321/seanime-flake";
 
@@ -92,30 +98,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
-
-    nvf = {
-      url = "github:notashelf/nvf/v0.8";
-    };
-
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-    };
-
+    nvf.url = "github:notashelf/nvf/v0.8";
+    noctalia.url = "github:noctalia-dev/noctalia-shell";
     elyprism-launcher.url = "github:elyprismlauncher/elyprismlauncher";
-
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    zjstatus = {
-      url = "github:dj95/zjstatus";
-    };
+    playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
+    zjstatus.url = "github:dj95/zjstatus";
   };
   nixConfig = {
     extra-substituters = [
       "https://cache.nixos.org"
-      "https://oxce5.cachix.org"
+      "https://nvf.cachix.org"
       "https://chaotic-nyx.cachix.org/"
       "https://nix-community.cachix.org"
       "https://nix-gaming.cachix.org"
@@ -126,7 +118,7 @@
     extra-trusted-public-keys = [
       "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
       "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
-      "oxce5.cachix.org-1:I53+um/3S34NAiZcSdOuNweWRmBaj3q9pO+94RBGsYU="
+      "nvf.cachix.org-1:GMQWiUhZ6ux9D5CvFFMwnc2nFrUHTeGaXRlVBXo+naI="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
       "prismlauncher.cachix.org-1:9/n/FGyABA2jLUVfY+DEp4hKds/rwO+SCOtbOkDzd+c="
