@@ -15,3 +15,5 @@
 !.git/*
 !Justfile
 modules/server/n8n.nix
+modules/server/sillytavern.nix
+modules/server/monitoring.nix
