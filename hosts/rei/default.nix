@@ -10,13 +10,12 @@
       ssh
       zellij
       stylix
-      ghostty
     ];
     # primaryDisplay = config.unify.hosts.nixos.rei.displays.eDP-1;
     primaryUser = "adachi";
     primaryWallpaper = builtins.fetchurl {
-      url = "https://static.zerochan.net/Adachi.Rei.full.3685990.jpg";
-      sha256 = "sha256-grmog1BGo1x1rjNoUXQMNlWXdfi/ZxZ7cASZIZt9R4k=";
+      url = "https://img2.gelbooru.com/images/02/ec/02ecefa2b0264715119bdae475a1b5fb.jpg";
+      sha256 = "sha256-/oh8KKZtxdP71kducSQIr23dpW7XZ2P8WpMsCqLuIlE=";
     };
     baseImage = builtins.fetchurl {
       url = "https://s3.zerochan.net/Adachi.Rei.240.3683316.jpg";
@@ -27,6 +26,7 @@
 
     nixos = {
       pkgs,
+      lib,
       hostConfig,
       ...
     }: {
@@ -41,7 +41,17 @@
         chaotic.nixosModules.default
       ];
 
-      boot.kernelPackages = pkgs.linuxPackages_zen;
+      boot = {
+        kernelPackages = pkgs.linuxPackages_zen;
+        loader = {
+          timeout = lib.mkForce 0;
+          systemd-boot.configurationLimit = 1;
+        };
+      };
+      nix.settings = {
+        keep-derivations = lib.mkForce false;
+        keep-outputs = lib.mkForce false;
+      };
 
       networking = {
         networkmanager.enable = true;
@@ -49,7 +59,7 @@
         hostName = "rei";
       };
 
-      environment.systemPackages = [pkgs.uv pkgs.neovim pkgs.openvpn pkgs.brave];
+      environment.systemPackages = [pkgs.uv pkgs.neovim pkgs.openvpn pkgs.brave pkgs.kitty];
 
       environment.pathsToLink = ["/share/applications" "/share/xdg-desktop-portal"];
     };
