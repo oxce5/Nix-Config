@@ -15,6 +15,8 @@
       sso
       sillytavern
       monitoring
+      crafty
+      zellij
     ];
 
     primaryUser = "teto";
@@ -22,8 +24,11 @@
       teto.modules = config.unify.hosts.nixos.chimera.modules;
       # sillytavern.modules = [config.unify.modules.sillytavern];
     };
-
-    nixos = {pkgs, ...}: {
+    nixos = {
+      lib,
+      pkgs,
+      ...
+    }: {
       facter.reportPath = ./facter.json;
       imports = with inputs; [
         nixos-hardware.nixosModules.common-cpu-amd
@@ -49,6 +54,9 @@
 
       services = {
         fwupd.enable = true;
+      };
+      programs = {
+        dconf.enable = lib.mkForce false;
       };
     };
   };
