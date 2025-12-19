@@ -1,9 +1,26 @@
-{inputs, ...}: {
+{
   unify.modules.neovim = {
-    home = {...}: {
+    home = {
       programs.nvf.settings.vim = {
         statusline.lualine = {
           enable = true;
+          activeSection.c = [
+            ''
+              {
+                "diagnostics",
+                sources = { 'nvim_lsp', 'nvim_diagnostic', 'nvim_diagnostic', 'vim_lsp', 'coc' },
+                symbols = { error = '󰅙  ', warn = '  ', info = '  ', hint = '󰌵 ' },
+                colored = true,
+                update_in_insert = false,
+                always_visible = false,
+                diagnostics_color = {
+                  color_error = { fg = 'red' },
+                  color_warn = { fg = 'yellow' },
+                  color_info = { fg = 'cyan' },
+                },
+              }
+            ''
+          ];
           activeSection.x = [
             ''
               {
@@ -36,29 +53,8 @@
             ''
             ''
               {
-                "diagnostics",
-                sources = { 'nvim_lsp', 'nvim_diagnostic', 'nvim_diagnostic', 'vim_lsp', 'coc' },
-                symbols = { error = '󰅙  ', warn = '  ', info = '  ', hint = '󰌵 ' },
-                colored = true,
-                update_in_insert = false,
-                always_visible = false,
-                diagnostics_color = {
-                  color_error = { fg = 'red' },
-                  color_warn = { fg = 'yellow' },
-                  color_info = { fg = 'cyan' },
-                },
-              }
-            ''
-            ''
-              {
-                require("noice").api.status.command.get,
-                cond = require("noice").api.status.command.has,
-              }
-            ''
-            ''
-              {
-                require("noice").api.status.mode.get,
-                cond = require("noice").api.status.mode.has,
+                function() return require("noice").api.status.command.get() end,
+                cond = function() return require("noice").api.status.command.has() end,
               }
             ''
           ];
