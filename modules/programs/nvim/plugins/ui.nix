@@ -51,7 +51,14 @@
             ''
             ''
               {
-                '%S',
+                require("noice").api.status.command.get,
+                cond = require("noice").api.status.command.has,
+              }
+            ''
+            ''
+              {
+                require("noice").api.status.mode.get,
+                cond = require("noice").api.status.mode.has,
               }
             ''
           ];
