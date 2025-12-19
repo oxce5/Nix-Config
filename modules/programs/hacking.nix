@@ -24,10 +24,12 @@
       home.packages = with pkgs; [
         gemini-cli
         exegol
+
         # general
         wordlists
         (writeScriptBin "wlfuzz" ''
-          ${lib.getExe television} files ${wordlists}/share/wordlists -s "fd . -t l" -p "${lib.getExe bat} {}" | tee /dev/tty | ${lib.getExe' wl-clipboard "wl-copy"}
+          ${lib.getExe television} files ${wordlists}/share/wordlists -s "fd . -t l" \
+            -p "${lib.getExe bat} {}" | tee /dev/tty | ${lib.getExe' wl-clipboard "wl-copy"}
         '')
 
         # Information Gathering
@@ -39,6 +41,7 @@
         feroxbuster
         sherlock
         amass
+
         # ProjectDiscovery tools
         subfinder
         dnsx
@@ -58,7 +61,6 @@
 
         # Vulnerability Analysis
         sqlmap
-        bruno
 
         # Exploitation Tools
         exploitdb
@@ -70,7 +72,7 @@
         aircrack-ng
 
         # Forensics Tools
-        autopsy
+        # autopsy
         volatility3
         binwalk
         exiftool
@@ -80,7 +82,7 @@
         stress-ng
 
         # Sniffing & Spoofing
-        wireshark
+        # wireshark
         bettercap
         python3Packages.scapy
         mitmproxy
@@ -96,35 +98,38 @@
         # Web Application Analysis
         whatweb
         burpsuite
-        zap
+        # zap
         ffuf
         xh
         wpscan
         dalfox
 
         # Reverse Engineering
-        ghidra
-        cutter
-        imhex
+        # ghidra
+        # cutter
+        # imhex
 
         # Social Engineering Tools
-        social-engineer-toolkit
+        # social-engineer-toolkit
 
         # Miscellaneous
-        tor-browser
-        (writeScriptBin "cyberchef" ''
-          ${lib.getExe' xdg-utils "xdg-open"} ${cyberchef}/share/cyberchef/index.html
-        '')
+        # tor-browser
+        # (writeScriptBin "cyberchef" ''   # browser-based GUI
+        #   ${lib.getExe' xdg-utils "xdg-open"} \
+        #     ${cyberchef}/share/cyberchef/index.html
+        # '')
 
         (inputs.wrapper-manager.lib.wrapWith pkgs {
           basePackage = pkgs.rustscan;
           prependFlags = ["-c ${config.xdg.configHome}/rustscan.toml"];
         })
+
         (inputs.wrapper-manager.lib.wrapWith pkgs {
           basePackage = pkgs.metasploit;
           programs.msfconsole.prependFlags = ["--defer-module-loads"];
         })
-        caido
+
+        # caido
       ];
     };
   };
