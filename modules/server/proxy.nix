@@ -81,7 +81,6 @@
                 entryPoints = ["websecure"];
                 rule = "Host(`nextcloud.tilapia-morpho.ts.net`)";
                 service = "nextcloud";
-                middlewares = ["authelia-auth"];
               };
 
               auth = {
