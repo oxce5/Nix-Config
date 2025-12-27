@@ -1,6 +1,4 @@
-{inputs, ...}:
-
-{
+{inputs, ...}: {
   unify.modules.dms.home = {pkgs, ...}: {
     imports = [
       inputs.dms.homeModules.dankMaterialShell.default
@@ -14,8 +12,8 @@
         enable = true;
         restartIfChanged = true;
       };
-      
-      enableSystemMonitoring = true;     
+
+      enableSystemMonitoring = true;
       enableClipboard = true;
       enableVPN = true;
       enableDynamicTheming = true;
@@ -23,7 +21,7 @@
       enableCalendarEvents = true;
     };
   };
- 
+
   nixos = {
     systemd.user.services.niri-flake-polkit.enable = false;
   };
