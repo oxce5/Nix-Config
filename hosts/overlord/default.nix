@@ -10,7 +10,7 @@
       development
       neovim
       plymouth
-      bar
+      dms
       gaming
       zellij
       tuigreet
@@ -120,6 +120,9 @@
         enable = true;
         memoryPercent = 75;
       };
+    };
+    home = {pkgs, ...}: {
+      home.packages = [pkgs.exegol];
     };
   };
 }
