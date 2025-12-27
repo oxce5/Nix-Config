@@ -89,13 +89,6 @@
     };
 
     niri-flake.url = "github:sodiboo/niri-flake";
-    omarchy = {
-      url = "github:henrysipp/omarchy-nix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
-    };
     seanime.url = "github:rishabh5321/seanime-flake";
 
     nix-index-database = {
