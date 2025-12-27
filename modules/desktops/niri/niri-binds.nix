@@ -3,15 +3,21 @@
     programs.niri.settings.binds = with config.lib.niri.actions; {
       "Mod+Shift+Slash".action = show-hotkey-overlay;
       "Mod+T".action = spawn "ghostty";
-      "Mod+Space".action = spawn "noctalia-shell" "ipc" "call" "launcher" "toggle";
-      "Mod+L".action = spawn "noctalia-shell" "ipc" "call" "lockScreen" "toggle";
+      # TODO: Make this modular
+      "Mod+Space".action = spawn "dms" "ipc" "call" "spotlight" "toggle";
+      "Mod+L".action = spawn "dms" "ipc" "call" "lock" "lock";
 
-      "XF86AudioRaiseVolume".action = spawn "noctalia-shell" "ipc" "call" "volume" "increase";
-      "XF86AudioLowerVolume".action = spawn "noctalia-shell" "ipc" "call" "volume" "decrease";
-      "XF86AudioMute".action = spawn "noctalia-shell" "ipc" "call" "volume" "muteOutput";
-      "XF86AudioMicMute".action = spawn "noctalia-shell" "ipc" "call" "volume" "muteInput";
-      "XF86MonBrightnessUp".action = spawn "noctalia-shell" "ipc" "call" "brightness" "increase";
-      "XF86MonBrightnessDown".action = spawn "noctalia-shell" "ipc" "call" "brightness" "decrease";
+      "XF86AudioRaiseVolume".action = spawn "dms" "ipc" "call" "audio" "increment" "5";
+      "XF86AudioLowerVolume".action = spawn "dms" "ipc" "call" "audio" "decrement" "5";
+      "XF86AudioMute".action = spawn "dms" "ipc" "call" "audio" "mute";
+      "XF86AudioMicMute".action = spawn "dms" "ipc" "call" "audio" "micmute";
+      "XF86MonBrightnessUp".action = spawn "dms" "ipc" "call" "brightness" "increment" "5" "";
+      "XF86MonBrightnessDown".action = spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
+
+      
+      "Mod+P".action = spawn "dms" "ipc" "call" "screenshot"; # nix: Mod+P { screenshot; }
+      "Mod+Alt+P".action = spawn "dms" "ipc" "call" "screenshotScreen"; # nix: Mod+Alt+P { screenshot-screen; }
+
       "Mod+O".action = toggle-overview; # nix: Mod+O repeat=false { toggle-overview; }
       "Mod+Q".action = close-window; # nix: Mod+Q repeat=false { close-window; }
 
@@ -133,10 +139,6 @@
       "Mod+V".action = toggle-window-floating; # nix: Mod+V       { toggle-window-floating; }
       "Mod+Shift+V".action = switch-focus-between-floating-and-tiling; # nix: Mod+Shift+V { switch-focus-between-floating-and-tiling; }
       "Mod+W".action = toggle-column-tabbed-display; # nix: Mod+W { toggle-column-tabbed-display; }
-
-      "Mod+P".action = spawn "niri" "msg" "action" "screenshot"; # nix: Mod+P { screenshot; }
-      "Mod+Alt+P".action = spawn "niri" "msg" "action" "screenshot-screen"; # nix: Mod+Alt+P { screenshot-screen; }
-
       "Mod+Escape" = {
         action = toggle-keyboard-shortcuts-inhibit; # nix: Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
         allow-inhibiting = false;
