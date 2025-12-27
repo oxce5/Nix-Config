@@ -1,5 +1,5 @@
 {inputs, ...}: {
-  unify.modules.bar = {
+  unify.modules.noctalia = {
     home = {hostConfig, ...}: {
       imports = [inputs.noctalia.homeModules.default];
 

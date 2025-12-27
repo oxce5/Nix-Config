@@ -83,6 +83,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     niri-flake.url = "github:sodiboo/niri-flake";
     omarchy = {
       url = "github:henrysipp/omarchy-nix";
