@@ -4,19 +4,20 @@
       imports = [inputs.playit-nixos-module.nixosModules.default];
       networking.firewall.allowedTCPPorts = [8443 8123];
       networking.firewall.allowedUDPPorts = [19132];
+
       sops.secrets.playit = {
-        owner = "playit";
+        owner = "root";
+        group = "root";
+        mode = "0400";
+        path = "/var/lib/playit/playit.toml";
       };
       sops.templates."playit.toml" = {
-        owner = "playit";
         content = ''
           secret_key = "${config.sops.placeholder.playit}"
         '';
       };
       services.playit = {
         enable = true;
-        user = "playit";
-        group = "playit";
         secretPath = config.sops.templates."playit.toml".path;
       };
     };
@@ -28,7 +29,7 @@
             image = "registry.gitlab.com/crafty-controller/crafty-4:latest";
 
             environment = {
-              TZ = "Etc/UTC";
+              TZ = "Asia/Manila";
             };
 
             ports = [
