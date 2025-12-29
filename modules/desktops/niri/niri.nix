@@ -66,6 +66,7 @@
             }
           ];
         };
+        cliphist.enable = true;
       };
 
       programs.niri = {
