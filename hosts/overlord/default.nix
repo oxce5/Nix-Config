@@ -13,7 +13,6 @@
       dms
       gaming
       zellij
-      tuigreet
       comfy
       virtualisation
       waydroid

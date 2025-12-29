@@ -14,9 +14,8 @@
       "XF86MonBrightnessUp".action = spawn "dms" "ipc" "call" "brightness" "increment" "5" "";
       "XF86MonBrightnessDown".action = spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
 
-      
-      "Mod+P".action = spawn "dms" "ipc" "call" "screenshot"; # nix: Mod+P { screenshot; }
-      "Mod+Alt+P".action = spawn "dms" "ipc" "call" "screenshotScreen"; # nix: Mod+Alt+P { screenshot-screen; }
+      "Mod+P".action = spawn "dms" "ipc" "call" "niri" "screenshot"; # nix: Mod+P { screenshot; }
+      "Mod+Alt+P".action = spawn "dms" "ipc" "call" "niri" "screenshotScreen"; # nix: Mod+Alt+P { screenshot-screen; }
 
       "Mod+O".action = toggle-overview; # nix: Mod+O repeat=false { toggle-overview; }
       "Mod+Q".action = close-window; # nix: Mod+Q repeat=false { close-window; }
