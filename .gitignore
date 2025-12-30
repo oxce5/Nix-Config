@@ -14,6 +14,8 @@
 !.git*
 !.git/*
 !Justfile
+!neovim.kdl
+!terminal.kdl
 modules/server/n8n.nix
 modules/server/sillytavern.nix
 modules/server/monitoring.nix
