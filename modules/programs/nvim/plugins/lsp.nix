@@ -13,8 +13,11 @@
       # inherit (inputs.nvf.lib.nvim.dag) entryAfter;
     in {
       programs.nvf.settings.vim = {
-        lsp.enable = true;
-        lsp.trouble.enable = true;
+        lsp = {
+          enable = true;
+          trouble.enable = true;
+        };
+
         languages = {
           enableTreesitter = true;
           enableExtraDiagnostics = true;
