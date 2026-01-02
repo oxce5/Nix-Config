@@ -1,40 +1,72 @@
 layout {
+    pane size=1 borderless=true {
+      plugin location="zjstatus" {
+        format_left   "{mode} #[fg=#8aadf4,bold]{session} {tabs}"
+        format_center "{datetime}"
+        format_right  "{command_git_branch}"
+        format_space  ""
 
-  pane_template name="neovim" {
-    command "nvim"
-  }
+        border_enabled  "false"
+        border_char     ""
+        border_format   "#[fg=#6C7086,bold]{char}"
+        border_position "bottom"
 
-  pane_template name="statusline" {
-    plugin location="zjstatus" {
+        // hide_frame_for_single_pane "true"
 
-      hide_frame_for_single_pane "true"
+        mode_locked        "#[bg=#a5adcb,fg=#24273a,bold] LOCKED  #[bg=#24273a,fg=#a5adcb]"
+        mode_normal        "#[bg=#8aadf4,fg=#24273a,bold] NORMAL  #[bg=#24273a,fg=#8aadf4]"
+        mode_resize        "#[bg=#f5a97f,fg=#24273a,bold] RESIZE 󰊔 #[bg=#24273a,fg=#f5a97f]"
+        mode_pane          "#[bg=#f5a97f,fg=#24273a,bold] PANE  #[bg=#24273a,fg=#f5a97f]"
+        mode_tab           "#[bg=#f5a97f,fg=#24273a,bold] TAB 󰓩 #[bg=#24273a,fg=#f5a97f]"
+        mode_scroll        "#[bg=#f5a97f,fg=#24273a,bold] SCROLL 󱕒 #[bg=#24273a,fg=#f5a97f]"
+        mode_enter_search  "#[bg=#f5a97f,fg=#24273a,bold,blink] ENTERSEARCH  #[bg=#24273a,fg=#f5a97f]"
+        mode_search        "#[bg=#f5a97f,fg=#24273a,bold,blink] SEARCH  #[bg=#24273a,fg=#f5a97f]"
+        mode_rename_tab    "#[bg=#f5a97f,fg=#24273a,bold,blink] RENAME  #[bg=#24273a,fg=#f5a97f]"
+        mode_rename_pane   "#[bg=#f5a97f,fg=#24273a,bold,blink] RENAME  #[bg=#24273a,fg=#f5a97f]"
+        mode_session       "#[bg=#f5a97f,fg=#24273a,bold] SESSION  #[bg=#24273a,fg=#f5a97f]"
+        mode_move          "#[bg=#f5a97f,fg=#24273a,bold] MOVE  #[bg=#24273a,fg=#f5a97f]"
+        mode_prompt        "#[bg=#f5a97f,fg=#24273a,bold] PROMPT 󰞷 #[bg=#24273a,fg=#f5a97f]"
+        mode_tmux          "#[bg=#f5a97f,fg=#24273a,bold] TMUX 󰆍 #[bg=#24273a,fg=#f5a97f]"
 
-      format_left  "{mode}#[fg=blue,bg=#383E5A,bold]  {session} #[fg=#383E5A,bg=bg] #[fg=white,bg=fg]󰓩  {tabs}"
-      format_right "#[fg=blue,bg=bg]{datetime}"
-      format_space "#[bg=fg]"
+        mode_default_to_mode "locked"
 
-      datetime          "#[fg=#1A1B26,bg=blue]{format}"
-      datetime_format   "  %H:%M "
-      datetime_timezone "America/Detroit"
+        // formatting for inactive tabs
+        tab_normal              "#[bg=#24273a,fg=#b7bdf8,bold]#[bg=#b7bdf8,fg=#24273a,bold] {name} {floating_indicator}#[bg=#24273a,fg=#b7bdf8,bold]"
+        tab_normal_fullscreen   "#[bg=#24273a,fg=#b7bdf8,bold]#[bg=#b7bdf8,fg=#24273a,bold] {name} {fullscreen_indicator}#[bg=#24273a,fg=#b7bdf8,bold]"
+        tab_normal_sync         "#[bg=#24273a,fg=#b7bdf8,bold]#[bg=#b7bdf8,fg=#24273a,bold] {name} {sync_indicator}#[bg=#24273a,fg=#b7bdf8,bold]"
 
-      mode_normal   "#[fg=#1A1B26,bg=blue,bold] NORMAL #[fg=blue,bg=#383E5A]"
-      mode_pane     "#[fg=#1A1B26,bg=magenta,bold] PANE #[fg=magenta,bg=#383E5A]"
-      mode_session  "#[fg=#1A1B26,bg=yellow,bold] SESSION #[fg=yellow,bg=#383E5A]"
-      mode_tab      "#[fg=#1A1B26,bg=green,bold] TAB #[fg=green,bg=#383E5A]"
+        // formatting for the current active ,tab
+        tab_active              "#[bg=#24273a,fg=#c6a0f6,bold]#[bg=#c6a0f6,fg=#24273a,bold] {name} {floating_indicator}#[bg=#24273a,fg=#c6a0f6,bold]"
+        tab_active_fullscreen   "#[bg=#24273a,fg=#c6a0f6,bold]#[bg=#c6a0f6,fg=#24273a,bold] {name} {fullscreen_indicator}#[bg=#24273a,fg=#c6a0f6,bold]"
+        tab_active_sync         "#[bg=#24273a,fg=#c6a0f6,bold]#[bg=#c6a0f6,fg=#24273a,bold] {name} {sync_indicator}#[bg=#24273a,fg=#c6a0f6,bold]"
 
-      tab_normal  "#[fg=#A9B1D6,bg=fg] [{index}] {name}"
-      tab_active  "#[fg=green,bg=fg,bold,italic] [{index}] {name}"
+        // separator between the tabs
+        tab_separator           "#[bg=#24273a] "
 
+        // format when renaming a tab
+        tab_rename              "#[bg=#24273a,fg=#f5a97f,bold]#[bg=#f5a97f,fg=#24273a, bold,blink] #{index} {name} {floating_indicator} #[bg=#24273a,fg=#f5a97f,bold]"
+
+        // indicators
+        tab_sync_indicator       "󱘖>"
+        tab_fullscreen_indicator "󰊓"
+        tab_floating_indicator   " "
+
+        // limit tab display count
+        tab_display_count         "5"  // limit to showing 3 tabs
+        tab_truncate_start_format "#[fg=#ee99a0,bg=#24273a]   {count} ..."
+        tab_truncate_end_format   "#[fg=#ee99a0,bg=#24273a] ...  {count} "
+
+        command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
+        command_git_branch_format      "#[bg=#24273a,fg=#8aadf4,bold]#[bg=#8aadf4,fg=#24273a,bold]  {stdout} "
+        command_git_branch_interval    "10"
+        command_git_branch_rendermode  "static"
+
+        datetime        "#[fg=#939ab7,bold] {format} "
+        datetime_format "  %Y/%m/%d ::: %I:%M:%S %p  "
+        datetime_timezone "America/Lima"
+      }
     }
-
-  }
-
-  default_tab_template { children; statusline size=1; }
-  tab_template name="editor" { children; }
-
-  editor name="editor" focus=true { neovim; }
-  tab name="terminal" { pane; }
-
+  pane
 }
 
 keybinds  {
