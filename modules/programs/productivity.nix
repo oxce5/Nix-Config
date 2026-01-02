@@ -16,7 +16,7 @@
         gearlever
         vesktop
         blender
-        youtube-music
+        pear-desktop
       ];
     };
   };
