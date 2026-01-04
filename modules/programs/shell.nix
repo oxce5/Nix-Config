@@ -11,7 +11,7 @@
 
     nerd-fonts-prompt = builtins.fromTOML (builtins.readFile (pkgs.fetchurl {
       url = "https://starship.rs/presets/toml/nerd-font-symbols.toml";
-      sha256 = "sha256-KssAxwGVYGGBMcH6Lwq1sllYwqrD95TfpcjydMtCceM=";
+      sha256 = "sha256-zxXDmI6V6wwKeoifF1+qC9sOtIQKHaF2ZyX7RvP0Fzg=";
     }));
 
     enableIntegrations = shells:
