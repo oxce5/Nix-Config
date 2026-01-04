@@ -110,7 +110,7 @@
         swapspace = {
           enable = true;
           settings = {
-            max_swapsize = "20g";
+            max_swapsize = "5g";
             min_swapsize = "1g";
           };
         };

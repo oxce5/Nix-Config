@@ -76,7 +76,7 @@
 
         utility.oil-nvim = {
           enable = true;
-          gitSatus.enable = true;
+          gitStatus.enable = true;
         };
 
         visuals = {
