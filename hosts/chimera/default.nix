@@ -15,6 +15,7 @@
       sso
       sillytavern
       monitoring
+      termix
       crafty
       zellij
     ];

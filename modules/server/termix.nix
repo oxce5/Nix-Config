@@ -1,15 +1,15 @@
 {
   unify.modules.termix = {
-     home = {
+    home = {
       services.podman = {
         containers = {
-          crafty_container = {
+          termix = {
             image = "ghcr.io/lukegus/termix:latest";
             environment = {
-              PORT = 8000;
+              PORT = 9000;
             };
             ports = [
-              "8000:8000"
+              "9000:9000"
             ];
             volumes = [
               "/home/teto/termix-data:/app/data"

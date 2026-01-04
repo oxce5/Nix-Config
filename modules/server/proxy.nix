@@ -77,6 +77,12 @@
                 middlewares = ["authelia-auth"];
               };
 
+              ssh = {
+                entryPoints = ["websecure"];
+                rule = "Host(`ssh.tilapia-morpho.ts.net`)";
+                service = "ssh";
+              };
+
               nextcloud = {
                 entryPoints = ["websecure"];
                 rule = "Host(`nextcloud.tilapia-morpho.ts.net`)";
@@ -107,6 +113,10 @@
 
               uptime = {
                 loadBalancer.servers = [{url = "http://127.0.0.1:40000";}];
+              };
+
+              ssh = {
+                loadBalancer.servers = [{url = "http://127.0.0.1:9000";}];
               };
 
               nextcloud = {
