@@ -36,7 +36,6 @@
             showcmd = true;
             expandtab = true;
             smartindent = true;
-            clipboard = "unnamedplus";
           };
           highlight = let
             bgNone = names: lib.genAttrs names (_: {bg = "none";});
