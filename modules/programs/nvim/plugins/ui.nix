@@ -60,7 +60,6 @@
           ];
         };
         telescope.enable = true;
-        tabline.nvimBufferline.enable = true;
         notify.nvim-notify.enable = true;
         ui = {
           noice = {
@@ -73,6 +72,11 @@
         };
         terminal.toggleterm = {
           lazygit.enable = true;
+        };
+
+        utility.oil-nvim = {
+          enable = true;
+          gitSatus.enable = true;
         };
 
         visuals = {
