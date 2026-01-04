@@ -11,12 +11,6 @@
             };
           };
         };
-        autopairs.nvim-autopairs = {
-          enable = true;
-          setupOpts = {
-            map_bs = false;
-          };
-        };
         lazy.plugins = {
           "smart-backspace" = {
             package = pkgs.vimUtils.buildVimPlugin {

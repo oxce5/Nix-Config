@@ -122,66 +122,6 @@
               end)
 
             '';
-            autopairs = entryAfter ["autopairs"] ''
-              local npairs = require'nvim-autopairs'
-              local Rule = require("nvim-autopairs.rule")
-              local ts_conds = require('nvim-autopairs.ts-conds')
-              local log = require('nvim-autopairs._log')
-              local utils = require('nvim-autopairs.utils')
-
-              -- Treesitter-aware check to skip comments
-              local is_not_ts_node_comment_one_back = function()
-                  return function(info)
-                      log.debug('not_in_ts_node_comment_one_back')
-
-                      local p = vim.api.nvim_win_get_cursor(0)
-                      -- adjust for 1-based indexing
-                      local pos_adjusted = {p[1] - 1, p[2] - 1}
-
-                      vim.treesitter.get_parser():parse()
-                      local target = vim.treesitter.get_node({ pos = pos_adjusted, ignore_injections = false })
-                      log.debug(target and target:type() or "nil")
-                      if target ~= nil and utils.is_in_table({'comment'}, target:type()) then
-                          return false
-                      end
-
-                      local rest_of_line = info.line:sub(info.col)
-                      return rest_of_line:match('^%s*$') ~= nil
-                  end
-              end
-
-              -- Optional: more restrictive Java expression end check
-              local function java_expr_end(opts)
-                  if opts.line:sub(opts.col):match("^%s*$") == nil then
-                      return false
-                  end
-
-                  -- Skip common block keywords to avoid semicolon after blocks
-                  return not opts.line:match("^%s*}")
-                      or not opts.line:match("class%s")
-                      or not opts.line:match("if%s*%(")
-                      or not opts.line:match("for%s*%(")
-                      or not opts.line:match("while%s*%(")
-              end
-
-              -- Nix-specific rule
-              npairs.add_rule(
-                  Rule("= ", ";", "nix")
-                      :with_pair(is_not_ts_node_comment_one_back())
-                      :set_end_pair_length(1)
-              )
-
-              -- Java rules: append semicolon after opening bracket so autopairs always adds it
-              for _, c in ipairs({"(", "{"}) do
-                  npairs.add_rule(
-                      Rule(c, ({
-                          ["("] = ");",
-                      })[c], "java")
-                          :with_pair(is_not_ts_node_comment_one_back())
-                          :set_end_pair_length(1)
-                  )
-              end
-            '';
             optionsScript = ''
               vim.o.foldcolumn = 'auto:9'
               vim.o.foldlevel = 99
