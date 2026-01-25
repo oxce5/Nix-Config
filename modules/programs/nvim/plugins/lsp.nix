@@ -10,17 +10,31 @@
       # java-debug = pkgs.callPackage ./java-debug.nix {};
       java-debug = builtins.toString ./java.debug.jar;
       vimPlug = pkgs.vimPlugins;
-      # inherit (inputs.nvf.lib.nvim.dag) entryAfter;
+      inherit (inputs.nvf.lib.nvim.dag) entryAfter;
     in {
       programs.nvf.settings.vim = {
+        extraPackages = [];
+
+        treesitter = {
+          enable = true;
+          context.enable = true;
+          autotagHtml = true;
+          fold = true;
+          textobjects.enable = true;
+        };
+
         lsp = {
           enable = true;
           trouble.enable = true;
+          lspkind.enable = true;
+          inlayHints.enable = true;
+          lightbulb.enable = true;
         };
 
         languages = {
           enableTreesitter = true;
           enableExtraDiagnostics = true;
+          enableFormat = true;
 
           nix.enable = true;
           python.enable = true;

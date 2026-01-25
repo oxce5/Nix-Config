@@ -18,8 +18,8 @@
           fzf.enable = true;
           lazygit.enable = true;
           nvf = {
-            enable = true;
-            transparentBackground = true;
+            enable = false;
+            transparentBackground = false;
           };
           qt.enable = true;
           wofi.enable = true;

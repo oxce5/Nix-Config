@@ -4,6 +4,7 @@
       vimPlug = pkgs.vimPlugins;
     in {
       programs.nvf.settings.vim = {
+        presence.neocord.enable = true;
         extraPlugins = {
           no-neck-pain.package = vimPlug.no-neck-pain-nvim;
           firenvim = {

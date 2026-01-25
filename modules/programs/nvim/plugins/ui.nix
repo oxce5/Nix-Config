@@ -119,6 +119,10 @@
           rainbow-delimiters.enable = true;
         };
 
+        notes = {
+          todo-comments.enable = true;
+        };
+
         dashboard.dashboard-nvim = {
           enable = true;
           setupOpts = {

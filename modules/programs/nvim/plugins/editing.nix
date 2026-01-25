@@ -2,6 +2,10 @@
   unify.modules.neovim = {
     home = {pkgs, ...}: {
       programs.nvf.settings.vim = {
+        autopairs.nvim-autopairs = {
+          enable = true;
+          setupOpts = {};
+        };
         autocomplete = {
           blink-cmp = {
             enable = true;
