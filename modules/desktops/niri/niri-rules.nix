@@ -3,7 +3,7 @@
     programs.niri.settings = {
       layer-rules = [
         {
-          matches = [{namespace = "^noctalia-overview*";}];
+          matches = [{namespace = "^dms:blurwallpaper*";}];
           place-within-backdrop = true;
         }
       ];
@@ -50,12 +50,6 @@
         }
         {
           clip-to-geometry = true;
-          geometry-corner-radius = {
-            bottom-left = 20.0;
-            bottom-right = 20.0;
-            top-left = 20.0;
-            top-right = 20.0;
-          };
         }
       ];
     };
