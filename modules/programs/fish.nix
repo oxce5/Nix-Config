@@ -65,7 +65,7 @@
         '';
         functions = {
           # This fixes the mktemp: Invalid Arg error
-          yy = lib.mkForce {
+          y = lib.mkForce {
             body = ''
               set -l tmp (mktemp -t "yazi-cwd.XXXXXX")
                 command yazi $argv --cwd-file="$tmp"
