@@ -14,8 +14,9 @@
         zoom-us
         obsidian
         gearlever
+        varia
         vesktop
-        blender
+        blender_4_1
         pear-desktop
       ];
     };
