@@ -25,7 +25,6 @@
     import-tree.url = "github:vic/import-tree";
 
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    # WARN: WINBOAT IS BROKEN UPSTREAM, PIN COMMIT.
     node24-old.url = "github:NixOS/nixpkgs/release-25.05";
 
     unify = {
@@ -95,12 +94,14 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    blender-bin.url = "github:edolstra/nix-warez?dir=blender";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
-    nvf.url = "github:notashelf/nvf/v0.8";
+    nvf.url = "github:notashelf/nvf";
     noctalia.url = "github:noctalia-dev/noctalia-shell";
     elyprism-launcher.url = "github:elyprismlauncher/elyprismlauncher";
     playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
     zjstatus.url = "github:dj95/zjstatus";
+    zellij-dev.url = "github:a-kenji/zellij-nix";
   };
   nixConfig = {
     extra-substituters = [
@@ -122,6 +123,7 @@
       "prismlauncher.cachix.org-1:9/n/FGyABA2jLUVfY+DEp4hKds/rwO+SCOtbOkDzd+c="
       "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+      "adithyagenie.cachix.org-1:h6BSMboeVfxyrULWuRQqAyweo4AJRATekb88xotfQwc="
     ];
   };
 }
