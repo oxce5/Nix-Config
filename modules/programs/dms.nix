@@ -2,8 +2,8 @@
   unify.modules.dms = {
     home = {pkgs, ...}: {
       imports = [
-        inputs.dms.homeModules.dankMaterialShell.default
-        inputs.dms.homeModules.dankMaterialShell.niri
+        inputs.dms.homeModules.dank-material-shell
+        inputs.dms.homeModules.niri
       ];
 
       programs.dankMaterialShell = {
@@ -15,7 +15,6 @@
         };
 
         enableSystemMonitoring = true;
-        enableClipboard = true;
         enableVPN = true;
         enableDynamicTheming = true;
         enableAudioWavelength = true;
@@ -28,9 +27,8 @@
 
       services.displayManager.dms-greeter = {
         enable = true;
-        compositor.name = "niri"; # Or "hyprland" or "sway"
+        compositor.name = "niri";
 
-        # Sync your user's DankMaterialShell theme with the greeter. You'll probably want this
         configHome = "/home/oxce5";
 
         # Save the logs to a file
