@@ -43,7 +43,6 @@
           remotePlay.openFirewall = true;
           localNetworkGameTransfers.openFirewall = true;
           extraCompatPackages = with pkgs; [
-            proton-cachyos
             steamtinkerlaunch
           ];
         };
