@@ -79,13 +79,14 @@
 
       nixpkgs.overlays = [
         (final: prev: {
-          oldNodejs_24 = inputs.node24-old.legacyPackages.${prev.system}.nodejs_24;
+          oldnodejs_24 = inputs.node24-old.legacyPackages.${prev.system}.nodejs_24;
         })
+        inputs.blender-bin.overlays.default
       ];
 
       environment.systemPackages = [
         (pkgs.winboat.override {
-          nodejs_24 = pkgs.oldNodejs_24;
+          nodejs_24 = pkgs.oldnodejs_24;
         })
       ];
 
@@ -96,12 +97,23 @@
           enable = true;
           keyboards = {
             default = {
+              ids = ["*"];
+              settings = {
+                main = {
+                  esc = "esc";
+                  capslock = "timeout(esc, 150, capslock)";
+                  kpasterisk = "'";
+                  kpplus = "g";
+                  kpminus = "h";
+                };
+              };
+            };
+            external = {
               ids = ["048d:c996:20fedd66"];
               settings = {
                 main = {
-                  capslock = "timeout(esc, 150, capslock)";
                   esc = "esc";
-                  kpasterisk = "\"";
+                  capslock = "timeout(esc, 150, capslock)";
                 };
               };
             };
@@ -114,6 +126,10 @@
             min_swapsize = "1g";
           };
         };
+        # sunshine = {
+        #   enable = true;
+        #   capSysAdmin = true;
+        # };
       };
       zramSwap = {
         enable = true;
@@ -121,7 +137,15 @@
       };
     };
     home = {pkgs, ...}: {
-      home.packages = [pkgs.exegol];
+      services = {
+        wayvnc = {
+          enable = true;
+          settings = {
+            address = "0.0.0.0";
+            port = 5901;
+          };
+        };
+      };
     };
   };
 }
