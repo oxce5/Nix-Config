@@ -6,7 +6,7 @@
   }: {
     appstream.enable = true;
     services.flatpak = {
-      enable = true;
+      enable = false;
       packages = [
         "com.github.tchx84.Flatseal"
         "com.usebottles.bottles"
