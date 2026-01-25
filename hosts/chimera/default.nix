@@ -8,6 +8,7 @@
       server
       proxy
       nextcloud
+      sync
       pihole
       anime
       downloader
@@ -16,6 +17,7 @@
       sillytavern
       monitoring
       termix
+      portainer
       crafty
       zellij
     ];
