@@ -8,7 +8,6 @@
   unify.modules.hacking = {
     nixos = {hostConfig, ...}: {
       environment.etc.hosts.mode = "0644";
-      # until exegol supports podman
       virtualisation.docker.enable = true;
       programs.wireshark.enable = true;
       users.users.${hostConfig.primaryUser}.extraGroups = [
@@ -23,8 +22,6 @@
     }: {
       home.packages = with pkgs; [
         gemini-cli
-        exegol
-
         # general
         wordlists
         (writeScriptBin "wlfuzz" ''
