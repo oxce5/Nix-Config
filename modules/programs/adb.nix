@@ -1,6 +1,10 @@
 {
-  unify.modules.workstation.nixos = {hostConfig, ...}: {
+  unify.modules.workstation.nixos = {
+    hostConfig,
+    pkgs,
+    ...
+  }: {
     users.users.${hostConfig.primaryUser}.extraGroups = ["adbusers"];
-    programs.adb.enable = true;
+    environment.systemPackages = with pkgs; [android-tools];
   };
 }
