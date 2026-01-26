@@ -60,7 +60,6 @@
         nixos-hardware.nixosModules.common-gpu-amd
         nixos-hardware.nixosModules.common-pc-ssd
 
-        nix-flatpak.nixosModules.nix-flatpak
         stylix.nixosModules.stylix
         chaotic.nixosModules.default
       ];
