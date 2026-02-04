@@ -25,8 +25,8 @@
     primaryDisplay = config.unify.hosts.nixos.overlord.displays.eDP-1;
     primaryUser = "oxce5";
     primaryWallpaper = builtins.fetchurl {
-      url = "https://img2.gelbooru.com/images/1a/2b/1a2bc2154348dc38ca7a19c4e34bd914.jpg";
-      sha256 = "1c6dzrl21vrd53zm68yd6rnd3nc97cbl3k03wnnsa1ssgikkr96g";
+      url = "https://i.postimg.cc/pLgRKzPs/Gk-Y6b-Xao-AAX5Il.jpg";
+      sha256 = "0b12ancxqsvknz9126prh8ivibinawr5kh7cr4xhfap3nc2xljkk";
     };
     baseImage = builtins.fetchurl {
       url = "https://w.wallhaven.cc/full/21/wallhaven-2119vy.jpg";
@@ -136,6 +136,9 @@
       };
     };
     home = {pkgs, ...}: {
+      home.sessionVariables = {
+        TZ = "Asia/Manila";
+      };
       services = {
         wayvnc = {
           enable = true;
