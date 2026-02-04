@@ -13,10 +13,12 @@
 
       xdg.portal = {
         enable = true;
-        extraPortals = with pkgs; [xdg-desktop-portal-gnome];
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-gnome
+          xdg-desktop-portal-gtk
+        ];
         config = {
           niri = {
-            default = ["gnome" "gtk"];
             "org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
             "org.freedesktop.impl.portal.FileChooser" = ["gtk"];
           };
@@ -24,49 +26,6 @@
       };
 
       services = {
-        swayidle = let
-          lock = "${config.programs.caelestia.package}/bin/caelestia-shell ipc call lock lock";
-          display = status: "${pkgs.niri}/bin/niri msg action power-${status}-monitors";
-        in {
-          enable = false;
-          timeouts = [
-            {
-              timeout = 15;
-              command = "${pkgs.libnotify}/bin/notify-send 'Locking in 5 seconds' -t 5000";
-            }
-            {
-              timeout = 45;
-              command = lock;
-            }
-            {
-              timeout = 75;
-              command = display "off";
-              resumeCommand = display "on";
-            }
-            {
-              timeout = 100;
-              command = "${pkgs.systemd}/bin/systemctl suspend";
-            }
-          ];
-          events = [
-            {
-              event = "before-sleep";
-              command = (display "off") + "; " + lock;
-            }
-            {
-              event = "after-resume";
-              command = display "on";
-            }
-            {
-              event = "lock";
-              command = (display "off") + "; " + lock;
-            }
-            {
-              event = "unlock";
-              command = display "on";
-            }
-          ];
-        };
         cliphist.enable = true;
       };
 

@@ -13,6 +13,9 @@
       "XF86AudioMicMute".action = spawn "dms" "ipc" "call" "audio" "micmute";
       "XF86MonBrightnessUp".action = spawn "dms" "ipc" "call" "brightness" "increment" "5" "";
       "XF86MonBrightnessDown".action = spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
+      "XF86AudioPlay".action = spawn "dms" "ipc" "call" "mpris" "playPause";
+      "XF86AudioPrev".action = spawn "dms" "ipc" "call" "mpris" "previous";
+      "XF86AudioNext".action = spawn "dms" "ipc" "call" "mpris" "next";
 
       "Mod+P".action = spawn "dms" "ipc" "call" "niri" "screenshot"; # nix: Mod+P { screenshot; }
       "Mod+Alt+P".action = spawn "dms" "ipc" "call" "niri" "screenshotScreen"; # nix: Mod+Alt+P { screenshot-screen; }
