@@ -124,7 +124,10 @@
 
               local config_dir = vim.fn.stdpath('cache') .. '/jdtls/config_linux'
               local project_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-              local workspace_dir = vim.fn.stdpath('cache') .. '/jdtls/workspace' .. project_dir
+              local workspace_dir = vim.fn.stdpath('cache') .. '/jdtls/workspace/' .. project_dir
+
+              local extendedClientCapabilities = require('jdtls').extendedClientCapabilities
+              extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
               -- Add java-debug jar
               local debugBundles = { "${java-debug}" }
@@ -143,25 +146,56 @@
                   '-configuration', config_dir,
                   '-data', workspace_dir,
                 },
-                root_dir = vim.fs.dirname(vim.fs.find({'pom.xml', 'gradlew', '.git', 'mvnw', '.classpath'}, { upward = true })[1]),
+
+                root_dir = vim.fs.dirname(
+                  vim.fs.find(
+                    { 'pom.xml', 'gradlew', '.git', 'mvnw', '.classpath' },
+                    { upward = true }
+                  )[1]
+                ),
+
                 settings = {
                   java = {
                     signatureHelp = { enabled = true },
-                    completion = { favoriteStaticMembers = {} },
-                    contentProvider = { preferred = 'fernflower' },
-                    extendedClientCapabilities = require('jdtls').extendedClientCapabilities
-                  }
+
+                    completion = {
+                      favoriteStaticMembers = {},
+                      overwrite = false,
+                      guessMethodArguments = true,
+                    },
+
+                    contentProvider = {
+                      preferred = 'fernflower',
+                    },
+
+                    codeGeneration = {
+                      generateComments = true,
+                      useBlocks = true,
+                    },
+
+                    inlayHints = {
+                      parameterNames = {
+                        enabled = "all",
+                        exclusions = { "this" },
+                      },
+                      variableTypes = { enabled = true },
+                      lambdaParameterTypes = { enabled = true },
+                    },
+                  },
                 },
+
                 init_options = {
-                  bundles = debugBundles
-                }
+                  bundles = debugBundles,
+                  extendedClientCapabilities = extendedClientCapabilities,
+                },
               }
 
               vim.api.nvim_create_autocmd('FileType', {
                 pattern = 'java',
                 callback = function(args)
                   require('jdtls').start_or_attach(config)
-                end
+                  vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+                end,
               })
             '';
           };
