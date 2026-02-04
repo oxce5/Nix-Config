@@ -16,6 +16,7 @@
           openmoji-color
           nerd-fonts.symbols-only
           atkinson-hyperlegible-next
+          noto-fonts-cjk-sans
         ];
         enableDefaultPackages = true;
         fontDir.enable = true;
