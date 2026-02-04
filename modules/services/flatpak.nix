@@ -1,13 +1,11 @@
 {inputs, ...}: {
   unify.modules.workstation = {
-    nixos = {
+    nixos = {pkgs, ...}: {
       imports = [
         inputs.nix-flatpak.nixosModules.nix-flatpak
       ];
       appstream.enable = true;
-    };
-    home = {pkgs, ...}: {
-      imports = [inputs.nix-flatpak.homeManagerModules.nix-flatpak];
+      environment.systemPackages = with pkgs; [flatpak];
       services.flatpak = {
         enable = true;
         packages = [
@@ -18,17 +16,13 @@
           "com.dec05eba.gpu_screen_recorder"
         ];
         uninstallUnmanaged = false;
+        overrides = {
+          global = {
+            Context.filesystems = ["/nix/store:ro"];
+          };
+          "gay.elysia.elysia".Context.filesystems = ["/run/current-system/sw/bin:ro"];
+        };
       };
-
-      # systemd = {
-      #   services.flatpak-repo = {
-      #     wantedBy = ["multi-user.target"];
-      #     path = [pkgs.flatpak];
-      #     script = ''
-      #       flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-      #     '';
-      #   };
-      # };
     };
   };
 }
