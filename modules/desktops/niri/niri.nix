@@ -18,9 +18,18 @@
           xdg-desktop-portal-gtk
         ];
         config = {
+          common = {
+            default = ["gtk"];
+          };
           niri = {
+            default = [
+              "gtk"
+              "gnome"
+            ];
             "org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
             "org.freedesktop.impl.portal.FileChooser" = ["gtk"];
+            "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
+            "org.freedesktop.impl.portal.Screenshot" = ["gnome"];
           };
         };
       };
@@ -61,8 +70,21 @@
           spawn-at-startup = [
             {command = ["${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1"];}
             {command = ["sway-audio-idle-inhibit"];}
-            {command = ["systemctl" "--user" "restart" "xdg-desktop-portal-gtk"];}
-            {command = ["flatpak" "run" "com.dec05eba.gpu_screen_recorder"];}
+            {
+              command = [
+                "systemctl"
+                "--user"
+                "restart"
+                "xdg-desktop-portal-gtk"
+              ];
+            }
+            {
+              command = [
+                "flatpak"
+                "run"
+                "com.dec05eba.gpu_screen_recorder"
+              ];
+            }
           ];
         };
       };
