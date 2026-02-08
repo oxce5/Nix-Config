@@ -29,6 +29,8 @@
           (GPUOffloadApp blender_4_1 "blender")
           blender_4_1
           pear-desktop
+          impala
+          wiremix
         ];
       };
   };
