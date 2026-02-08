@@ -18,6 +18,31 @@
           ];
           open-floating = true;
         }
+
+        {
+          matches = [{is-window-cast-target = true;}];
+
+          focus-ring = {
+            enable = true;
+            active.color = "#f38ba8";
+            inactive.color = "#7d0d2d";
+          };
+
+          border = {
+            inactive.color = "#7d0d2d";
+          };
+
+          shadow = {
+            enable = true;
+            color = "#7d0d2d70";
+          };
+
+          tab-indicator = {
+            active.color = "#f38ba8";
+            inactive.color = "#7d0d2d";
+          };
+        }
+
         {
           matches = [
             {title = "^*.Messenger.*$";}
