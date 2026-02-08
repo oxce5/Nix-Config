@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
   unify.modules.neovim = {
     home = {
       pkgs,
@@ -8,7 +12,7 @@
     }: let
       # Temporarily deprecated due to upstream issue
       # java-debug = pkgs.callPackage ./java-debug.nix {};
-      java-debug = builtins.toString ./java.debug.jar;
+      java-debug = ./com.microsoft.java.debug.plugin-0.53.2.jar;
       vimPlug = pkgs.vimPlugins;
       inherit (inputs.nvf.lib.nvim.dag) entryAfter;
     in {
