@@ -20,6 +20,15 @@
         }
 
         {
+          matches = [
+            {
+              app-id = "Main";
+            }
+          ];
+          open-floating = true;
+        }
+
+        {
           matches = [{is-window-cast-target = true;}];
 
           focus-ring = {
