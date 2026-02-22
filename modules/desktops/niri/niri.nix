@@ -96,7 +96,7 @@
       nixpkgs.overlays = [inputs.niri-flake.overlays.niri];
       programs.niri = {
         enable = true;
-        package = pkgs.niri-unstable;
+        package = inputs.niri.${pkgs.system}.default;
       };
       niri-flake.cache.enable = true;
     };

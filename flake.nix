@@ -88,6 +88,7 @@
     };
 
     niri-flake.url = "github:sodiboo/niri-flake";
+    niri.url = "github:niri-wm/niri/wip/branch";
     seanime.url = "github:rishabh5321/seanime-flake";
 
     nix-index-database = {

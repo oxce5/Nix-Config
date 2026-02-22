@@ -7,6 +7,7 @@
     programs = {
       yazi = {
         package = pkgs.yazi;
+        shellWrapperName = "y";
         enable = true;
         initLua = ''
           require("git"):setup()
