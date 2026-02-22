@@ -2,7 +2,8 @@
   inputs,
   config,
   ...
-}: {
+}:
+{
   unify.hosts.nixos.overlord = {
     modules = with config.unify.modules; [
       workstation
@@ -49,127 +50,150 @@
 
     users.oxce5.modules = config.unify.hosts.nixos.overlord.modules;
 
-    nixos = {
-      pkgs,
-      config,
-      ...
-    }: {
-      facter.reportPath = ./facter.json;
-      imports = with inputs; [
-        nixos-hardware.nixosModules.common-cpu-amd
-        nixos-hardware.nixosModules.common-gpu-amd
-        nixos-hardware.nixosModules.common-pc-ssd
+    nixos =
+      {
+        pkgs,
+        config,
+        ...
+      }:
+      {
+        facter.reportPath = ./facter.json;
+        imports = with inputs; [
+          nixos-hardware.nixosModules.common-cpu-amd
+          nixos-hardware.nixosModules.common-gpu-amd
+          nixos-hardware.nixosModules.common-pc-ssd
 
-        stylix.nixosModules.stylix
-        chaotic.nixosModules.default
-      ];
-
-      boot.kernelPackages = pkgs.linuxPackages_zen;
-      boot.extraModulePackages = with config.boot.kernelPackages; [lenovo-legion-module];
-
-      networking = {
-        networkmanager.enable = true;
-        hostName = "overlord";
-        nameservers = [
-          "192.168.1.26"
-          "8.8.8.8"
+          stylix.nixosModules.stylix
+          chaotic.nixosModules.default
         ];
-      };
 
-      nixpkgs.overlays = [
-        (final: prev: {
-          oldnodejs_24 = inputs.node24-old.legacyPackages.${prev.system}.nodejs_24;
-        })
-        inputs.blender-bin.overlays.default
-      ];
+        boot.kernelPackages = pkgs.linuxPackages_zen;
+        boot.extraModulePackages = with config.boot.kernelPackages; [ lenovo-legion-module ];
 
-      environment.systemPackages = [
-        (pkgs.winboat.override {
-          nodejs_24 = pkgs.oldnodejs_24;
-        })
-      ];
+        networking = {
+          networkmanager.enable = true;
+          hostName = "overlord";
+          nameservers = [
+            "192.168.1.26"
+            "8.8.8.8"
+          ];
+        };
 
-      services = {
-        fwupd.enable = true;
+        nixpkgs.overlays = [
+          (final: prev: {
+            oldnodejs_24 = inputs.node24-old.legacyPackages.${prev.system}.nodejs_24;
+          })
+          inputs.blender-bin.overlays.default
+        ];
 
-        keyd = {
-          enable = true;
-          keyboards = {
-            default = {
-              ids = ["*"];
-              settings = {
-                main = {
-                  esc = "esc";
-                  capslock = "timeout(esc, 150, capslock)";
-                  kpasterisk = "'";
-                  kpplus = "g";
-                  kpminus = "h";
+        environment.systemPackages = [
+          (pkgs.winboat.override {
+            nodejs_24 = pkgs.oldnodejs_24;
+          })
+        ];
+
+        services = {
+          fwupd.enable = true;
+
+          keyd = {
+            enable = true;
+            keyboards = {
+              default = {
+                ids = [ "*" ];
+                settings = {
+                  main = {
+                    esc = "esc";
+                    capslock = "timeout(esc, 150, capslock)";
+                    kpasterisk = "'";
+                    kpplus = "g";
+                    kpminus = "h";
+                  };
+                };
+              };
+              external = {
+                ids = [ "048d:c996:20fedd66" ];
+                settings = {
+                  main = {
+                    esc = "esc";
+                    capslock = "timeout(esc, 150, capslock)";
+                  };
                 };
               };
             };
-            external = {
-              ids = ["048d:c996:20fedd66"];
-              settings = {
-                main = {
-                  esc = "esc";
-                  capslock = "timeout(esc, 150, capslock)";
-                };
+          };
+          swapspace = {
+            enable = true;
+            settings = {
+              max_swapsize = "5g";
+              min_swapsize = "1g";
+            };
+          };
+          udev.extraRules =
+            let
+              toggle-script = pkgs.writeShellScript "toggle-internal-kb" ''
+                ACTION="$1"
+                INTERNAL_KBD=$(grep -rl "ITE Tech. Inc. ITE Device(8176) Keyboard" /sys/class/input/event*/device/name 2>/dev/null | head -1)
+                INTERNAL_KBD_DIR=$(dirname "$INTERNAL_KBD" 2>/dev/null)
+
+                if [ -z "$INTERNAL_KBD_DIR" ]; then
+                  exit 0
+                fi
+
+                DEVNODE="/dev/input/$(basename "$(dirname "$INTERNAL_KBD_DIR")")"
+
+                case "$ACTION" in
+                  add)
+                    udevadm trigger --action=change --property-match=DEVNAME="$DEVNODE" --property=LIBINPUT_IGNORE_DEVICE=1
+                    ;;
+                  remove)
+                    udevadm trigger --action=change --property-match=DEVNAME="$DEVNODE" --property=LIBINPUT_IGNORE_DEVICE=0
+                    ;;
+                esac
+              '';
+            in
+            ''
+              # BY Tech Gaming Keyboard connected
+              ACTION=="add", ATTRS{idVendor}=="258a", ATTRS{idProduct}=="010c", SUBSYSTEM=="usb", RUN+="${toggle-script} add"
+
+              # BY Tech Gaming Keyboard disconnected
+              ACTION=="remove", ATTRS{idVendor}=="258a", ATTRS{idProduct}=="010c", SUBSYSTEM=="usb", RUN+="${toggle-script} remove"
+            '';
+        };
+        zramSwap = {
+          enable = true;
+          memoryPercent = 75;
+        };
+
+        hardware = {
+          bluetooth = {
+            enable = true;
+            powerOnBoot = true;
+            settings = {
+              General = {
+                Experimental = true;
+                FastConnectable = true;
               };
+              Policy.AutoEnable = true;
+
             };
           };
         };
-        swapspace = {
-          enable = true;
-          settings = {
-            max_swapsize = "5g";
-            min_swapsize = "1g";
-          };
+      };
+    home =
+      { pkgs, ... }:
+      {
+        home.sessionVariables = {
+          TZ = "Asia/Manila";
         };
-        # sunshine = {
-        #   enable = true;
-        #   capSysAdmin = true;
-        # };
-      };
-      zramSwap = {
-        enable = true;
-        memoryPercent = 75;
-      };
-
-      hardware.bluetooth = {
-        enable = true;
-        powerOnBoot = true;
-        settings = {
-          General = {
-            # Shows battery charge of connected devices on supported
-            # Bluetooth adapters. Defaults to 'false'.
-            Experimental = true;
-            # When enabled other devices can connect faster to us, however
-            # the tradeoff is increased power consumption. Defaults to
-            # 'false'.
-            FastConnectable = true;
-          };
-          Policy = {
-            # Enable all controllers when they are found. This includes
-            # adapters present on start as well as adapters that are plugged
-            # in later on. Defaults to 'true'.
-            AutoEnable = true;
+        services = {
+          wayvnc = {
+            enable = true;
+            settings = {
+              address = "0.0.0.0";
+              port = 5901;
+            };
           };
         };
       };
-    };
-    home = {pkgs, ...}: {
-      home.sessionVariables = {
-        TZ = "Asia/Manila";
-      };
-      services = {
-        wayvnc = {
-          enable = true;
-          settings = {
-            address = "0.0.0.0";
-            port = 5901;
-          };
-        };
-      };
-    };
   };
 }
