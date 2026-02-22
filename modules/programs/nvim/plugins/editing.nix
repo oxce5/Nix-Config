@@ -10,8 +10,11 @@
           blink-cmp = {
             enable = true;
             friendly-snippets.enable = true;
-            setupOpts.keymap = {
-              preset = "none";
+            setupOpts = {
+              completion.ghost_text.enabled = true;
+              keymap = {
+                preset = "none";
+              };
             };
           };
         };
@@ -27,7 +30,10 @@
                 hash = "sha256-koQp1b5wTTTxQgifVfC90AQImLk0E40QSfihiNd1vVQ=";
               };
             };
-            event = ["InsertEnter" "CmdlineEnter"];
+            event = [
+              "InsertEnter"
+              "CmdlineEnter"
+            ];
             setupOpts = {
               enable = true;
               silent = true;

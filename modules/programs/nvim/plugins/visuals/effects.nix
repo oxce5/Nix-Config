@@ -1,8 +1,8 @@
 {
-  unify.modules.neovim = {pkgs, ...}: {
-    home = {
+  unify.modules.neovim = {
+    home = {pkgs, ...}: {
       programs.nvf = {
-        vim.settings = {
+        settings.vim = {
           extraPlugins.tiny-glimmer = {
             package = pkgs.vimPlugins.tiny-glimmer-nvim;
             setup = ''

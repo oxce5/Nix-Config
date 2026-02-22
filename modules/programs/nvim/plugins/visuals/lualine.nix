@@ -2,7 +2,7 @@
   unify.modules.neovim = {
     home = {
       programs.nvf = {
-        vim.settings = {
+        settings.vim = {
           statusline.lualine = {
             enable = true;
             activeSection.c = [

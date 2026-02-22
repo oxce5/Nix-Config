@@ -2,7 +2,7 @@
   unify.modules.neovim = {
     home = {
       programs.nvf = {
-        vim.settings = {
+        settings.vim = {
           utility.oil-nvim = {
             enable = true;
             gitStatus.enable = true;

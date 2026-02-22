@@ -2,7 +2,7 @@
   unify.modules.neovim = {
     home = {
       programs.nvf = {
-        vim.settings = {
+        settings.vim = {
           dashboard.dashboard-nvim = {
             enable = true;
             setupOpts = {

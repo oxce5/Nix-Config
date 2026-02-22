@@ -1,6 +1,6 @@
 {
   unify.modules.neovim = {
-    home = {pkgs, ...}: {
+    home = {
       programs.nvf.settings.vim = {
         git = {
           enable = true;
