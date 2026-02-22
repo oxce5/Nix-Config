@@ -26,8 +26,8 @@
           gearlever
           varia
           vesktop
-          (GPUOffloadApp blender_4_1 "blender")
-          blender_4_1
+          (GPUOffloadApp blender_5_0 "blender")
+          blender_5_0
           pear-desktop
           impala
           wiremix
