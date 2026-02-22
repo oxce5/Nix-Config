@@ -58,5 +58,5 @@
       firewall.enable = true;
       firewall.allowPing = true;
     };
-  }
+  };
 }
