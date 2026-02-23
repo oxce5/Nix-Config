@@ -2,6 +2,7 @@
   unify.modules.niri = {
     home = {
       config,
+      lib,
       pkgs,
       hostConfig,
       ...
@@ -96,7 +97,7 @@
       nixpkgs.overlays = [inputs.niri-flake.overlays.niri];
       programs.niri = {
         enable = true;
-        package = inputs.niri.${pkgs.system}.default;
+        package = pkgs.niri-unstable;
       };
       niri-flake.cache.enable = true;
     };
