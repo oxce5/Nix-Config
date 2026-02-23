@@ -14,6 +14,22 @@
           restartIfChanged = true;
         };
 
+        niri.includes = {
+          enable = true;
+
+          override = true;
+          originalFileName = "hm";
+          filesToInclude = [
+            "alttab"
+            "binds"
+            "colors"
+            "layout"
+            "outputs"
+            "wpblur"
+            "blur"
+          ];
+        };
+
         enableSystemMonitoring = true;
         enableVPN = true;
         enableDynamicTheming = true;
