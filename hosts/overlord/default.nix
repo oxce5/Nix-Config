@@ -12,7 +12,7 @@
       plymouth
       dms
       gaming
-      zellij
+      tmux
       comfy
       virtualisation
       waydroid
@@ -81,6 +81,7 @@
           oldnodejs_24 = inputs.node24-old.legacyPackages.${prev.system}.nodejs_24;
         })
         inputs.blender-bin.overlays.default
+        inputs.tmux.overlay
       ];
 
       environment.systemPackages = [
