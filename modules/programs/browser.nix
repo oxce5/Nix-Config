@@ -1,7 +1,5 @@
 {inputs, ...}: {
   unify.modules.workstation.home = {pkgs, ...}: {
-    imports = [inputs.zen-browser.homeModules.default];
-    programs.zen-browser.enable = false;
     home.packages = with pkgs; [
       brave
       inputs.helium.packages.${system}.default
