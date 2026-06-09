@@ -9,10 +9,6 @@
         package = pkgs.yazi;
         shellWrapperName = "y";
         enable = true;
-        initLua = ''
-          require("git"):setup()
-          require("relative-motions"):setup({ show_numbers="relative", show_motion = true, enter_mode ="first" })
-        '';
         settings = {
           mgr.prepend_keymap = [
             {
@@ -102,36 +98,8 @@
                 run = "ouch";
               }
             ];
-            prepend_fetchers = [
-              {
-                id = "git";
-                name = "*";
-                run = "git";
-              }
-              {
-                id = "git";
-                name = "*/";
-                run = "git";
-              }
-            ];
           };
         };
-        keymap = {
-          manager = {
-            prepend_keymap = [
-              {
-                on = ["m"];
-                run = "plugin relative-motions";
-                desc = "Trigger a new relative motion";
-              }
-            ];
-          };
-        };
-        # theme = {
-        #   flavor = {
-        #     dark = "rose-pine-moon";
-        #   };
-        # };
       };
     };
   };

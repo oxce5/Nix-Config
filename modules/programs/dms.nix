@@ -6,7 +6,7 @@
         inputs.dms.homeModules.niri
       ];
 
-      programs.dankMaterialShell = {
+      programs.dank-material-shell = {
         enable = true;
 
         systemd = {
@@ -14,20 +14,23 @@
           restartIfChanged = true;
         };
 
-        niri.includes = {
-          enable = true;
+        niri = {
+          enableKeybinds = true;
+          includes = {
+            enable = true;
 
-          override = true;
-          originalFileName = "hm";
-          filesToInclude = [
-            "alttab"
-            "binds"
-            "colors"
-            "layout"
-            "outputs"
-            "wpblur"
-            "blur"
-          ];
+            override = true;
+            originalFileName = "hm";
+            filesToInclude = [
+              "alttab"
+              "binds"
+              "colors"
+              "layout"
+              "outputs"
+              "wpblur"
+              "blur"
+            ];
+          };
         };
 
         enableSystemMonitoring = true;
@@ -38,12 +41,13 @@
       };
     };
 
-    nixos = {
+    nixos = {pkgs, ...}: {
       systemd.user.services.niri-flake-polkit.enable = false;
 
       services.displayManager.dms-greeter = {
         enable = true;
         compositor.name = "niri";
+        package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
         configHome = "/home/oxce5";
 

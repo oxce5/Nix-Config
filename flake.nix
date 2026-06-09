@@ -74,13 +74,13 @@
     };
 
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
+      url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     niri-flake = {
       url = "github:sodiboo/niri-flake";
-      inputs.niri-unstable.url = "github:niri-wm/niri/wip/branch";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     seanime.url = "github:rishabh5321/seanime-flake";
 
@@ -117,8 +117,7 @@
       "https://nix-gaming.cachix.org"
       "https://prismlauncher.cachix.org"
       "https://devenv.cachix.org"
-      # "https://niri.cachix.org"
-      "https://niri-wm-blur.cachix.org"
+      "https://niri.cachix.org"
     ];
     extra-trusted-public-keys = [
       "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
@@ -128,9 +127,8 @@
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
       "prismlauncher.cachix.org-1:9/n/FGyABA2jLUVfY+DEp4hKds/rwO+SCOtbOkDzd+c="
       "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
-      # "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+      "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "adithyagenie.cachix.org-1:h6BSMboeVfxyrULWuRQqAyweo4AJRATekb88xotfQwc="
-      "niri-wm-blur.cachix.org-1:WzxaB76U3fydJM+mrpeEhGxm61fIfejpeI1YgsNE2Jk="
     ];
   };
 }

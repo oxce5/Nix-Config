@@ -2,7 +2,7 @@
   unify.modules.niri.home = {config, ...}: {
     programs.niri.settings.binds = with config.lib.niri.actions; {
       "Mod+Shift+Slash".action = show-hotkey-overlay;
-      "Mod+T".action = spawn "ghostty";
+      "Mod+T".action = spawn "kitty";
       # TODO: Make this modular
       "Mod+Space".action = spawn "dms" "ipc" "call" "spotlight" "toggle";
       "Mod+L".action = spawn "dms" "ipc" "call" "lock" "lock";

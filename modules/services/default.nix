@@ -11,7 +11,6 @@
           enableNotifications = true;
           freeMemThreshold = 7;
         };
-        fwupd.enable = true;
       };
     };
   };

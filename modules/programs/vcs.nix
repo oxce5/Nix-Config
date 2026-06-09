@@ -17,7 +17,7 @@
         };
         signing = {
           format = "ssh";
-          key = "~/.ssh/id_ed25519.pub";
+          key = "~/.ssh/id_ed25519_sign.pub";
           signByDefault = true;
         };
         extraConfig = {
@@ -40,7 +40,7 @@
           signing = {
             behavior = "own";
             backend = "ssh";
-            key = "~/.ssh/id_ed25519.pub";
+            key = "~/.ssh/id_ed25519_sign.pub";
           };
           git = {
             sign-on-push = true;

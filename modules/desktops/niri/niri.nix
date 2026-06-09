@@ -43,9 +43,6 @@
         settings = {
           prefer-no-csd = true;
           hotkey-overlay.skip-at-startup = true;
-          debug = {
-            honor-xdg-activation-with-invalid-serial = true;
-          };
 
           outputs."eDP-1" = {
             mode = {
@@ -69,7 +66,6 @@
 
           overview.workspace-shadow.enable = false;
           spawn-at-startup = [
-            {command = ["${pkgs.mate.mate-polkit}/libexec/polkit-mate-authentication-agent-1"];}
             {command = ["sway-audio-idle-inhibit"];}
             {
               command = [
@@ -77,13 +73,6 @@
                 "--user"
                 "restart"
                 "xdg-desktop-portal-gtk"
-              ];
-            }
-            {
-              command = [
-                "flatpak"
-                "run"
-                "com.dec05eba.gpu_screen_recorder"
               ];
             }
           ];

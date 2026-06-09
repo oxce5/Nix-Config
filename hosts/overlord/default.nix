@@ -8,19 +8,19 @@
       workstation
       laptop
       development
-      neovim
-      plymouth
-      dms
-      gaming
-      tmux
-      comfy
-      virtualisation
-      waydroid
       nvidia
       niri
-      cachix
-      stylix
-      ghostty
+      dms
+      # neovim
+      # plymouth
+      # gaming
+      # tmux
+      # comfy
+      # virtualisation
+      # waydroid
+      # cachix
+      # stylix
+      # ghostty
     ];
     primaryDisplay = config.unify.hosts.nixos.overlord.displays.eDP-1;
     primaryUser = "oxce5";
@@ -60,7 +60,6 @@
         nixos-hardware.nixosModules.common-gpu-amd
         nixos-hardware.nixosModules.common-pc-ssd
 
-        stylix.nixosModules.stylix
         chaotic.nixosModules.default
       ];
 
@@ -77,24 +76,20 @@
       };
 
       nixpkgs.overlays = [
-        (final: prev: {
-          oldnodejs_24 = inputs.node24-old.legacyPackages.${prev.system}.nodejs_24;
-        })
         inputs.blender-bin.overlays.default
         inputs.tmux.overlay
       ];
 
       environment.systemPackages = [
-        (pkgs.winboat.override {
-          nodejs_24 = pkgs.oldnodejs_24;
-        })
+        pkgs.neovim
+        pkgs.kitty
       ];
 
       services = {
-        fwupd.enable = true;
+        fwupd.enable = false;
 
         keyd = {
-          enable = true;
+          enable = false;
           keyboards = {
             default = {
               ids = ["*"];
