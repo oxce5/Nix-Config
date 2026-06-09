@@ -83,6 +83,7 @@
       environment.systemPackages = [
         pkgs.neovim
         pkgs.kitty
+        pkgs.ffmpeg
       ];
 
       services = {
