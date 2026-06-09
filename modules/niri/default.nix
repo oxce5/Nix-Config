@@ -1,0 +1,149 @@
+{
+  chimera,
+  inputs,
+  lib,
+  niri-lib,
+  den,
+  ...
+}: {
+  chimera.wayland._.niri = {
+    host,
+    user,
+    ...
+  }:
+    den.lib.parametric.fixedTo {inherit host;} {
+      includes = [
+        chimera.wayland._.base
+        # chimera.apps._.vicinae
+      ];
+      nixos = {
+        config,
+        pkgs,
+        ...
+      }: {
+        imports = [inputs.niri.nixosModules.niri];
+        nixpkgs.overlays = [inputs.niri.overlays.niri];
+
+        systemd.user.services.niri-flake-polkit.enable = false;
+
+        services.displayManager.dms-greeter = {
+          enable = true;
+          compositor.name = "niri";
+          package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
+
+          configHome = "/home/oxce5";
+
+          # Save the logs to a file
+          logs = {
+            save = true;
+            path = "/tmp/dms-greeter.log";
+          };
+        };
+
+        programs.niri = {
+          enable = true;
+          package = pkgs.niri-unstable;
+        };
+        niri-flake.cache.enable = true;
+      };
+      homeManager = {
+        config,
+        lib,
+        pkgs,
+        host,
+        ...
+      }: {
+        imports = [
+          inputs.dms.homeModules.dank-material-shell
+          inputs.dms.homeModules.niri
+        ];
+
+        home.sessionVariables = {
+          EDITOR = "nvim";
+        };
+
+        programs = {
+          dank-material-shell = {
+            enable = true;
+
+            systemd = {
+              enable = true;
+              restartIfChanged = true;
+            };
+
+            niri = {
+              # enableKeybinds = true;
+              includes = {
+                enable = true;
+
+                override = true;
+                originalFileName = "hm";
+                filesToInclude = [
+                  "alttab"
+                  "binds"
+                  "colors"
+                  "layout"
+                  "outputs"
+                  "wpblur"
+                  "blur"
+                ];
+              };
+            };
+
+            enableSystemMonitoring = true;
+            enableVPN = true;
+            enableDynamicTheming = true;
+            enableAudioWavelength = true;
+            enableCalendarEvents = true;
+          };
+
+          niri = {
+            settings = {
+              prefer-no-csd = true;
+              hotkey-overlay.skip-at-startup = true;
+              environment = {
+                EDITOR = "nvim";
+              };
+              #
+              # outputs."eDP-1" = {
+              #   mode = {
+              #     width = host.primaryDisplay.width;
+              #     height = host.primaryDisplay.height;
+              #   };
+              #   scale = 1.0;
+              #   position.x = 0;
+              #   position.y = 0;
+              # };
+              #
+              # outputs."HDMI-A-5" = {
+              #   mode = {
+              #     width = hostConfig.primaryDisplay.width;
+              #     height = hostConfig.primaryDisplay.height;
+              #   };
+              #   scale = 1.0;
+              #   position.x = 0;
+              #   position.y = 0;
+              # };
+              #
+              overview.workspace-shadow.enable = false;
+              spawn-at-startup = [
+                {command = ["sway-audio-idle-inhibit"];}
+                {
+                  command = [
+                    "systemctl"
+                    "--user"
+                    "restart"
+                    "xdg-desktop-portal-gtk"
+                  ];
+                }
+              ];
+            };
+          };
+        };
+
+        services = {
+          cliphist.enable = true;
+        };
+      };
+    };
+}
