@@ -104,9 +104,7 @@
     nvf.url = "github:notashelf/nvf";
     noctalia.url = "github:noctalia-dev/noctalia-shell";
     elyprism-launcher.url = "github:elyprismlauncher/elyprismlauncher";
-    playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
-    zjstatus.url = "github:dj95/zjstatus";
-    zellij-dev.url = "github:a-kenji/zellij-nix";
+    kopuz.url = "github:temidaradev/kopuz";
   };
   nixConfig = {
     extra-substituters = [
@@ -118,6 +116,7 @@
       "https://prismlauncher.cachix.org"
       "https://devenv.cachix.org"
       "https://niri.cachix.org"
+      "https://kopuz.cachix.org"
     ];
     extra-trusted-public-keys = [
       "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
@@ -129,6 +128,7 @@
       "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "adithyagenie.cachix.org-1:h6BSMboeVfxyrULWuRQqAyweo4AJRATekb88xotfQwc="
+      "kopuz.cachix.org-1:J2X3AnAYhKTJW5S3aCLoA1ckonQXVNZMQvhZA0YAufw="
     ];
   };
 }
