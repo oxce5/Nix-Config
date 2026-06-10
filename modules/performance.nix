@@ -14,17 +14,26 @@
     provides = {
       responsive = {
         includes = [ chimera.performance ];
-        nixos.boot = {
-          kernel.sysctl."vm.swappiness" = 1;
-          kernelParams = [
-            "nowatchdog"
-            "nosoftlockup"
-            "audit=0"
-            "skew_tick=1"
-            "threadirqs"
-            "preempt=full"
-            "nohz_full=all"
-          ];
+        nixos = {
+          boot = {
+            kernel.sysctl."vm.swappiness" = 5;
+            kernelParams = [
+              "nowatchdog"
+              "nosoftlockup"
+              "audit=0"
+              "skew_tick=1"
+              "threadirqs"
+              "preempt=full"
+              "nohz_full=all"
+            ];
+          };
+          services.swapspace = {
+            enable = true;
+            settings = {
+              max_swapsize = "1g";
+              min_swapsize = "128m";
+            };
+          };
         };
       };
       max = {

@@ -18,7 +18,7 @@
       includes = [
         <chimera/boot/graphical>
         # <chimera/boot/secure>
-        # <chimera/performance/responsive>
+        <chimera/performance/responsive>
         <chimera/power-mgmt>
         <chimera/workstation>
       ];
