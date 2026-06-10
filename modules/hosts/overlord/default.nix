@@ -8,11 +8,11 @@
     primaryDisplay = config.hostConfig.overlord.displays.eDP-1;
     displays = {
       eDP-1 = {
-        refresh = 60.0;
+        refresh = 144.0;
         width = 1920;
         height = 1080;
         scaling = 1.00;
-        wallpaper = /assets/background.png;
+        wallpaper = /assets/kasane-teto-anime-art.jpg;
       };
     };
   };
@@ -75,6 +75,10 @@
           nvidia-vaapi-driver
         ];
       };
+
+      virtualisation.docker.enable = true;
+      hardware.nvidia-container-toolkit.enable = true;
+
     };
   };
 }
