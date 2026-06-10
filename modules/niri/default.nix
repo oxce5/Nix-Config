@@ -58,8 +58,15 @@
           inputs.dms.homeModules.niri
         ];
 
-        home.sessionVariables = {
-          EDITOR = "nvim";
+        home = {
+          sessionVariables = {
+            EDITOR = "nvim";
+          };
+          packages = with pkgs; [ xwayland-satellite ];
+        };
+
+        xdg.portal.config.niri = {
+          "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ]; # or "kde"
         };
 
         programs = {
