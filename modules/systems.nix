@@ -8,7 +8,7 @@
       includes = [
         <chimera/boot>
         <chimera/networking>
-        # <chimera/theming>
+        <chimera/theming>
         <chimera/wayland/niri>
         # <chimera/tailscale>
         <chimera/xdg>

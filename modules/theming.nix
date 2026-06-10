@@ -1,14 +1,14 @@
-{ chimera, ... }:
+{ chimera, withSystem, ... }:
 {
   chimera.theming = {
-    includes = [ (chimera.theming._.catppuccin "mocha" "mauve") ];
+    # includes = [ (chimera.theming._.catppuccin "mocha" "mauve") ];
     nixos =
       { pkgs, ... }:
       {
         fonts = {
           packages = with pkgs; [
             maple-mono.NF
-            jetbrains-mono
+            (withSystem pkgs.stdenv.hostPlatform.system (p: p.config.packages.iosevka-chimera))
             montserrat
             libertine
             inter
@@ -27,16 +27,16 @@
         };
       };
 
-    homeManager =
-      { pkgs, ... }:
-      {
-        home = {
-          pointerCursor = {
-            package = pkgs.posy-cursors;
-            name = "Posy_Cursor";
-            gtk.enable = true;
-          };
-        };
-      };
+    # homeManager =
+    #   { pkgs, ... }:
+    #   {
+    #     home = {
+    #       pointerCursor = {
+    #         package = pkgs.posy-cursors;
+    #         name = "Posy_Cursor";
+    #         gtk.enable = true;
+    #       };
+    #     };
+    #   };
   };
 }
