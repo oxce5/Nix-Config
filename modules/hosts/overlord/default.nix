@@ -21,6 +21,7 @@
   den.aspects.overlord = {
     includes = with chimera; [
       laptop
+      gaming._.min
     ];
 
     nixos = {

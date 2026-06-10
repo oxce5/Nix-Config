@@ -54,6 +54,8 @@
     };
 
     kopuz.url = "github:temidaradev/kopuz";
+    elyprism-launcher.url = "github:elyprismlauncher/elyprismlauncher";
+    dw-proton.url = "github:imaviso/dwproton-flake";
   };
   nixConfig = {
     extra-substituters = [
