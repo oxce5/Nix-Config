@@ -65,8 +65,12 @@
           packages = with pkgs; [ xwayland-satellite ];
         };
 
-        xdg.portal.config.niri = {
-          "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ]; # or "kde"
+        xdg.portal = { 
+          enable = true;
+          extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+          config.niri = {
+            "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+          };
         };
 
         programs = {
