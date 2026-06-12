@@ -13,6 +13,7 @@
 
         userDirs = {
           enable = true;
+          setSessionVariables = false;
           createDirectories = true;
           desktop = null;
           templates = null;
