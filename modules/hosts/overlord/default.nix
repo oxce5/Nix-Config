@@ -37,7 +37,7 @@
         # kernelPackages =
         #   inputs.chaotic.legacyPackages.${pkgs.stdenv.hostPlatform.system}.linuxPackages_cachyos;
         loader.systemd-boot.enable = true;
-        kernelParams = ["acpi_backlight=native"];
+        # kernelParams = ["acpi_backlight=native"];
         # plymouth.enable = true;
         # binfmt.emulatedSystems = [ "aarch64-linux" ];
       };
