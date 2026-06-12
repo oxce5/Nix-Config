@@ -1,6 +1,11 @@
 {
-  chimera.fish = {
-    nixos.programs.fish.enable = true;
+  chimera.fish =
+    { user, ... }:
+    {
+    nixos = { pkgs, ... }: {
+      programs.fish.enable = true;
+      users.users.${user.userName}.shell = pkgs.fish;
+    };
     homeManager = {pkgs, ...}: {
       home.packages = with pkgs.fishPlugins; [
         colored-man-pages
