@@ -11,6 +11,7 @@
         <chimera/theming>
         <chimera/wayland/niri>
         # <chimera/tailscale>
+        <chimera/flatpak>
         <chimera/xdg>
       ];
     };
